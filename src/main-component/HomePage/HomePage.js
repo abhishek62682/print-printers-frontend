@@ -36,7 +36,7 @@ const HomePage = () => {
             
             <About />
             <MarqueeSection hclass={'marquee-section margin-top-8 mb-80'} />
-            <ServiceSection hclass={'service-section bg-cover section-padding'} Bg={ServiceBg} />
+            {/* <ServiceSection hclass={'service-section bg-cover section-padding'} Bg={ServiceBg} /> */}
             <StoreSection />
             <ProductSection
                 

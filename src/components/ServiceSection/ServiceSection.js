@@ -19,7 +19,7 @@ const ClickHandler = () => {
 
 const ServiceSection = ({ hclass }) => {
   return (
-    <section className={"theme-bg " + hclass}>
+    <section className={"theme-bg pt-0 " + hclass}>
       <div className="shape-image">
         <img src={Shape} alt="img" />
       </div>

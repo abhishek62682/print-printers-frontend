@@ -4,7 +4,7 @@ import MS1 from '../../img/marquee-box.png'
 
 const MarqueeSection = (props) => {
     return (
-        <div className={"" +props.hclass}>
+        <div className={"section-padding pt-0 " +props.hclass}>
             <div className="mycustom-marque">
                 <div className="scrolling-wrap">
                     <div className="comm">

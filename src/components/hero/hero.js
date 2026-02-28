@@ -18,7 +18,7 @@ const hero = () => {
     }
 
     return (
-        <section className="hero-section hero-1 fix theme-bg" style={{backgroundImage:"url(	https://prinoz-next.vercel.app/images/hero/hero-bg.jpg)"}} >
+        <section className="hero-section hero-1 fix theme-bg"  >
             <div className="circle-shape">
                 <img src={Shape1} alt="img" />
             </div>
