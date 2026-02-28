@@ -33,7 +33,7 @@ const HomePage = () => {
         <Fragment>
             
             <Hero />
-            <FeatureSection />
+            
             <About />
             <MarqueeSection hclass={'marquee-section margin-top-8 mb-80'} />
             <ServiceSection hclass={'service-section bg-cover section-padding'} Bg={ServiceBg} />
@@ -46,7 +46,7 @@ const HomePage = () => {
             <FunFact hclass={'counter-section fix section-padding pt-0'} />
             <WorksSection hclass={'about-feature-section fix section-padding pt-0 bg-cover'} eclass={'about-feature-wrapper'} Ws6={Ws6} />
             <ProcessSection />
-            <PricingSection />
+            
             <Testimonial />
             <BlogSection hclass="blog-section section-padding pt-0 bg-cover" SubClass="blog-wrapper" />
             <CtaSection />

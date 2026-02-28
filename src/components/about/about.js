@@ -37,9 +37,7 @@ const about = () => {
                                 <div className="circle-shape float-bob-y">
                                     <img src={Abimg3} alt="img" />
                                 </div>
-                                <div className="cap-shape float-bob-x">
-                                    <img src={Abimg4} alt="img" />
-                                </div>
+                                
                                 <div className="shape-img">
                                     <img src={Abimg5} alt="img" />
                                 </div>

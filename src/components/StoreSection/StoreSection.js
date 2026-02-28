@@ -18,7 +18,8 @@ const StoreSection = () => {
                                 </div>
                                 <div className="content">
                                     <h3>
-                                        Independent Project Management
+                                        Constant Innovation
+in Technology
                                     </h3>
                                     <p>
                                         Connect your store to Printes, added
@@ -34,7 +35,8 @@ const StoreSection = () => {
                                 </div>
                                 <div className="content">
                                     <h3>
-                                        Transparent Communication
+                                       Internal & External
+Collaboration
                                     </h3>
                                     <p>
                                         Connect your store to Printes, added
@@ -50,7 +52,8 @@ const StoreSection = () => {
                                 </div>
                                 <div className="content">
                                     <h3>
-                                        Win-Win Solutions
+                                       Transparent
+Communication
                                     </h3>
                                     <p>
                                         Connect your store to Printes, added
@@ -66,7 +69,8 @@ const StoreSection = () => {
                                 </div>
                                 <div className="content">
                                     <h3>
-                                        Flexible Options
+                                        Sustainable
+Practices
                                     </h3>
                                     <p>
                                         Connect your store to Printes, added

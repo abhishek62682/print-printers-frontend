@@ -42,7 +42,7 @@ const Header = (props) => {
                   <Link onClick={ClickHandler} to="/" className="header-logo">
                     <img
                       src="/logo.png"
-                      style={{ width: "200px" }}
+                      
                       alt="Print Printers Logo"
                     />
                   </Link>
