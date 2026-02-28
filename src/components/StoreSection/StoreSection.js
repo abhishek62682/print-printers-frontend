@@ -17,7 +17,9 @@ const StoreSection = () => {
                                     <img src={SS1} alt="img" />
                                 </div>
                                 <div className="content">
-                                    <h3>Local fulfillment</h3>
+                                    <h3>
+                                        Independent Project Management
+                                    </h3>
                                     <p>
                                         Connect your store to Printes, added
                                         products, and set your own retail
@@ -31,7 +33,9 @@ const StoreSection = () => {
                                     <img src={SS2} alt="img" />
                                 </div>
                                 <div className="content">
-                                    <h3>Reliable quality</h3>
+                                    <h3>
+                                        Transparent Communication
+                                    </h3>
                                     <p>
                                         Connect your store to Printes, added
                                         products, and set your own retail
@@ -45,7 +49,9 @@ const StoreSection = () => {
                                     <img src={SS3} alt="img" />
                                 </div>
                                 <div className="content">
-                                    <h3>Smooth automation</h3>
+                                    <h3>
+                                        Win-Win Solutions
+                                    </h3>
                                     <p>
                                         Connect your store to Printes, added
                                         products, and set your own retail
@@ -59,7 +65,9 @@ const StoreSection = () => {
                                     <img src={SS4} alt="img" />
                                 </div>
                                 <div className="content">
-                                    <h3>No order minimums</h3>
+                                    <h3>
+                                        Flexible Options
+                                    </h3>
                                     <p>
                                         Connect your store to Printes, added
                                         products, and set your own retail

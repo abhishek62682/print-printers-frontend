@@ -5,9 +5,12 @@ const CursorMaus = () => {
         const cursorinner = document.querySelector('.cursor2');
         const links = document.querySelectorAll('a');
 
+
+
         function onMouseMove(e) {
             const x = e.clientX;
             const y = e.clientY;
+            console.log(x,y)
             cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
             cursorinner.style.left = x + 'px';
             cursorinner.style.top = y + 'px';
@@ -53,7 +56,7 @@ const CursorMaus = () => {
     }, []);
 
     return (
-        <div>
+        <div className='cursor-wrapper'>
             <div className="cursor"></div>
             <div className="cursor2"></div>
         </div>

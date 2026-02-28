@@ -1,12 +1,4 @@
-/*
-Theme Name: Prinoz
-Author: Ui-Drops
-Author URI: https://themeforest.net/user/ui-drops/portfolio
-Description: Prinoz - Printing company & Service Html Template
-Service Html Template 
-Version: 1.0.0
-*/
-/*CSS Table Of Content Ends Here*/
+
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 @import url("https://fonts.cdnfonts.com/css/satoshi");
 :root {
@@ -22,7 +14,18 @@ Version: 1.0.0
   --bg: #F3F7FB;
   --bg2: #F6FBFF;
   --box-shadow: 0px 1px 14px 0px rgba(0, 0, 0, 0.13);
+
+
+
+  --color-primary-light: #76b9f0;
+  --color-primary: #31a2ff;
+  --color-primary-dark: #1e0d87;
+
+  --color-neutral-light: #d2d2d2;
+  --color-black: #000000;
 }
+
+
 
 .theme-btn {
   position: relative;
@@ -2624,7 +2627,7 @@ span {
   position: relative;
   list-style: none;
   display: inline-block;
-  margin-inline-end: 50px;
+  margin-inline-end: 40px;
 }
 .header-main .main-menu ul li:last-child {
   margin-inline-end: 0;
@@ -2871,16 +2874,7 @@ span {
     padding: 0;
   }
 }
-.header-1 .mega-menu-wrapper::before {
-  position: absolute;
-  right: 122px;
-  content: "";
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  height: 85px;
-  background-color: #ECECEC;
-}
+
 @media (max-width: 1399px) {
   .header-1 .mega-menu-wrapper::before {
     display: none;
@@ -3013,16 +3007,7 @@ span {
   transform: rotateX(0deg);
   visibility: visible;
 }
-.header-1.style-3 .mega-menu-wrapper::before {
-  position: absolute;
-  right: 105px;
-  content: "";
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  height: 85px;
-  background-color: #ECECEC;
-}
+
 @media (max-width: 1399px) {
   .header-1.style-3 .mega-menu-wrapper::before {
     display: none;
@@ -3098,9 +3083,7 @@ span {
   padding: 0;
   border-radius: 0;
 }
-.sticky.header-1 .mega-menu-wrapper::before {
-  right: 100px;
-}
+
 
 .offcanvas__info {
   background: var(--bg) none repeat scroll 0 0;

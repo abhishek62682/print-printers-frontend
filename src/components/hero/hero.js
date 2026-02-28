@@ -18,22 +18,22 @@ const hero = () => {
     }
 
     return (
-        <section className="hero-section hero-1 fix bg-cover" style={{ backgroundImage: `url(${Bg})` }} >
-            <div className="circle-shape">
+        <section className="hero-section hero-1 fix theme-bg" style={{backgroundImage:"url(	https://prinoz-next.vercel.app/images/hero/hero-bg.jpg)"}} >
+            {/* <div className="circle-shape">
                 <img src={Shape1} alt="img" />
-            </div>
+            </div> */}
             <div className="vector-shape float-bob-x">
                 <img src={Shape2} alt="img" />
             </div>
-            <div className="circle-shape-2">
+            {/* <div className="circle-shape-2">
                 <img src={Shape3} alt="img" />
-            </div>
-            <div className="arrow-shape float-bob-y">
+            </div> */}
+            {/* <div className="arrow-shape float-bob-y">
                 <img src={Shape4} alt="img" />
-            </div>
-            <div id="scrollDown" className="scroll-down">
+            </div> */}
+            {/* <div id="scrollDown" className="scroll-down">
                 <img src={Shape5} alt="img" />
-            </div>
+            </div> */}
             <div className="container">
                 <div className="row g-4 align-items-center">
                     <div className="col-lg-6">
@@ -62,7 +62,7 @@ const hero = () => {
                     </div>
                     <div className="col-lg-6 wow fadeInUp" data-wow-delay=".4s">
                         <div className="hero-thumb">
-                            <img src={hero1} alt="hero-img" />
+                            <img src="https://prinoz-next.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhero-1.d25dc91a.png&w=1920&q=75" alt="hero-img" />
                             <div className="information-shape float-bob-x">
                                 <img src={hero2} alt="img" />
                             </div>
