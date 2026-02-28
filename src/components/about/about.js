@@ -22,7 +22,7 @@ const about = () => {
     }
 
     return (
-        <section className="about-section section-padding pt-0">
+        <section className="about-section section-padding ">
             <div className="dot-shape">
                 <img src={Abimg1} alt="img" />
             </div>
