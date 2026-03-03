@@ -38,7 +38,7 @@ const hero = () => {
                 <div className="row g-4 align-items-center">
                     <div className="col-lg-7">
                         <div className="hero-content">
-                            <h6 className="wow fadeInUp">Digital printing Service</h6>
+                            <span className="wow  section-tags fadeInUp">Digital printing Service</span>
                             <h1 className="wow fadeInUp" data-wow-delay=".3s">
                                 India's Book Printing Partner for Publishers Worldwide
                                 {/* <img src={Shape6} alt="img" /> */}

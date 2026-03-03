@@ -43,13 +43,14 @@
   left: 0;
   width: 0;
   background-color: var(--color-white);
-  color:var(--color-text-primary);
+  color:var(--color-dark ) !important;
   z-index: -1;
   transition: all 0.4s ease-out;
   border-radius: inherit;
 }
 .theme-btn:hover {
-
+  color:var(--color-dark ) !important;
+  
   box-shadow: none;
 }
 .theme-btn:hover::before {
@@ -1994,7 +1995,7 @@ span {
   border-radius: 50%;
 }
 .footer-widgets-wrapper.style-2 .footer-content .social-icon a:hover {
-  background-color: var(--theme);
+  /* background-color: var(--theme); */
 
   border: 1px solid transparent;
 }
@@ -9455,6 +9456,7 @@ input.main-search-input::placeholder {
 }
 
 .section-tags{
+  display: inline-block;
   padding:8px 24px;
   background-color: var(--color-white);
   color:var(--color-dark);

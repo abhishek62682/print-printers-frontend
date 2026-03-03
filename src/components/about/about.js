@@ -55,7 +55,7 @@ const about = () => {
                         <div className="col-lg-6">
                             <div className="about-content">
                                 <div className="section-title">
-                                    <h6 className=" section-tags wow fadeInUp">About Us</h6>
+                                    <span className=" section-tags wow fadeInUp">About Us</span>
                                     <h2 className="wow fadeInUp" data-wow-delay=".3s">
                                         Three Decades of Print. 
 

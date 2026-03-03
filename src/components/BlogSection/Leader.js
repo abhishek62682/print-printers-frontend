@@ -15,7 +15,7 @@ const LeaderSection = (props) => {
         <section className={"" + props.hclass} >
             <div className="container">
                 <div className="section-title flex-center text-center">
-                    <h6 className="section-tags">Our Leaders</h6>
+                    <span className="section-tags">Our Leaders</span>
                     <h2>
                         The People Behind Your Print
 
