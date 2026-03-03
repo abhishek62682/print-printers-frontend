@@ -31,23 +31,31 @@ const hero = () => {
             <div className="arrow-shape float-bob-y">
                 <img src={Shape4} alt="img" />
             </div>
-            <div id="scrollDown" className="scroll-down">
+            {/* <div id="scrollDown" className="scroll-down">
                 <img src={Shape5} alt="img" />
-            </div>
+            </div> */}
             <div className="container">
                 <div className="row g-4 align-items-center">
-                    <div className="col-lg-6">
+                    <div className="col-lg-7">
                         <div className="hero-content">
                             <h6 className="wow fadeInUp">Digital printing Service</h6>
                             <h1 className="wow fadeInUp" data-wow-delay=".3s">
-                                Produce Printing,
-                                <span>Art & Sticker <img src={Shape6} alt="img" /></span>..
+                                India's Book Printing Partner for Publishers Worldwide
+                                {/* <img src={Shape6} alt="img" /> */}
                             </h1>
                             <p className="wow fadeInUp" data-wow-delay=".5s">
-                                Beautiful, customizable template, with a ton of web blocks <br />
-                                to create an amazing website that looks
+                               Three decades of print excellence. Proudly manufactured in India.  <br /> Delivered to your door in New York, London, Melbourne and beyond.
+
                             </p>
-                            <ul className="list wow fadeInUp" data-wow-delay=".7s">
+                            <div className=' btn-wrapper d-flex gap-4 '>
+ <Link to="/shop" onClick={ClickHandler} className="theme-btn wow fadeInUp" data-wow-delay=".9s">Download Our Capability Profile</Link>
+
+                                 <Link to="/shop" onClick={ClickHandler} className="theme-btn wow fadeInUp" data-wow-delay=".9s">Get a Free Quote!
+</Link>
+
+                                 
+                            </div>
+                            {/* <ul className="list wow fadeInUp" data-wow-delay=".7s">
                                 <li>
                                     <i className="fa-sharp fa-solid fa-check"></i>
                                     Top quality prints using the latest technology
@@ -56,11 +64,11 @@ const hero = () => {
                                     <i className="fa-sharp fa-solid fa-check"></i>
                                     Mix and match colors, sizes, and designs
                                 </li>
-                            </ul>
-                            <Link to="/shop" onClick={ClickHandler} className="theme-btn wow fadeInUp" data-wow-delay=".9s">Custom order</Link>
+                            </ul> */}
+                           
                         </div>
                     </div>
-                    <div className="col-lg-6 wow fadeInUp" data-wow-delay=".4s">
+                    <div className="col-lg-5 wow fadeInUp" data-wow-delay=".4s">
                         <div className="hero-thumb">
                             <img src="https://prinoz-next.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhero-1.d25dc91a.png&w=1920&q=75" alt="hero-img" />
                             <div className="information-shape float-bob-x">

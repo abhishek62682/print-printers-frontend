@@ -22,7 +22,7 @@ const about = () => {
     }
 
     return (
-        <section className="about-section section-padding ">
+        <section className="about-section  section-padding ">
             <div className="dot-shape">
                 <img src={Abimg1} alt="img" />
             </div>
@@ -31,7 +31,7 @@ const about = () => {
             </div>
             <div className="container">
                 <div className="about-wrapper">
-                    <div className="row g-4">
+                    <div className="row g-4 align-items-center">
                         <div className="col-lg-6">
                             <div className="about-image-items">
                                 <div className="circle-shape float-bob-y">
@@ -55,17 +55,47 @@ const about = () => {
                         <div className="col-lg-6">
                             <div className="about-content">
                                 <div className="section-title">
-                                    <h6 className="wow fadeInUp">More about us</h6>
+                                    <h6 className=" section-tags wow fadeInUp">About Us</h6>
                                     <h2 className="wow fadeInUp" data-wow-delay=".3s">
-                                        Create Stunning Print For
-                                        <span> Your Business <img src={Abimg9} alt="img" /></span>
+                                        Three Decades of Print. 
+
+                                        <span> One Unwavering Promise. <img src={Abimg9} alt="img" /></span>
                                     </h2>
                                 </div>
-                                <p className="mt-3 mt-md-0 wow fadeInUp" data-wow-delay=".5s">
+                                {/* <p className="mt-3 mt-md-0 wow fadeInUp" data-wow-delay=".5s">
                                     A full administration printing background. Print shirts for yourself
                                     or your online business Beautiful, customizable template,
+                                </p> */}
+
+                                <div className='about-block-wrappper'>
+
+
+                                    <p className='about-block'>
+                                    Print Printers, a division of Citicap Channels Pvt. Ltd., was founded in New Delhi, India in 1992. What began as a specialist in book printing has grown into one of India's most trusted print export operations — serving publishers, corporations, and creative businesses across the United States, Canada, the United Kingdom, Australia, the Middle East, and South America.
+
                                 </p>
-                                <div className="row g-4">
+<p className='about-block'>
+
+                                We have never believed that offshore printing should mean uncertainty. Too many publishers have experienced the frustration of receiving books that don't match the approved proof, shipments that arrive weeks late, or vendors who disappear when things go wrong. We built Print Printers to be the antidote to all of that. 
+
+                               <p>
+
+                               </p>
+
+
+Our reputation was earned — and continues to be earned — by delivering a no-surprise, hassle-free customer experience that creates long-term, sustainable relationships. When you work with us, you don't just get a printer. You get a dedicated print partner who is invested in your success.
+
+
+</p>
+
+<p className='about-block'>
+
+    As a specialist print management and export company, we sit at the intersection of two worlds: the deep manufacturing expertise of India's finest print factories, and the communication standards, business practices, and expectations of our international clients. We speak both languages fluently — and that translation is where the real value lies.
+
+</p>
+
+                                </div>
+                                {/* <div className="row g-4">
                                     <div className="col-xl-6 col-md-6 col-lg-12 wow fadeInUp" data-wow-delay=".3s">
                                         <div className="icon-box-items active">
                                             <div className="icon-items">
@@ -94,7 +124,7 @@ const about = () => {
                                             </span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="about-author">
                                     <Link onClick={ClickHandler} to="/about" className="theme-btn wow fadeInUp" data-wow-delay=".3s">more about us</Link>
                                     <div className="author-image wow fadeInUp" data-wow-delay=".5s">

@@ -20,6 +20,7 @@ import ServiceBg from '../../img/service/service-bg.jpg'
 
 import api from "../../api";
 import Ws6 from '../../img/feature/bg.png'
+import LeaderSection from '../../components/BlogSection/Leader';
 
 const HomePage = () => {
 
@@ -33,9 +34,11 @@ const HomePage = () => {
         <Fragment>
             
             <Hero />
-            
+            <FeatureSection />
+            <MarqueeSection hclass={'marquee-section  '} />
             <About />
-            <MarqueeSection hclass={'marquee-section margin-top-8 mb-80'} />
+            <LeaderSection hclass="blog-section section-padding pt-0 bg-cover" SubClass="blog-wrapper"  />
+            
             {/* <ServiceSection hclass={'service-section bg-cover section-padding'} Bg={ServiceBg} /> */}
             <StoreSection />
             <ProductSection
