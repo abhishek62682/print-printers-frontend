@@ -9459,8 +9459,8 @@ input.main-search-input::placeholder {
   display: inline-block;
   padding:8px 24px;
   background-color: var(--color-white);
-  color:var(--color-dark);
-  border:1px solid var(--color-dark);
+  color:var(--color-blue);
+  border:1px solid var(--color-blue);
   width:fit-content;
   /* margin:auto; */
   margin-bottom: 20px;
