@@ -1,19 +1,17 @@
-import React from 'react';
 
 /* image  */
 import Abimg1 from '../../img/about/dot-1.png'
 import Abimg2 from '../../img/about/dot-2.png'
 import Abimg3 from '../../img/about/circle.png'
-import Abimg4 from '../../img/about/cap.png'
+
 import Abimg5 from '../../img/about/shape.png'
 import Abimg6 from '../../img/about/01.jpg'
 import Abimg7 from '../../img/about/02.jpg'
 import Abimg8 from '../../img/about/03.jpg'
 import Abimg9 from '../../img/line.png'
-import Abimg10 from '../../img/icon/01.svg'
+
 import Abimg11 from '../../img/about/author.png'
 import Abimg12 from '../../img/about/line.png'
-import Abimg13 from '../../img/icon/02.svg'
 import { Link } from 'react-router-dom';
 
 const about = () => {
@@ -22,7 +20,7 @@ const about = () => {
     }
 
     return (
-        <section className="about-section  section-padding ">
+        <section id="about-container" className="about-section  section-padding pb-0 ">
             <div className="dot-shape">
                 <img src={Abimg1} alt="img" />
             </div>
@@ -62,10 +60,7 @@ const about = () => {
                                         <span> One Unwavering Promise. <img src={Abimg9} alt="img" /></span>
                                     </h2>
                                 </div>
-                                {/* <p className="mt-3 mt-md-0 wow fadeInUp" data-wow-delay=".5s">
-                                    A full administration printing background. Print shirts for yourself
-                                    or your online business Beautiful, customizable template,
-                                </p> */}
+                                
 
                                 <div className='about-block-wrappper'>
 
@@ -76,61 +71,30 @@ const about = () => {
                                 </p>
 <p className='about-block'>
 
-                                We have never believed that offshore printing should mean uncertainty. Too many publishers have experienced the frustration of receiving books that don't match the approved proof, shipments that arrive weeks late, or vendors who disappear when things go wrong. We built Print Printers to be the antidote to all of that. 
+                               We believe that offshore and overseas printing should never mean uncertainty. Many publishers have experienced the frustration of receiving books that don't match the approved proof, shipments that arrive late, or vendors who disappear when things go wrong. We built Print Printers to be the antidote of all of that.
 
                                <p>
 
                                </p>
 
 
-Our reputation was earned — and continues to be earned — by delivering a no-surprise, hassle-free customer experience that creates long-term, sustainable relationships. When you work with us, you don't just get a printer. You get a dedicated print partner who is invested in your success.
+As a specialist print export company, we sit at the intersection of two worlds: the manufacturing depth of the finest printing equipment and the communication standards of international clients. We speak both languages — and that translation is where the value lies.
 
 
 </p>
 
-<p className='about-block'>
 
-    As a specialist print management and export company, we sit at the intersection of two worlds: the deep manufacturing expertise of India's finest print factories, and the communication standards, business practices, and expectations of our international clients. We speak both languages fluently — and that translation is where the real value lies.
-
-</p>
 
                                 </div>
-                                {/* <div className="row g-4">
-                                    <div className="col-xl-6 col-md-6 col-lg-12 wow fadeInUp" data-wow-delay=".3s">
-                                        <div className="icon-box-items active">
-                                            <div className="icon-items">
-                                                <div className="icon">
-                                                    <img src={Abimg10} alt="img" />
-                                                </div>
-                                                <h6>Smooth Automation</h6>
-                                            </div>
-                                            <span>
-                                                No matter how much you know
-                                                about a part icular medical
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="col-xl-6 col-md-6 col-lg-12 wow fadeInUp" data-wow-delay=".5s">
-                                        <div className="icon-box-items">
-                                            <div className="icon-items">
-                                                <div className="icon bg-2">
-                                                    <img src={Abimg13} alt="" />
-                                                </div>
-                                                <h6>Custom Branding Tools</h6>
-                                            </div>
-                                            <span>
-                                                No matter how much you know
-                                                about a part icular medical
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div> */}
+                               
                                 <div className="about-author">
-                                    <Link onClick={ClickHandler} to="/about" className="theme-btn wow fadeInUp" data-wow-delay=".3s">more about us</Link>
+                                   <a href="#leader-section" class="theme-btn wow fadeInUp" data-wow-delay=".3s">
+      More About Us
+    </a>
                                     <div className="author-image wow fadeInUp" data-wow-delay=".5s">
                                         <img src={Abimg11} alt="img" />
                                             <div className="content">
-                                            <span>10m+ Trusted Global clients <img src={Abimg12} alt="img" /></span>
+                                            <span>100+ Satisfied Global Clients <img src={Abimg12} alt="img" /></span>
                                             </div>
                                     </div>
                                 </div>

@@ -67,6 +67,7 @@
 .theme-btn:hover::before {
   width: 100%;
 }
+
 @media (max-width: 767px) {
   .theme-btn {
     padding: 20px 32px;
@@ -3933,6 +3934,13 @@ span {
 .hero-1 .hero-content {
   position: relative;
   z-index: 9;
+}
+
+.hero-1 .hero-content > h1 {
+  position: relative;
+  z-index: 9;
+  font-size: 200px;
+  background-color: red !important;
 }
 .hero-1 .hero-content h6 {
   font-size: 16px;

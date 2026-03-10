@@ -3,19 +3,16 @@ import React from 'react';
 import Ws1 from '../../img/about/product-shape.png'
 import Ws2 from '../../img/about/04.jpg'
 import Ws3 from '../../img/about/05.jpg'
-import Ws4 from '../../img/feature/StickersV30.png'
 import Ws5 from '../../img/line.png'
 
 
 const WorksSection = (props) => {
     return (
-        <section className={"" +props.hclass} style={{ backgroundImage: `url(${props.Ws6})`}}>
-            <div className="product-shape float-bob-x">
-                <img src={Ws1} alt="img" />
-            </div>
+        <section className={"" +props.hclass} >
+            
             <div className="container">
                 <div className={"" +props.eclass}>
-                    <div className="row g-4">
+                    <div className="row g-4 align-items-center">
                         <div className="col-lg-6">
                             <div className="about-image-items">
                                 <div className="about-feature-image">
@@ -23,41 +20,36 @@ const WorksSection = (props) => {
                                         <div className="about-feature-image reveal image-anime">
                                         <img src={Ws3} alt="img" />
                                         </div>
-                                        <div className="stickers-shape">
-                                        <img src={Ws4} alt="img" />
-                                        </div>
+                                      
                                 </div>
                             </div>
                         </div>
                         <div className="col-lg-6">
                             <div className="about-feature-content">
                                 <div className="section-title">
-                                    <h6 className="wow fadeInUp">More about us</h6>
+                                    <span className="wow section-tags fadeInUp">We Handle Everything</span>
                                     <h2 className="wow fadeInUp" data-wow-delay=".3s">
-                                        How Print-On-Demand
-                                        <span><img src={Ws5} alt="img" />Drop Shipping</span> Works
+                                        Your Print. Managed
+                                        <span><img src={Ws5} alt="img" />From File to Front </span> Door.
                                     </h2>
                                 </div>
                                 <div className="box-items-area mt-3 mt-md-0">
                                     <div className="box-item wow fadeInUp" data-wow-delay=".3s">
-                                        <h5>Competitive & flexible product pricing</h5>
+                                        <h5>You Approve Before We Print</h5>
                                         <p>
-                                            Everyone’s local printer, we partner with more than 50 print
-                                            on demand suppliers in over 10  we partner with more
+                                            Your physical proof arrives before a single production copy is made — see it, feel it, approve it..
                                         </p>
                                     </div>
                                     <div className="box-item active wow fadeInUp" data-wow-delay=".3s">
-                                        <h5>Catalog of 350+ products</h5>
+                                        <h5>One Contact. Always Reachable.</h5>
                                         <p>
-                                            Everyone’s local printer, we partner with more than 50 print
-                                            on demand suppliers in over 10  we partner with more
+                                            Your dedicated contact sends production updates at every milestone — you always know where your job is.
                                         </p>
                                     </div>
                                     <div className="box-item wow fadeInUp" data-wow-delay=".3s">
-                                        <h5>Competitive & flexible product pricing</h5>
+                                        <h5>Shipped to Your Warehouse. Not Just Your Port.</h5>
                                         <p>
-                                            Everyone’s local printer, we partner with more than 50 print
-                                            on demand suppliers in over 10  we partner with more
+                                            Door-to-door delivery includes customs clearance, freight and final mile — no surprises at your end.
                                         </p>
                                     </div>
                                 </div>

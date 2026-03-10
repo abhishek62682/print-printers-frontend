@@ -7,7 +7,7 @@ import BShap2 from '../../img/star-shape.png'
 const PageTitle = (props) => {
     return (
         <div className="breadcrumb-section section-bg-2">
-            <div className="container-fluid">
+           
                 <div className="breadcrumb-wrapper bg-cover" style={{ backgroundImage: `url(${BreadcrumbBG})`}}>
                     <div className="flower-shape">
                         <img src={BShap1} alt="img" />
@@ -17,12 +17,12 @@ const PageTitle = (props) => {
                     </div>
                     <div className="container">
                         <div className="page-heading center">
-                            <h6>{props.pageTitle}</h6>
+                            <span className='section-tags'>{props.pageTitle}</span>
                             <h1>{props.pagesub}</h1>
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </div>
     )
 }

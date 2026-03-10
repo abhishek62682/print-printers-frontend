@@ -13,6 +13,7 @@ import Ts7 from '../../img/testimonial/line-shape-2.png'
 import Tclient1 from '../../img/testimonial/client-1.png'
 import Tclient2 from '../../img/testimonial/client-2.png'
 import Tclient3 from '../../img/testimonial/client-3.png'
+import { ArrowBigDownDash, ArrowLeft, ArrowRight, ArrowUpNarrowWide, ChevronLeft, ChevronRight, MoveRight } from "lucide-react";
 
 SwiperCore.use([Navigation, Autoplay]);
 const TestimonialSectionS2 = () => {
@@ -21,7 +22,7 @@ const TestimonialSectionS2 = () => {
     }, []);
 
     return (
-        <section className="testimonial-section-2 section-padding pt-0">
+        <section id="testimonial-section" className="testimonial-section-2 section-padding pb-0">
             <div className="client-1">
                 <img src={Ts1} alt="img" />
             </div>
@@ -45,11 +46,11 @@ const TestimonialSectionS2 = () => {
             </div>
             <div className="container">
                 <div className="section-title text-center">
-                    <h6 className="wow fadeInUp">Digital printing Service</h6>
+                    <h6 className="wow section-tags fadeInUp">Our Relationships</h6>
                     <h2 className="wow fadeInUp" data-wow-delay=".3s">
-                        What Our Client’s Says <br />
-                        About Company
+                        What Our Clients Say 
                     </h2>
+                    <h3>About Print Printers</h3>
                 </div>
                 <div className="row justify-content-center">
                     <div className="col-lg-9">
@@ -67,64 +68,60 @@ const TestimonialSectionS2 = () => {
                                     prevEl: ".array-prev",
                                 }}
                             >
-                                <SwiperSlide>
-                                    <div className="testimonial-box-items">
+<SwiperSlide>
+  <div className="testimonial-box-items">
 
-                                        <div
-                                            className="client-img bg-cover"
-                                            style={{ backgroundImage: `url(${Tclient1})` }}
-                                        ></div>
-                                        <p>
-                                            The experience with Ave has been nothing short of amazing. So much better than other themes I’ve used – wish I had seen this one first and saved my wasted time and money on other themes! I’d recommend this theme in a heartbeat!
-                                        </p>
-                                        <div className="client-content">
-                                            <h4>Mathias Herasen</h4>
-                                            <span>ThemeForest Exclusive</span>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
+    <div
+      className="client-img bg-cover"
+      style={{ backgroundImage: `url(${Tclient1})` }}
+    ></div>
 
-                                <SwiperSlide>
-                                    <div className="testimonial-box-items">
-                                       
-                                        <div
-                                            className="client-img bg-cover"
-                                            style={{ backgroundImage: `url(${Tclient2})` }}
-                                        ></div>
-                                        <p>
-                                            The experience with Ave has been nothing short of amazing. So much better than other themes I’ve used – wish I had seen this one first and saved my wasted time and money on other themes! I’d recommend this theme in a heartbeat!
-                                        </p>
-                                        <div className="client-content">
-                                            <h4>Shikhon Islam</h4>
-                                            <span>Web Developer</span>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
+    <p>
+      “Your professionalism and perfectionism has enabled us to have total confidence in the printed materials you produce for us.”
+    </p>
 
-                                <SwiperSlide>
-                                    <div className="testimonial-box-items">
-                                        
-                                        <div
-                                            className="client-img bg-cover"
-                                            style={{ backgroundImage: `url(${Tclient3})` }}
-                                        ></div>
-                                        <p>
-                                            The experience with Ave has been nothing short of amazing. So much better than other themes I’ve used – wish I had seen this one first and saved my wasted time and money on other themes! I’d recommend this theme in a heartbeat!
-                                        </p>
-                                        <div className="client-content">
-                                            <h4>Kawser Ahmed</h4>
-                                            <span>ThemeForest Exclusive</span>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
+    <div className="client-content">
+      <h4>Darby Binder</h4>
+      <span>
+        Operations Manager · Rapid Guide LLC, USA · Client since 2002 · ~3.5M booklet copies printed
+      </span>
+    </div>
+
+  </div>
+</SwiperSlide>
+<SwiperSlide>
+  <div className="testimonial-box-items">
+
+    <div
+      className="client-img bg-cover"
+      style={{ backgroundImage: `url(${Tclient2})` }}
+    ></div>
+
+    <p>
+      “Ash from Print Printers provided service beyond what was quoted. We are totally satisfied — and our customers say it has a quality feel.”
+    </p>
+
+    <div className="client-content">
+      <h4>Chris Holton-Smith</h4>
+      <span>
+        The Teacup Project · Florida, USA · 1,000 lay-flat concealed Wire-O books · Completed during COVID-19 lockdown
+      </span>
+    </div>
+
+  </div>
+</SwiperSlide>
+
+                              
+
+                              
                             </Swiper>
 
                             <div className="array-button justify-content-center">
                                 <button className="array-prev">
-                                    <i className="fa-regular fa-arrow-left-long"></i>
+<ArrowLeft />
                                 </button>
                                 <button className="array-next">
-                                    <i className="fa-regular fa-arrow-right-long"></i>
+                                  <ArrowRight />
                                 </button>
                             </div>
                         </div>

@@ -12,10 +12,10 @@ const ClickHandler = () => {
 const BlogSection = (props) => {
     const { blogAllbtn = true } = props
     return (
-        <section className={"" + props.hclass} >
+        <section id="blog-container" className={"" + props.hclass} style={{ backgroundImage: `url(${BlogBg})` }}>
             <div className="container">
                 <div className="section-title text-center">
-                    <h6>Digital printing Service</h6>
+                    <span className="section-tags">Digital printing Service</span >
                     <h2>
                         Get Update News & Blogs<br />
                         By Company

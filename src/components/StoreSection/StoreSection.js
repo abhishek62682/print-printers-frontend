@@ -7,14 +7,14 @@ import SS4 from '../../img/feature/order.png'
 
 const StoreSection = () => {
     return (
-        <section className="feature-section section-padding pt-0">
-            <div className="container custom-container">
+        <section className="feature-section section-padding pb-0">
+            <div className="container">
                 <div className="feature-wrapper-2">
                     <div className="row g-4">
                         <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
                             <div className="feature-box-items-2 text-center">
-                                <div className="icon">
-                                    <img src={SS1} alt="img" />
+                                <div className="value-pillar-icon">
+                                    
                                 </div>
                                 <div className="content">
                                     <h3>
@@ -22,59 +22,58 @@ const StoreSection = () => {
 in Technology
                                     </h3>
                                     <p>
-                                        Connect your store to Printes, added
-                                        products, and set your own retail
+                                        Up to date with the latest printing technologies and finishes available in-house.
+
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
                             <div className="feature-box-items-2 text-center">
-                                <div className="icon bg-2">
-                                    <img src={SS2} alt="img" />
+                               <div className="value-pillar-icon">
+                                   
+                                   
                                 </div>
                                 <div className="content">
                                     <h3>
-                                       Internal & External
-Collaboration
+                                       Real-Time Factory Updates
+
                                     </h3>
                                     <p>
-                                        Connect your store to Printes, added
-                                        products, and set your own retail
+                                        Weekly updates from the press floor keep you informed at every stage of production to keep you well planned.
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
                             <div className="feature-box-items-2 text-center">
-                                <div className="icon bg-3">
-                                    <img src={SS3} alt="img" />
+                                <div className="value-pillar-icon">
+                                   
                                 </div>
                                 <div className="content">
                                     <h3>
-                                       Transparent
-Communication
+                                       360 Degree Collaboration
+
                                     </h3>
                                     <p>
-                                        Connect your store to Printes, added
-                                        products, and set your own retail
+                                        Collaborations with internal and external stakeholders to ensure best printing, packing and shipping solutions for you. 
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
                             <div className="feature-box-items-2 text-center">
-                                <div className="icon bg-4">
-                                    <img src={SS4} alt="img" />
+                               <div className="value-pillar-icon">
+                                   
+                                    
                                 </div>
                                 <div className="content">
                                     <h3>
-                                        Sustainable
-Practices
+                                        Sustainable Approach
+
                                     </h3>
                                     <p>
-                                        Connect your store to Printes, added
-                                        products, and set your own retail
+                                        Using FSC paper and materials, Audited Equipment, and one tree planted per order through our Citicap Cares initiative.
                                     </p>
                                 </div>
                             </div>

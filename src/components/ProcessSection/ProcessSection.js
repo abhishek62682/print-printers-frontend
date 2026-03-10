@@ -9,7 +9,7 @@ import Ps6 from '../../img/feature/growth1.png'
 
 const ProcessSection = () => {
     return (
-        <section className="feature-section-3 section-padding pt-0">
+        <section id="process-container" className="feature-section-3 section-padding pb-0 ">
             <div className="container custom-container-2">
                 <div className="fearure-wrapper-3">
                     <div className="line-shape">
@@ -21,8 +21,9 @@ const ProcessSection = () => {
                         </div>
                         <div className="feature-content">
                             <h5>
-                                Certified Print Shop<br/>
-                                    100% Authentic
+                                Files Approved
+<br/>
+                                    & Proof Sent
                             </h5>
                         </div>
                     </div>
@@ -32,8 +33,9 @@ const ProcessSection = () => {
                         </div>
                         <div className="feature-content">
                             <h5>
-                                Fast Delivery From 10<br/>
-                                    Working Days
+                                Physical Proof
+<br/>
+                                    Approved
                             </h5>
                         </div>
                     </div>
@@ -43,8 +45,9 @@ const ProcessSection = () => {
                         </div>
                         <div className="feature-content">
                             <h5>
-                                Well- Founded Print<br/>
-                                    Top - Service
+                                Printing &
+<br/>
+                                   Binding
                             </h5>
                         </div>
                     </div>
@@ -54,8 +57,9 @@ const ProcessSection = () => {
                         </div>
                         <div className="feature-content">
                             <h5>
-                                Flexible Orders<br/>
-                                    Module
+                               Quality Check
+<br/>
+                                    & Packing
                             </h5>
                         </div>
                     </div>
@@ -65,8 +69,9 @@ const ProcessSection = () => {
                         </div>
                         <div className="feature-content">
                             <h5>
-                                Simple & Digital<br/>
-                                    Process
+                                Shipped to
+<br/>
+                                    Your Door
                             </h5>
                         </div>
                     </div>

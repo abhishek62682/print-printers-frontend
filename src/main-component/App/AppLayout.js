@@ -6,6 +6,7 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
+import CursorMaus from '../../components/CursorMaus/CursorMaus';
 // import CustomCursor from '../../components/CustomCursor/CustomCursor';
 
 const AppLayout = () => {
@@ -14,6 +15,7 @@ const AppLayout = () => {
     <div className="App" id='scrool'>
 
       <Navbar hclass={'header-section'} />
+       <CursorMaus />
 
       <Outlet/>
 

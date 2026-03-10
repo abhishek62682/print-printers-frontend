@@ -1,22 +1,25 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 
-import PageTitle from '../../components/pagetitle/PageTitle'
-import Contactpage from '../../components/Contactpage/Contactpage'
-import CtaSectionS2 from '../../components/CtaSectionS2/CtaSectionS2';
+import Contactpage from '../../components/Contactpage/Contactpage';
 
-import CursorMaus from '../../components/CursorMaus/CursorMaus';
+import { useLocation } from 'react-router-dom';
 
 const ContactPage = () => {
+    const { pathname } = useLocation();
+
+    // Scroll to top whenever we enter the contact page
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [pathname]);
+
     return (
         <Fragment>
-            {/* <NavbarS2 hclass={'header-section-2 style-two'} /> */}
-            <PageTitle pageTitle={'Contact Us'} pagesub={'Contact'} />
+            
             <Contactpage />
-            <CtaSectionS2 />
-            {/* <FooterS3 /> */}
-            <CursorMaus />
+            
+            {/* <CursorMaus /> */}
         </Fragment>
     )
 };
-export default ContactPage;
 
+export default ContactPage;
