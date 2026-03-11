@@ -35,192 +35,7 @@ const toastLoading = {
     style: toastBase,
 };
 
-const styles = `
-  .form-wrap {
-    width: 100%;
-    font-family: var(--font-secondary);
-    margin-top: 40px;
-  }
-  .f-row { display: grid; gap: 16px; }
-  .f-row-2 { grid-template-columns: 1fr 1fr; }
-  .f-row-3 { grid-template-columns: 1fr 1fr 1fr; }
-  .f-group { margin-bottom: 20px; }
-  .f-group label {
-    display: block;
-    font-family: var(--font-primary);
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--color-text-secondary);
-    margin-bottom: 8px;
-    font-weight: 600;
-  }
 
-  /* ── Bigger, punchier asterisk ── */
-  .f-group label .req {
-    color: #e05c4b;
-    font-size: 16px;
-    font-weight: 800;
-    line-height: 1;
-    vertical-align: middle;
-    margin-left: 4px;
-    display: inline-block;
-    transform: translateY(-1px);
-  }
-
-  .f-group input,
-  .f-group textarea,
-  .f-group select {
-    width: 100%;
-    border: 1px solid var(--color-light);
-    background: var(--color-white);
-    color: var(--color-text-primary);
-    padding: 14px 16px;
-    font-family: var(--font-secondary);
-    font-size: var(--font-size-label);
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    resize: vertical;
-    appearance: none;
-    -webkit-appearance: none;
-    border-radius: var(--radius-md);
-    box-sizing: border-box;
-  }
-  .f-group input::placeholder,
-  .f-group textarea::placeholder { color: var(--color-light); }
-  .f-group input:focus,
-  .f-group textarea:focus,
-  .f-group select:focus {
-    border-color: var(--color-blue);
-    box-shadow: 0 0 0 3px rgba(49, 162, 255, 0.1);
-  }
-  .f-group textarea { min-height: 110px; }
-  .f-group select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23D2D2D2' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    padding-right: 40px;
-    color: var(--color-text-primary);
-  }
-  .f-group .srv-validation-message {
-    color: #e05c4b;
-    font-size: 11px;
-    font-family: var(--font-secondary);
-    margin-top: 4px;
-    display: block;
-  }
-  .btn-enquiry {
-    width: 100%;
-    background: var(--color-dark);
-    color: var(--color-white);
-    border: none;
-    padding: 18px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: background 0.2s, box-shadow 0.2s;
-    font-family: var(--font-secondary);
-    border-radius: var(--radius-md);
-  }
-  .btn-enquiry:disabled { opacity: 0.65; cursor: not-allowed; }
-  .form-note {
-    font-size: 14px;
-    font-family: var(--font-secondary);
-    color: #aaa;
-    margin-top: 16px;
-    line-height: 1.6;
-    margin-bottom: 0;
-    text-align: center;
-  }
-
-  /* ── Modal ── */
-  .cf-modal-overlay {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 9999; padding: 24px;
-    animation: cf-fade-in 0.25s ease;
-  }
-  @keyframes cf-fade-in { from { opacity:0 } to { opacity:1 } }
-  .cf-modal {
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    padding: 48px 40px 40px;
-    max-width: 520px; width: 100%;
-    position: relative; text-align: center;
-    animation: cf-slide-up 0.3s ease;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.15);
-  }
-  @keyframes cf-slide-up {
-    from { opacity:0; transform:translateY(24px) }
-    to   { opacity:1; transform:translateY(0) }
-  }
-  .cf-modal-close {
-    position: absolute; top:16px; right:20px;
-    background: none; border: none; font-size: 20px;
-    cursor: pointer; color: var(--color-text-secondary);
-    line-height:1; padding:4px; transition: color 0.2s;
-  }
-  .cf-modal-close:hover { color: var(--color-text-primary); }
-  .cf-modal-icon {
-    width:64px; height:64px;
-    background: rgba(49,162,255,0.1);
-    border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    margin: 0 auto 24px;
-  }
-    .cf-modal-icon > img{
-    width:100%;}
-  .cf-modal-icon i { font-size:28px; color: var(--color-blue); }
-  .cf-modal h4 {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-heading-sm);
-    color: var(--color-text-primary);
-    letter-spacing:1px; text-transform:uppercase; margin-bottom:12px;
-  }
-  .cf-modal p {
-    font-family: var(--font-secondary);
-    font-size: var(--font-size-label);
-    color: var(--color-text-secondary);
-    line-height:1.75; margin-bottom:28px;
-  }
-  .cf-modal-actions { display:flex; gap:12px;  justify-content:center;  }
-  .cf-modal-actions a {
-    font-family: var(--font-secondary); font-size:10px;
-    letter-spacing:1.5px; text-transform:uppercase; font-weight:700;
-    padding:13px 24px; text-decoration:none;
-    border-radius: var(--radius-md);
-    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-    display:inline-block;
-    flex-shrink:0;
-  }
-  .cf-modal-actions .btn-modal-primary { background: var(--color-dark); color: var(--color-white); }
-  
-  .cf-modal-actions .btn-modal-secondary {
-    border:1px solid var(--color-light);
-    color: var(--color-text-secondary); background:transparent;
-  }
-  .cf-modal-actions .btn-modal-secondary:hover { border-color: var(--color-blue); color: var(--color-blue); }
-  .cf-modal-divider { width:40px; height:2px; background: var(--color-blue); margin:0 auto 20px; border-radius:2px; }
-
-  @media (max-width: 768px) {
-    .f-row-3 { grid-template-columns: 1fr 1fr; }
-    .cf-modal { padding: 36px 24px 28px; }
-  }
-  @media (max-width: 600px) {
-    .f-row-2, .f-row-3 { grid-template-columns: 1fr; }
-    .cf-modal-actions { flex-direction: column; }
-    .cf-modal-actions a { text-align: center; }
-  }
-`;
 
 // Bold red asterisk next to required field labels
 const Req = () => <span className="req" aria-hidden="true">*</span>;
@@ -335,7 +150,7 @@ const scrollToBlog = () => {
 
     return (
         <>
-            <style>{styles}</style>
+            
 
            
             <Toaster
@@ -375,12 +190,14 @@ const scrollToBlog = () => {
             )}
 
             {/* ── Heading ── */}
-            <div className="contact-title text-center">
-                <h3 className="wow fadeInUp" data-wow-delay=".3s">Fill Up The Form</h3>
-                <p className="wow fadeInUp" data-wow-delay=".5s">
-                    Fields marked <span style={{color:'#e05c4b', fontSize:16, fontWeight:800}}>*</span> are required.
-                </p>
-            </div>
+           <div className="contact-title text-center">
+  <h3 className="wow fadeInUp" data-wow-delay=".3s">
+    Get In Touch With Us
+  </h3>
+  <p className="wow fadeInUp" data-wow-delay=".5s">
+    Fill out the form below and our team will get back to you shortly.
+  </p>
+</div>
 
             {/* ── Form ── */}
             <form id="contact-form" className="form-wrap" onSubmit={handleSubmit} noValidate>

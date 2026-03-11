@@ -41,7 +41,7 @@ const FeatureSection = () => {
                                 <div className="content">
                                     <h3>0</h3>
                                     <p>
-                                       Surprises — That's Our Promise
+                                       Surprises That's Our Promise
                                     </p>
                                 </div>
                             </div>

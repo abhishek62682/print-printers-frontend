@@ -22,7 +22,7 @@ const TestimonialSectionS2 = () => {
     }, []);
 
     return (
-        <section id="testimonial-section" className="testimonial-section-2 section-padding pb-0">
+        <section id="testimonial-container" className="testimonial-section-2 section-padding pb-0">
             <div className="client-1">
                 <img src={Ts1} alt="img" />
             </div>
@@ -50,7 +50,7 @@ const TestimonialSectionS2 = () => {
                     <h2 className="wow fadeInUp" data-wow-delay=".3s">
                         What Our Clients Say 
                     </h2>
-                    <h3>About Print Printers</h3>
+                    <p>About Print Printers</p>
                 </div>
                 <div className="row justify-content-center">
                     <div className="col-lg-9">
@@ -98,7 +98,7 @@ const TestimonialSectionS2 = () => {
     ></div>
 
     <p>
-      “Ash from Print Printers provided service beyond what was quoted. We are totally satisfied — and our customers say it has a quality feel.”
+      “Ash from Print Printers provided service beyond what was quoted. We are totally satisfied and our customers say it has a quality feel.”
     </p>
 
     <div className="client-content">

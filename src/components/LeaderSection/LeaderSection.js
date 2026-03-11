@@ -61,7 +61,7 @@ const LeaderSection = (props) => {
 
                                         </h3>
 
-                                        <p>Your primary contact — ensuring every update, proof response, and shipping notification reaches you promptly and clearly.
+                                        <p>Your primary contact ensuring every update, proof response, and shipping notification reaches you promptly and clearly.
 
 </p>
                                        

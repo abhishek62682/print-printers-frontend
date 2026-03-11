@@ -29,7 +29,7 @@ const WorksSection = (props) => {
                                 <div className="section-title">
                                     <span className="wow section-tags fadeInUp">We Handle Everything</span>
                                     <h2 className="wow fadeInUp" data-wow-delay=".3s">
-                                        Your Print. Managed
+                                        Your Print. Managed 
                                         <span><img src={Ws5} alt="img" />From File to Front </span> Door.
                                     </h2>
                                 </div>

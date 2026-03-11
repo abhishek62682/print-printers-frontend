@@ -19,7 +19,7 @@ const StoreSection = () => {
                                 <div className="content">
                                     <h3>
                                         Constant Innovation
-in Technology
+in Tech.
                                     </h3>
                                     <p>
                                         Up to date with the latest printing technologies and finishes available in-house.

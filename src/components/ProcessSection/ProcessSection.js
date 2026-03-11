@@ -11,8 +11,13 @@ const ProcessSection = () => {
     return (
         <section id="process-container" className="feature-section-3 section-padding pb-0 ">
             <div className="container custom-container-2">
-                <div className="counter-text text-center">
-                    <h6 className="wow fadeInUp">Our Proven Process</h6>
+                <div className="section-title text-center">
+                    <span className='section-tags'>Our Process</span>
+                    <h2>How It Works</h2>
+                    <p className="section-subtitle">
+From file approval to printing, packing, and delivery.
+</p>
+                    
                 </div>
                 <div className="fearure-wrapper-3">
                     <div className="line-shape">
@@ -20,7 +25,9 @@ const ProcessSection = () => {
                     </div>
                     <div className="feature-item wow fadeInUp" data-wow-delay=".2s">
                         <div className="feature-icon">
-                            <img src={Ps2} alt="img" />
+                            {/* <img src={Ps2} alt="img" /> */}
+                            📄
+
                         </div>
                         <div className="feature-content">
                             <span>Step 1</span>
@@ -33,7 +40,9 @@ const ProcessSection = () => {
                     </div>
                     <div className="feature-item wow fadeInUp" data-wow-delay=".4s">
                         <div className="feature-icon">
-                            <img src={Ps3} alt="img" />
+                            {/* <img src={Ps3} alt="img" /> */}
+                            ✅
+
                         </div>
                         <div className="feature-content">
                             <span>Step 2</span>
@@ -47,7 +56,9 @@ const ProcessSection = () => {
                     </div>
                     <div className="feature-item wow fadeInUp" data-wow-delay=".6s">
                         <div className="feature-icon">
-                            <img src={Ps4} alt="img" />
+                            {/* <img src={Ps4} alt="img" /> */}
+                            🖨️
+
                         </div>
                         <div className="feature-content">
                             <span>Step 3</span>
@@ -61,7 +72,8 @@ const ProcessSection = () => {
                     </div>
                     <div className="feature-item wow fadeInUp" data-wow-delay=".7s">
                         <div className="feature-icon">
-                            <img src={Ps5} alt="img" />
+                            {/* <img src={Ps5} alt="img" /> */}
+                            🔍
                         </div>
                         <div className="feature-content">
                             <span>Step 4</span>
@@ -75,7 +87,8 @@ const ProcessSection = () => {
                     </div>
                     <div className="feature-item wow fadeInUp" data-wow-delay=".8s">
                         <div className="feature-icon">
-                            <img src={Ps6} alt="img" />
+                            {/* <img src={Ps6} alt="img" /> */}
+                            🚢
                         </div>
                         <div className="feature-content">
                             <span>Step 5</span>

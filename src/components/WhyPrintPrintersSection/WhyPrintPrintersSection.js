@@ -1,7 +1,7 @@
 
 import { ArrowRight } from "lucide-react";
 import blogImg1 from "../../img/news/01.jpg";
-
+import Ws5 from '../../img/line.png'
 // Section 13: Why Print Printers
 const WhyPrintPrintersSection = (props) => {
     const { hclass = "", SubClass = "", blogAllbtn = true } = props;
@@ -40,7 +40,10 @@ const WhyPrintPrintersSection = (props) => {
                 <div className="section-title text-center">
                     <h6 className="section-tags">Why Print Printers</h6>
                     <h2>
-                        Because Offshore Printing <br /> Shouldn't Feel Risky
+                        
+                        Because Offshore Printing   <br />
+
+                                                                <span><img src={Ws5} alt="img" />Shouldn't Feel Risky </span>
                     </h2>
                     <p>
                         We built Print Printers to solve the real problems publishers face when sourcing from India.

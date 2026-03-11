@@ -50,7 +50,13 @@ const Header = (props) => {
                       </li>
                       <li>
                         <SmartScrollLink toPage="/" sectionId="process-container">
-                          Process
+                          Our Process
+                        </SmartScrollLink>
+                      </li>
+
+                      <li>
+                        <SmartScrollLink toPage="/" sectionId="testimonial-container">
+                          Our Relationship
                         </SmartScrollLink>
                       </li>
                       <li>

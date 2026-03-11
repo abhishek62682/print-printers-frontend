@@ -12,6 +12,7 @@ const FooterS2 = () => {
   return (
     <footer
       className="footer-section style-2 bg-cover"
+      // style={{backgroundColor:"var(--color-dark)"}}
       style={{ backgroundImage: `url(${Bgimg})` }}
     >
       

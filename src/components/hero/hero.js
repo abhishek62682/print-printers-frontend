@@ -33,7 +33,7 @@ const hero = () => {
                 <div className="row g-4 align-items-center">
                     <div className="col-lg-7">
                         <div className="hero-content ">
-                            <span className="wow  section-tags fadeInUp">Print & Ship to USA · UK · Australia</span>
+                            <span className="wow  section-tags tags-light fadeInUp">Print & Ship to USA · UK · Australia</span>
                             <h1 className="wow fadeInUp" data-wow-delay=".3s">
                                 India's Book Printing Partner for Publishers Worldwide
                               
@@ -43,9 +43,9 @@ const hero = () => {
 
                             </p>
                             <div className=' btn-wrapper d-flex gap-4 '>
- <Link to="/shop" onClick={ClickHandler} className="theme-btn wow fadeInUp" data-wow-delay=".9s">Get A Free Quote!</Link>
+ <Link to="/contact" onClick={ClickHandler} className="theme-btn wow fadeInUp" data-wow-delay=".9s">Get A Free Quote!</Link>
 
-                                 <Link to="/shop" onClick={ClickHandler} className="theme-btn wow fadeInUp" data-wow-delay=".9s">Download Our Profile
+                                 <Link to="#!" onClick={ClickHandler} className="theme-btn wow fadeInUp" data-wow-delay=".9s">Download Our Profile
 </Link>
 
                                  

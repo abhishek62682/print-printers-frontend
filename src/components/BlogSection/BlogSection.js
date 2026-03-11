@@ -1,7 +1,7 @@
 import React from "react";
 import blogs from '../../api/blogs'
 import { Link } from "react-router-dom";
-
+import Ws5 from '../../img/line.png'
 import BlogBg from '../../img/news/bg.png'
 
 const ClickHandler = () => {
@@ -18,7 +18,10 @@ const BlogSection = (props) => {
                     <span className="section-tags">Industry Insights</span >
                     <h2>
                         Get Update News & Blogs<br />
-                        By Company
+                        
+
+
+                          <span><img src={Ws5} alt="img" />By Company </span>
                     </h2>
                 </div>
                 <div className={"" +props.SubClass}>
@@ -29,6 +32,7 @@ const BlogSection = (props) => {
                                     <div className="blog-image">
                                         <img src={blog.screens} alt="img" />
                                         <img src={blog.screens} alt="img" />
+                                      
                                     </div>
                                     <div className="blog-content">
                                         <span>e-Learning</span>
@@ -47,11 +51,7 @@ const BlogSection = (props) => {
                             </div>
                         ))}
                     </div>
-                    {blogAllbtn && (
-                        <div className="news-button text-center mt-5 wow fadeInUp" data-wow-delay=".3s">
-                            <Link onClick={ClickHandler} to="/news" className="theme-btn">See all News</Link>
-                        </div>
-                    )}
+                    
                 </div>
             </div>
         </section>
