@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 
 
 import Bgimg from "../../img/footer/footer-bg.jpg";
-import Shape1 from "../../img/footer/line-shape.png";
-import Shape2 from "../../img/footer/star.png";
 import {  Instagram } from "lucide-react";
 
 const ClickHandler = () => {
@@ -17,9 +15,9 @@ const FooterS2 = () => {
       style={{ backgroundImage: `url(${Bgimg})` }}
     >
       
-      <div className="star-shape float-bob-y">
+      {/* <div className="star-shape float-bob-y">
         <img src={Shape2} alt="img" />
-      </div>
+      </div> */}
       <div className="container">
         <div className="footer-widgets-wrapper style-2">
           <div className="row">

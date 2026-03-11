@@ -15,7 +15,7 @@ const BlogSection = (props) => {
         <section id="blog-container" className={"" + props.hclass} style={{ backgroundImage: `url(${BlogBg})` }}>
             <div className="container">
                 <div className="section-title text-center">
-                    <span className="section-tags">Digital printing Service</span >
+                    <span className="section-tags">Industry Insights</span >
                     <h2>
                         Get Update News & Blogs<br />
                         By Company
@@ -40,10 +40,7 @@ const BlogSection = (props) => {
                                                 <i className="fa-regular fa-user"></i>
                                                 Roger J. Spaulding
                                             </li>
-                                            <li>
-                                                <i className="fa-regular fa-comment"></i>
-                                                Comments (5)
-                                            </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>

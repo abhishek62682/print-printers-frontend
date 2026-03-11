@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import SimpleReactValidator from 'simple-react-validator';
 import toast, { Toaster } from 'react-hot-toast';
 import { ClosedCaption, HeartMinus, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 // ─── Change this to your real endpoint ───────────────────────────────────────
 const API_ENDPOINT = 'http://localhost:3000/api/enquiries';
@@ -193,7 +194,7 @@ const styles = `
   }
   .cf-modal-actions { display:flex; gap:12px;  justify-content:center;  }
   .cf-modal-actions a {
-    font-family: var(--font-primary); font-size:10px;
+    font-family: var(--font-secondary); font-size:10px;
     letter-spacing:1.5px; text-transform:uppercase; font-weight:700;
     padding:13px 24px; text-decoration:none;
     border-radius: var(--radius-md);
@@ -249,6 +250,19 @@ const ContactForm = () => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
+
+  const navigate = useNavigate();
+
+const scrollToBlog = () => {
+  navigate("/");
+
+  setTimeout(() => {
+    const section = document.getElementById("blog-container");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  }, 200);
+};
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -351,7 +365,7 @@ const ContactForm = () => {
                                 <i className="fal fa-download" style={{marginRight: 6}}></i>
                                 Download Capability Profile
                             </a>
-                            <a href="#" className="btn-modal-secondary">
+                            <a onClick={scrollToBlog} href="#" className="btn-modal-secondary">
                                 <i className="fal fa-book-open" style={{marginRight: 6}}></i>
                                 Explore Our Blog
                             </a>
@@ -489,7 +503,7 @@ const ContactForm = () => {
                 </div>
 
                 <button className="btn-enquiry" type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? 'Sending…' : "Send My Enquiry — We'll Respond Within 24 Hours →"}
+                    {isSubmitting ? 'Sending…' : "Send My Enquiry We'll Respond Within 24 Hours "}
                 </button>
 
                 <p className="form-note">
