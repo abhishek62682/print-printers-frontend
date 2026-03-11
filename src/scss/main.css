@@ -1145,6 +1145,12 @@ span {
   .contact-area .contact-form-items .form-clt input {
     padding: 15px 20px;
   }
+  .contact-area .contact-title h3{
+    font-size: 32px;
+  }
+  .form-wrap{
+    margin-top: 40px;
+  }
 }
 .contact-area .contact-form-items .form-clt-big textarea {
   padding: 20px 30px 110px;
