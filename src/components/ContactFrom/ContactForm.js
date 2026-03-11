@@ -82,7 +82,7 @@ const styles = `
     resize: vertical;
     appearance: none;
     -webkit-appearance: none;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     box-sizing: border-box;
   }
   .f-group input::placeholder,
@@ -125,7 +125,7 @@ const styles = `
     gap: 8px;
     transition: background 0.2s, box-shadow 0.2s;
     font-family: var(--font-secondary);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
   }
   .btn-enquiry:disabled { opacity: 0.65; cursor: not-allowed; }
   .form-note {
@@ -196,7 +196,7 @@ const styles = `
     font-family: var(--font-primary); font-size:10px;
     letter-spacing:1.5px; text-transform:uppercase; font-weight:700;
     padding:13px 24px; text-decoration:none;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
     display:inline-block;
     flex-shrink:0;

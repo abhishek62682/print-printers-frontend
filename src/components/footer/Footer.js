@@ -16,9 +16,7 @@ const FooterS2 = () => {
       className="footer-section style-2 bg-cover"
       style={{ backgroundImage: `url(${Bgimg})` }}
     >
-      <div className="line-shape float-bob-y">
-        <img src={Shape1} alt="img" />
-      </div>
+      
       <div className="star-shape float-bob-y">
         <img src={Shape2} alt="img" />
       </div>
