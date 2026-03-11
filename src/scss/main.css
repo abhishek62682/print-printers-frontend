@@ -3496,7 +3496,7 @@ span {
   transition: all 0.4s ease-in-out;
 }
 .array-button .array-next:hover {
-  background-color: var(--white);
+  background-color: var(--white) ;
 
 }
 
@@ -7009,9 +7009,7 @@ input.main-search-input::placeholder {
   background-color: var(--white);
 }
 .testimonial-section .array-button .array-next:hover {
-  /* background-color: var(--theme2); */
-
-  border: 2px solid var(--theme2);
+  color:#fff;
 }
 
 .testimonial-wrapper .testimonial-content {
@@ -7333,7 +7331,7 @@ input.main-search-input::placeholder {
   background-color: var(--white);
   border:none;
 }
-.testimonial-section-2 .array-button .array-prev:hover {
+.testimonial-section-2 .array-button .array-prev:hover , .testimonial-section-2 .array-button .array-next:hover {
   background-color: var(--color-dark);
   color:#fff;
 
