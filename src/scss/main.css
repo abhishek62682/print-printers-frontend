@@ -399,6 +399,7 @@ span {
 
 .about-section {
   position: relative;
+  overflow: hidden;
 }
 .about-section .dot-shape {
   position: absolute;
