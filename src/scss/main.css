@@ -4679,6 +4679,9 @@ span {
 
 .blog-box-items {
   margin-top: 30px;
+  background-color: #fff;
+  padding:8px;
+  border-radius: 32px;
 }
 .blog-box-items .blog-image {
   position: relative;
@@ -4713,7 +4716,8 @@ span {
 }
 
 .team-content{
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  padding:8px;
 }
 
 .team-content span {
@@ -4730,7 +4734,7 @@ span {
 
 .team-content p {
 margin: 0;
-  line-height: 1.7;
+  line-height: 1.4;
 }
 .blog-box-items .blog-content span {
 
