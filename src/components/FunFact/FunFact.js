@@ -6,7 +6,7 @@ const FunFact = (props) => {
         <section className={"" + props.hclass}>
             <div className="container">
                 <div className="counter-text text-center">
-                    <h6 className="wow fadeInUp">Publishing houses trust us for a reason. Here are four of them.</h6>
+                    <h6 className="wow fadeInUp">Publishing houses trust us for a reason. <br /> Here are four of them.</h6>
                 </div>
                 <div className="row">
                     <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
