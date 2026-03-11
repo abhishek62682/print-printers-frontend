@@ -7388,6 +7388,9 @@ input.main-search-input::placeholder {
 .product-box-items {
   margin-top: 30px;
   transition: all 0.4s ease-in-out;
+  background-color: #fff;
+  padding:8px;
+  border-radius: 24px;
 }
 .product-box-items .product-image {
   position: relative;
@@ -7420,14 +7423,15 @@ input.main-search-input::placeholder {
   background-color: var(--theme2);
 }
 .product-box-items .product-image .product-icon li:hover a {
-
+align-items: stretch;
 }
 
 
 .product-box-items .product-content {
-  text-align: center;
-  padding: 20px 0;
+  /* text-align: center; */
+  padding: 16px 4px;
   transition: all 0.4s ease-in-out;
+
 }
 .product-box-items .product-content .star {
 

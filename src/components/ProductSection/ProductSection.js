@@ -32,7 +32,7 @@ const ServicesPrintSection = () => {
 
                 <div className="tab-content">
                     <div id="Tab1">
-                        <div className="row">
+                        <div className="row align-items-stretch">
                             {products.map((product) => (
                                 <div className="col-xl-3 col-lg-4 col-md-6" key={product.id}>
                                     <div className="product-box-items">
@@ -50,7 +50,7 @@ const ServicesPrintSection = () => {
                 </div>
 
                 <div className="shop-button text-center mt-5">
-                    <b style={{ color: 'var(--color-text-primary)' }}>We Bind:</b> Perfect Bound · Case Bound · Saddle Stitch · Wire-O · Lay Flat · Comb Bound · Smyth Sewn · Coil / Spiral Bound &nbsp;&nbsp; 
+                    <b style={{ color: 'var(--color-text-primary)' }}>We Bind:</b> Perfect Bound · Case Bound · Saddle Stitch · Wire-O · Lay Flat · Comb Bound · Smyth Sewn · Coil / Spiral Bound &nbsp;&nbsp;  < br />
                     <b style={{ color: 'var(--color-text-primary)' }}>We Finish:</b> Soft Touch · Gloss · Matte · Spot UV · Foil Stamping · Embossing · Debossing · French Flaps · Gilded Edges · Printed Edges
                 </div>
             </div>
