@@ -14,6 +14,9 @@
   --box-shadow: 0px 1px 14px 0px rgba(0, 0, 0, 0.13);
 }
 
+body{
+  overflow-x: hidden;
+}
 
 html{
   scroll-behavior: smooth;
@@ -75,6 +78,7 @@ html{
     padding: 18px 30px;
     font-size: 14px;
   }
+
   .header-1 .mega-menu-wrapper{
     margin-top: 0 !important;
 }
@@ -237,9 +241,15 @@ span {
     margin-bottom: 6px;
   }
 }
+ .counter-text h6{
+    font-size: 40px;
+  }
 @media (max-width: 575px) {
   .about-wrapper {
     margin-bottom: 10px;
+  }
+    .counter-text h6{
+    font-size: 32px;
   }
 }
 .about-wrapper .about-image-items {
@@ -1526,11 +1536,7 @@ span {
     margin-bottom: 0;
   }
 }
-.counter-text h6 {
-  font-size: 40px;
-  font-size: "Satoshi", sans-serif;
-  line-height: 1;
-}
+
 
 .fearure-wrapper-3 {
   background-color: var(--white);
@@ -2789,7 +2795,8 @@ span {
 }
 .header-main .sidebar__toggle {
   cursor: pointer;
-  font-size: 20px;
+  
+  padding: 12px;
 }
 
 @media (max-width: 1199px) {
@@ -3808,7 +3815,9 @@ span {
 }
 .btn-wrapper{
   margin-top: 2rem;
+  flex-wrap: wrap;
 }
+
 
 .hero-1 {
   padding: 200px 0 100px;
@@ -3917,6 +3926,14 @@ span {
 @media (max-width: 575px) {
   .hero-1 .hero-content h1 {
     font-size: 42px;
+  }
+  .hero-content {
+    text-align: center;
+  }
+
+  .btn-wrapper > a{
+    width:100%;
+
   }
 }
 .hero-1 .hero-content h1 span {

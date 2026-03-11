@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
+import { Menu } from "lucide-react";
 
 const menus = [
   { id: 1, title: "Home", link: "#home" },
@@ -45,11 +46,7 @@ const MobileMenu = () => {
         className="showmenu mobail-menu"
         onClick={() => setMenuState(!menuActive)}
       >
-        <button type="button" className="navbar-toggler open-btn">
-          <span className="icon-bar first-angle"></span>
-          <span className="icon-bar middle-angle"></span>
-          <span className="icon-bar last-angle"></span>
-        </button>
+       <Menu size={36}  />
       </div>
     </div>
   );
