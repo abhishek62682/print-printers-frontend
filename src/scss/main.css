@@ -4686,7 +4686,7 @@ span {
   margin-top: 30px;
   background-color: #fff;
   padding:8px;
-  border-radius: 32px;
+  border-radius: 24px;
 }
 .blog-box-items .blog-image {
   position: relative;
@@ -4716,8 +4716,8 @@ span {
   transition: all 0.4s ease-in-out;
 }
 .blog-box-items .blog-content {
-  margin-top: 25px;
-  margin-left: 20px;
+  padding:16px 8px;
+  
 }
 
 .team-content{
@@ -4749,7 +4749,9 @@ margin: 0;
   margin-bottom: 15px;
 }
 .blog-box-items .blog-content h3 {
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
+  margin-bottom: 8px;
+
 }
 .blog-box-items .blog-content h3 a:hover {
 
