@@ -9833,12 +9833,13 @@ align-items: stretch;
           font-size: 24px;
           display: inline-block;
           font-weight: 600;
+          color:var(--color-blue);
         }
         .pkg-title {
           font-family: var(--font-primary);
-          font-size: 16px;
+          font-size: 20px;
           font-weight: 700;
-          color: var(--color-text-primary);
+          color: var(--color-dark);
           margin-bottom: 10px;
           line-height: 1.35;
         }

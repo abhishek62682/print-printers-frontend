@@ -89,9 +89,9 @@ const ShippingSailingSection = () => {
             <h3
               style={{
                 fontFamily: "var(--font-primary)",
-                fontSize: "32px",
+                fontSize: "clamp(20px, 2.5vw, 28px)",
                 fontWeight: 700,
-                color: "var(--color-dark)",
+                color: "var(--color-text-primary)",
                 margin: 0,
               }}
             >
