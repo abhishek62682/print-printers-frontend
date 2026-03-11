@@ -1563,6 +1563,11 @@ span {
 .fearure-wrapper-3 .feature-item .feature-content {
   margin-top: 20px;
 }
+.fearure-wrapper-3 .feature-item .feature-content > span {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
 .fearure-wrapper-3 .feature-item .feature-content h5 {
   font-weight: 500;
   line-height: 150%;

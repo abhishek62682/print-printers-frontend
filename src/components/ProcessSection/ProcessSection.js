@@ -11,6 +11,9 @@ const ProcessSection = () => {
     return (
         <section id="process-container" className="feature-section-3 section-padding pb-0 ">
             <div className="container custom-container-2">
+                <div className="counter-text text-center">
+                    <h6 className="wow fadeInUp">Our Proven Process</h6>
+                </div>
                 <div className="fearure-wrapper-3">
                     <div className="line-shape">
                         <img src={Ps1} alt="img" />
@@ -20,6 +23,7 @@ const ProcessSection = () => {
                             <img src={Ps2} alt="img" />
                         </div>
                         <div className="feature-content">
+                            <span>Step 1</span>
                             <h5>
                                 Files Approved
 <br/>
@@ -32,7 +36,9 @@ const ProcessSection = () => {
                             <img src={Ps3} alt="img" />
                         </div>
                         <div className="feature-content">
+                            <span>Step 2</span>
                             <h5>
+                                
                                 Physical Proof
 <br/>
                                     Approved
@@ -44,7 +50,9 @@ const ProcessSection = () => {
                             <img src={Ps4} alt="img" />
                         </div>
                         <div className="feature-content">
+                            <span>Step 3</span>
                             <h5>
+                                
                                 Printing &
 <br/>
                                    Binding
@@ -56,7 +64,9 @@ const ProcessSection = () => {
                             <img src={Ps5} alt="img" />
                         </div>
                         <div className="feature-content">
+                            <span>Step 4</span>
                             <h5>
+                                
                                Quality Check
 <br/>
                                     & Packing
@@ -68,7 +78,9 @@ const ProcessSection = () => {
                             <img src={Ps6} alt="img" />
                         </div>
                         <div className="feature-content">
+                            <span>Step 5</span>
                             <h5>
+                                
                                 Shipped to
 <br/>
                                     Your Door
