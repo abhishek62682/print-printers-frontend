@@ -3484,7 +3484,7 @@ span {
   height: 60px;
   line-height: 60px;
   text-align: center;
-  background-color: var(--theme2);
+  background-color: #fff;
 
   border-radius: 50%;
   border: 1px solid transparent;
@@ -4725,6 +4725,7 @@ span {
 
 .team-content h3 {
   margin-bottom: 12px;
+  color:var(--color-dark);
 }
 
 .team-content p {
@@ -5476,7 +5477,7 @@ input.main-search-input::placeholder {
 .value-pillar-icon{
   width:64px;
   height:64px;
-  background-color: #ccc;
+  background-color: var(--color-blue);
   margin:auto;
   border-radius: 50%;
 }
@@ -6994,12 +6995,12 @@ input.main-search-input::placeholder {
   border: 2px solid var(--theme2);
 }
 .testimonial-section .array-button .array-next {
-  border: 2px solid var(--white);
+  /* border: 2px solid var(--white); */
 
   background-color: var(--white);
 }
 .testimonial-section .array-button .array-next:hover {
-  background-color: var(--theme2);
+  /* background-color: var(--theme2); */
 
   border: 2px solid var(--theme2);
 }
@@ -7317,7 +7318,7 @@ input.main-search-input::placeholder {
   height: 50px;
   line-height: 50px;
 }
-.testimonial-section-2 .array-button .array-prev {
+.testimonial-section-2 .array-button .array-prev  ,.testimonial-section-2 .array-button .array-nex{
 
   box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.09);
   background-color: var(--white);
@@ -7328,10 +7329,7 @@ input.main-search-input::placeholder {
   color:#fff;
 
 }
-.testimonial-section-2 .array-button .array-next {
-  background-color: var(--color-dark);
-  color:#fff;
-}
+
 .testimonial-section-2 .array-button .array-next:hover {
   background-color: var(--color-dark);
 

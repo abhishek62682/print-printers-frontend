@@ -72,9 +72,20 @@ const WhyPrintPrintersSection = (props) => {
 
 
                         <div className="news-button text-center mt-5 wow fadeInUp" data-wow-delay=".3s">
-                            <a href="#about-section" className="theme-btn wow fadeInUp" data-wow-delay=".3s">
-                See All Reasons <ArrowRight className="ml-4" />
-            </a>
+                         <a
+  
+  className="theme-btn wow fadeInUp"
+  data-wow-delay=".3s"
+  onClick={(e) => {
+    e.preventDefault();
+    const el = document.getElementById("about-container");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  }}
+>
+  See All Reasons <ArrowRight className="ml-4" />
+</a>
                         </div>
                     
                 </div>
