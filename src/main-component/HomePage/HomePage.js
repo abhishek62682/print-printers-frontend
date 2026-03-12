@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Hero from "../../components/hero/hero";
 import FeatureSection from "../../components/FeatureSection/FeatureSection";
 import About from "../../components/about/about";
@@ -15,7 +15,31 @@ import ShippingSailingSection from "../../components/ShipingSailingSection/Shipi
 import WhyPrintPrintersSection from "../../components/WhyPrintPrintersSection/WhyPrintPrintersSection";
 import LeaderSection from "../../components/LeaderSection/LeaderSection";
 import MarqueeSectionS4 from "../../components/MarqueeSectionS4/MarqueeSectionS4";
+import httpClient from "../../config/http-client";
 const HomePage = () => {
+
+  const [blogList , setBlogList] = useState([]);
+
+  async function FectchBlogList(){
+     const {data} = await httpClient("/blogs/public");
+
+     setBlogList(data?.data)
+     
+
+
+  }
+
+  
+
+
+
+  
+
+
+
+
+
+
   useEffect(() => {
     const sectionId = sessionStorage.getItem("scrollToSection");
     if (sectionId) {
@@ -23,6 +47,8 @@ const HomePage = () => {
       if (el) el.scrollIntoView({ behavior: "smooth" });
       sessionStorage.removeItem("scrollToSection");
     }
+
+    FectchBlogList()
   }, []);
 
   return (
@@ -47,6 +73,7 @@ const HomePage = () => {
       <ShippingSailingSection />
       <WhyPrintPrintersSection />
       <BlogSection
+        
         hclass="blog-section section-padding  bg-cover"
         SubClass="blog-wrapper"
       />

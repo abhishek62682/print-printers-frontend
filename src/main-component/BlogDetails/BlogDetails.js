@@ -1,26 +1,48 @@
-import React, { Fragment } from 'react';
-import { useParams } from 'react-router-dom'
-import blogs from '../../api/blogs'
-import PageTitle from '../../components/pagetitle/PageTitle'
-import BlogSingle from '../../components/BlogDetails/BlogSingle'
-import CtaSectionS2 from '../../components/CtaSectionS2/CtaSectionS2';
-import CursorMaus from '../../components/CursorMaus/CursorMaus';
+import React, { Fragment, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
+import PageTitle from '../../components/pagetitle/PageTitle';
+import BlogSingle from '../../components/BlogDetails/BlogSingle';
+import CtaSection from '../../components/CtaSection/CtaSection';
+import httpClient from '../../config/http-client';
 
 const BlogDetails = () => {
+    const { slug } = useParams();
 
-    const { slug } = useParams()
+    const [blogItem, setBlogItem] = useState(null);
+    const [recentBlog , setRecentBlog] = useState(null);
+    const [loading, setLoading]   = useState(true);
 
-    const BlogDetails = blogs.find(item => item.slug === slug)
+    async function fetchBlogBySlug() {
+        try {
+            setLoading(true);
+            const { data } = await httpClient.get(`/blogs/public/${slug}`);
+            setBlogItem(data?.data ?? null);
+            setRecentBlog(data?.recentBlogs ?? null);
+        } catch (err) {
+            toast.error(err?.response?.data?.message ?? "Failed to fetch blog.");
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    console.log(blogItem , recentBlog)
+
+    useEffect(() => {
+        if (slug) fetchBlogBySlug();
+    }, [slug]);
+
+    if (loading) return <p className="text-center py-5">Loading...</p>;
+    if (!blogItem) return <p className="text-center py-5">Blog not found.</p>;
 
     return (
-        <Fragment>
-            {/* <NavbarS2 hclass={'header-section-2 style-two'} /> */}
-            <PageTitle pageTitle={'Digital printing Service'} pagesub={BlogDetails.title} />
-            <BlogSingle />
-            <CtaSectionS2 />
-            {/* <FooterS3 /> */}
-            <CursorMaus />
-        </Fragment>
-    )
+    <Fragment>
+        <Toaster position="top-right" />
+        <PageTitle pageTitle={blogItem?.title ?? "Blog"} pagesub={blogItem?.title} />
+        <BlogSingle blogItem={blogItem} recentBlogs={recentBlog ?? []} />
+        <CtaSection />
+    </Fragment>
+);
 };
+
 export default BlogDetails;

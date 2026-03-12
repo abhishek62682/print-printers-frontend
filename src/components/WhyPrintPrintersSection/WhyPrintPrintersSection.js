@@ -51,7 +51,7 @@ const WhyPrintPrintersSection = (props) => {
                 </div>
 
                 <div className={SubClass}>
-                    <div className="row">
+                    <div className="row justify-content-center">
                         {reasons.map((reason) => (
                             <div className="col-xl-4 col-lg-6 col-md-6 wow img-custom-anim-top" key={reason.id}>
                                 <div className="blog-box-items">

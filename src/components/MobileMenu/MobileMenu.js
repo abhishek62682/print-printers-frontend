@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const menus = [
   { id: 1, title: "Home", link: "#home" },
@@ -23,7 +23,7 @@ const MobileMenu = () => {
       <div className={`mobileMenu ${menuActive ? "show" : ""}`}>
         <div className="menu-close">
           <div className="clox" onClick={() => setMenuState(false)}>
-            <i className="ti-close"></i>
+           <X />
           </div>
         </div>
 
@@ -46,7 +46,9 @@ const MobileMenu = () => {
         className="showmenu mobail-menu"
         onClick={() => setMenuState(!menuActive)}
       >
-       <Menu size={36}  />
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 40 40" fill="#0f0f0f">
+                                        <path d="M24.4444 26V28H0V26H24.4444ZM40 19V21H0V19H40ZM40 12V14H15.5556V12H40Z" fill="#0f0f0f"></path>
+                                    </svg>
       </div>
     </div>
   );

@@ -48,5 +48,12 @@ body{
     font-family: var(--font-secondary);
 }
 
+.rounded-pill{
+    border-radius: 40px;
+    background-color: #ededf4;
+    padding:4px 12px;
+    font-size: 10px !important;
+}
+
 
 

@@ -10,7 +10,7 @@ const CursorMaus = () => {
         function onMouseMove(e) {
             const x = e.clientX;
             const y = e.clientY;
-            console.log(x,y)
+
             cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
             cursorinner.style.left = x + 'px';
             cursorinner.style.top = y + 'px';
@@ -38,10 +38,10 @@ const CursorMaus = () => {
         document.addEventListener('mousedown', onMouseDown);
         document.addEventListener('mouseup', onMouseUp);
 
-        links.forEach(link => {
-            link.addEventListener('mouseover', onLinkHover);
-            link.addEventListener('mouseleave', onLinkLeave);
-        });
+        // links.forEach(link => {
+        //     link.addEventListener('mouseover', onLinkHover);
+        //     link.addEventListener('mouseleave', onLinkLeave);
+        // });
 
         return () => {
             document.removeEventListener('mousemove', onMouseMove);

@@ -1,23 +1,18 @@
-import React from 'react'
 
-import BreadcrumbBG from '../../img/breadcrumb-bg.jpg'
-import BShap1 from '../../img/flower-shape.png'
 import BShap2 from '../../img/star-shape.png'
 
 const PageTitle = (props) => {
     return (
         <div className="breadcrumb-section section-bg-2">
            
-                <div className="breadcrumb-wrapper bg-cover" style={{ backgroundImage: `url(${BreadcrumbBG})`}}>
-                    <div className="flower-shape">
-                        <img src={BShap1} alt="img" />
-                    </div>
+                <div className="breadcrumb-wrapper " style={{ backgroundColor:"var(--color-blue)"}}>
+                   
                     <div className="star-shape">
                         <img src={BShap2} alt="img" />
                     </div>
                     <div className="container">
                         <div className="page-heading center">
-                            <span className='section-tags'>{props.pageTitle}</span>
+                            <span className='section-tags tags-light'>Digital printing Service</span>
                             <h1>{props.pagesub}</h1>
                         </div>
                     </div>
