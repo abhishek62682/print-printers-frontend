@@ -1,12 +1,9 @@
 import React, { useState, useRef } from 'react';
 import SimpleReactValidator from 'simple-react-validator';
 import toast, { Toaster } from 'react-hot-toast';
-import { ClosedCaption, HeartMinus, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
-// ─── Change this to your real endpoint ───────────────────────────────────────
-const API_ENDPOINT = 'http://localhost:3000/api/enquiries';
-// ─────────────────────────────────────────────────────────────────────────────
+import httpClient from '../../config/http-client';
 
 // Today's date in YYYY-MM-DD — used as min on the delivery date picker
 const TODAY = new Date().toISOString().split('T')[0];
@@ -35,8 +32,6 @@ const toastLoading = {
     style: toastBase,
 };
 
-
-
 // Bold red asterisk next to required field labels
 const Req = () => <span className="req" aria-hidden="true">*</span>;
 
@@ -56,28 +51,27 @@ const ContactForm = () => {
         howDidYouHear: '',
     });
 
-    const [showModal, setShowModal]       = useState(true);
+    const [showModal, setShowModal]       = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [, forceUpdate]                 = useState(0);
     const simpleValidator                 = useRef(new SimpleReactValidator());
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-  const navigate = useNavigate();
-
-const scrollToBlog = () => {
-  navigate("/");
-
-  setTimeout(() => {
-    const section = document.getElementById("blog-container");
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  }, 200);
-};
+    const scrollToBlog = () => {
+        navigate("/");
+        setTimeout(() => {
+            const section = document.getElementById("blog-container");
+            if (section) {
+                section.scrollIntoView({ behavior: "smooth" });
+            }
+        }, 200);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -109,22 +103,7 @@ const scrollToBlog = () => {
         const loadingId = toast.loading('Sending your enquiry…', toastLoading);
 
         try {
-            const response = await fetch(API_ENDPOINT, {
-                method:  'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body:    JSON.stringify(payload),
-            });
-
-            const data = await response.json().catch(() => ({}));
-
-            if (!response.ok) {
-                const msg =
-                    data?.message ||
-                    data?.error   ||
-                    `Something went wrong (${response.status}). Please try again.`;
-                toast.error(msg, { ...toastError, id: loadingId });
-                return;
-            }
+            await httpClient.post('/enquiries', payload);
 
             // ── All good ──
             toast.success("Enquiry sent! We'll be in touch within 24 hours.", { ...toastSuccess, id: loadingId });
@@ -138,11 +117,12 @@ const scrollToBlog = () => {
             });
             simpleValidator.current.hideMessages();
 
-        } catch {
-            toast.error(
-                'Unable to reach the server. Please check your connection and try again.',
-                { ...toastError, id: loadingId }
-            );
+        } catch (error) {
+            const msg = 
+                error?.response?.data?.message || 
+                error?.message || 
+                'Something went wrong. Please try again.';
+            toast.error(msg, { ...toastError, id: loadingId });
         } finally {
             setIsSubmitting(false);
         }
@@ -150,15 +130,11 @@ const scrollToBlog = () => {
 
     return (
         <>
-            
-
-           
             <Toaster
                 position="top-right"
                 containerStyle={{ zIndex: 99999, top: 24, right: 24 }}
             />
 
-           
             {showModal && (
                 <div className="cf-modal-overlay" onClick={() => setShowModal(false)}>
                     <div className="cf-modal" onClick={e => e.stopPropagation()}>
@@ -166,7 +142,7 @@ const scrollToBlog = () => {
                            <X />
                         </button>
                         <div className="cf-modal-icon">
-                           <img src="./namaste.png" />
+                           <img src="./namaste.png" alt="Thank you" />
                         </div>
                         <h4>Thank You!</h4>
                         <div className="cf-modal-divider"></div>
@@ -191,13 +167,11 @@ const scrollToBlog = () => {
 
             {/* ── Heading ── */}
            <div className="contact-title text-center">
-  <h3 className="wow fadeInUp" data-wow-delay=".3s">
-    Get In Touch With Us
-  </h3>
-  <p className="wow fadeInUp" data-wow-delay=".5s">
-    Fill out the form below and our team will get back to you shortly.
-  </p>
-</div>
+                <h3>Share Your Printing Requirements </h3>
+                <p>
+                    Let us know your specifications and our team will recommend the best printing solution.
+                </p>
+            </div>
 
             {/* ── Form ── */}
             <form id="contact-form" className="form-wrap" onSubmit={handleSubmit} noValidate>
@@ -293,7 +267,6 @@ const scrollToBlog = () => {
                     </div>
                     <div className="f-group">
                         <label>Required Delivery Date</label>
-                        {/* min={TODAY} disables all dates before today in the picker */}
                         <input
                             type="date"
                             name="requiredDeliveryDate"

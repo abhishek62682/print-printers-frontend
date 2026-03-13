@@ -87,7 +87,7 @@ const WhyPrintPrintersSection = (props) => {
     }
   }}
 >
-  See All Reasons <ArrowRight className="ml-4" />
+  See All Reasons 
 </a>
                         </div>
                     

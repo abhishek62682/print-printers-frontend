@@ -30,6 +30,8 @@ const TestimonialSectionS2 = () => {
     }
   };
 
+  console.log(testimonialList)
+
   useEffect(() => {
     getTestimonialList();
   }, []);

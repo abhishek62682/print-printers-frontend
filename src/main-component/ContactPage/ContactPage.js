@@ -3,6 +3,7 @@ import React, { Fragment, useEffect } from 'react';
 import Contactpage from '../../components/Contactpage/Contactpage';
 
 import { useLocation } from 'react-router-dom';
+import PageTitle from '../../components/pagetitle/PageTitle';
 
 const ContactPage = () => {
     const { pathname } = useLocation();
@@ -14,7 +15,7 @@ const ContactPage = () => {
 
     return (
         <Fragment>
-            
+                        <PageTitle pageTitle={"Contact Us"} pagesub={"Get in Touch"} />
             <Contactpage />
             
             {/* <CursorMaus /> */}

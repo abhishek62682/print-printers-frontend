@@ -34,7 +34,7 @@ const WorksSection = (props) => {
                                     </h2>
                                 </div>
                                 <div className="box-items-area mt-3 mt-md-0">
-                                    <div className="box-item wow fadeInUp" data-wow-delay=".3s">
+                                    <div className="box-item active wow fadeInUp" data-wow-delay=".3s">
                                         <h5>You Approve Before We Print</h5>
                                         <p>
                                             Your physical proof arrives before a single production copy is made — see it, feel it, approve it..
@@ -46,7 +46,7 @@ const WorksSection = (props) => {
                                             Your dedicated contact sends production updates at every milestone — you always know where your job is.
                                         </p>
                                     </div>
-                                    <div className="box-item wow fadeInUp" data-wow-delay=".3s">
+                                    <div className="box-item active wow fadeInUp" data-wow-delay=".3s">
                                         <h5>Shipped to Your Warehouse. Not Just Your Port.</h5>
                                         <p>
                                             Door-to-door delivery includes customs clearance, freight and final mile — no surprises at your end.

@@ -12,7 +12,7 @@ const PageTitle = (props) => {
                     </div>
                     <div className="container">
                         <div className="page-heading center">
-                            <span className='section-tags tags-light'>Digital printing Service</span>
+                            <span className='section-tags tags-light'>{props.pageTitle}</span>
                             <h1>{props.pagesub}</h1>
                         </div>
                     </div>

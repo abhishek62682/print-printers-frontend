@@ -1112,12 +1112,29 @@ span {
   height: 350px;
 }
 .contact-area .contact-title {
-  margin-bottom: 30px;
+  /* margin-top: 80px; */
+  
 }
+
+.contact-area{
+  background-color: #fff;
+  margin-top: 80px ;
+  padding: 80px;
+  border-radius: 24px;
+}
+
+
+
 .contact-area .contact-title h3 {
+  width: fit-content;
+  /* background-color: red; */
+  margin: auto;
+position: relative;
+line-height: 1;
  
-  font-size: 40px;
+  font-size: 34px;
   font-family: var(--font-primary);
+  margin-bottom: 8px;
   
 }
 .contact-area .form-clt {
@@ -3244,29 +3261,12 @@ span {
 }
 .breadcrumb-wrapper .page-heading {
   position: relative;
-  padding: 200px 0 130px;
+  padding: 160px 0 80px;
   z-index: 9;
 }
-@media (max-width: 1600px) {
-  .breadcrumb-wrapper .page-heading {
-    padding-top: 250px;
-  }
-}
-@media (max-width: 1199px) {
-  .breadcrumb-wrapper .page-heading {
-    padding-top: 190px;
-  }
-}
-@media (max-width: 767px) {
-  .breadcrumb-wrapper .page-heading {
-    padding: 170px 0 100px;
-  }
-}
-@media (max-width: 575px) {
-  .breadcrumb-wrapper .page-heading {
-    padding: 150px 0 80px;
-  }
-}
+
+
+
 .breadcrumb-wrapper .page-heading h6 {
   font-size: 18px;
   font-weight: 500;

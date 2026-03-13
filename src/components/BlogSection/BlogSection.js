@@ -46,7 +46,7 @@ const BlogSection = ({ hclass = "", SubClass = "" }) => {
   }, []);
 
   // Hide section entirely when no blogs
-  if (!Array.isArray(blogList) || blogList.length === 0) return null;
+  if (!Array.isArray(blogList) || blogList.length === 0) return <div className="section-padding pb-0"></div>;
 
   const showNavigation = blogList.length > 3;
 
