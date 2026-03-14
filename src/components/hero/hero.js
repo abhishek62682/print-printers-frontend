@@ -57,9 +57,7 @@ const hero = () => {
                     <div className="col-lg-5 wow fadeInUp" data-wow-delay=".4s">
                         <div className="hero-thumb">
                             <img src="https://prinoz-next.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhero-1.d25dc91a.png&w=1920&q=75" alt="hero-img" />
-                            <div className="information-shape float-bob-x">
-                                <img src={hero2} alt="img" />
-                            </div>
+                          
                         </div>
                     </div>
                 </div>

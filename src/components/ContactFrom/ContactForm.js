@@ -293,7 +293,7 @@ const ContactForm = () => {
                 </div>
 
                 <button className="btn-enquiry" type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? 'Sending…' : "Send My Enquiry We'll Respond Within 24 Hours "}
+                    {isSubmitting ? 'Sending…' : "Send My Enquiry"}
                 </button>
 
                 <p className="form-note">

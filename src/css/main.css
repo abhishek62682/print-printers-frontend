@@ -1237,6 +1237,7 @@ span {
   .contact-area .contact-form-items .form-clt .icon {
     display: none;
   }
+ 
 }
 .contact-area .contact-form-items .form-clt .icon i {
   color: var(--header);
@@ -1256,6 +1257,7 @@ span {
   .contact-area .contact-form-items .form-clt input {
     padding: 15px 20px;
   }
+
 }
 .contact-area .contact-form-items .form-clt-big textarea {
   padding: 20px 30px 110px;
@@ -2303,6 +2305,10 @@ span {
   .footer-newsletter-wrapper .newsletter-items {
     gap: 20px;
     flex-wrap: wrap;
+  }
+
+     .contact-area{
+    padding:60px 24px !important;
   }
 }
 .footer-newsletter-wrapper .newsletter-items h2 {

@@ -10,7 +10,7 @@ import ProcessSection from "../../components/ProcessSection/ProcessSection";
 import Testimonial from "../../components/Testimonial/Testimonial";
 import CtaSection from "../../components/CtaSection/CtaSection";
 import BlogSection from "../../components/BlogSection/BlogSection";
-import MarqueeSection from "../../components/MarqueeSection/MarqueeSection";
+
 import ShippingSailingSection from "../../components/ShipingSailingSection/ShipingSailingSection";
 import WhyPrintPrintersSection from "../../components/WhyPrintPrintersSection/WhyPrintPrintersSection";
 import LeaderSection from "../../components/LeaderSection/LeaderSection";

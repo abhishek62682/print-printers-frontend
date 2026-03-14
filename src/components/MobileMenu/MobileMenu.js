@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import "./style.css";
-import { Menu, X } from "lucide-react";
+import { X } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 const menus = [
-  { id: 1, title: "Home", link: "#home" },
-  { id: 2, title: "About", link: "#about" },
-  { id: 3, title: "Services", link: "#services" },
-  { id: 4, title: "Process", link: "#process" },
-  { id: 5, title: "Shipping & Sailing", link: "#shipping" },
-  { id: 6, title: "Why Print Printers", link: "#why" },
-  { id: 7, title: "Our Relationships", link: "#relationships" },
-  { id: 8, title: "Blog", link: "#blog" },
-  { id: 9, title: "Contact", link: "#contact" },
+  { id: 1, title: "Home", sectionId: "hero-section" },
+  { id: 2, title: "About", sectionId: "about-container" },
+  { id: 3, title: "Services", sectionId: "service-container" },
+  { id: 4, title: "Process", sectionId: "process-container" },
+  { id: 5, title: "Shipping & Sailing", sectionId: "shipping-sailing-container" },
+  { id: 6, title: "Why Print Printers", sectionId: "why-print-printers-container" },
+  { id: 7, title: "Our Relationships", sectionId: "testimonial-container" },
+  { id: 8, title: "Blog", sectionId: "blog-container" },
+
+  // ✅ contact page navigation
+  { id: 9, title: "Contact", path: "/contact" },
 ];
 
 const MobileMenu = () => {
@@ -19,39 +23,72 @@ const MobileMenu = () => {
 
   return (
     <div>
-      {/* Mobile Sidebar */}
       <div className={`mobileMenu ${menuActive ? "show" : ""}`}>
         <div className="menu-close">
           <div className="clox" onClick={() => setMenuState(false)}>
-           <X />
+            <X />
           </div>
         </div>
 
-        <ul className="responsivemenu">
-          {menus.map((item) => (
-            <li key={item.id}>
-              <a
-                href={item.link}
-                onClick={() => setMenuState(false)}
-              >
-                {item.title}
-              </a>
-            </li>
-          ))}
-        </ul>
+       <ul className="responsivemenu">
+  {menus.map((item) => (
+    <li key={item.id}>
+      <SmartScrollLink
+        toPage={item.path || "/"}
+        sectionId={item.sectionId}
+        onClick={() => setMenuState(false)}
+      >
+        {item.title}
+      </SmartScrollLink>
+    </li>
+  ))}
+</ul>
       </div>
 
-      {/* Hamburger Button */}
-      <div
-        className="showmenu mobail-menu"
-        onClick={() => setMenuState(!menuActive)}
-      >
-<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 40 40" fill="#0f0f0f">
-                                        <path d="M24.4444 26V28H0V26H24.4444ZM40 19V21H0V19H40ZM40 12V14H15.5556V12H40Z" fill="#0f0f0f"></path>
-                                    </svg>
-      </div>
+     <button
+  className="showmenu"
+  onClick={() => setMenuState(!menuActive)}
+  aria-label="Open menu"
+>
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 40 40">
+          <path d="M24.4444 26V28H0V26H24.4444ZM40 19V21H0V19H40ZM40 12V14H15.5556V12H40Z"></path>
+        </svg>
+      </button>
     </div>
   );
 };
 
+const SmartScrollLink = ({ toPage = "/", sectionId, children, className, onClick }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    // 🔥 If no sectionId → normal navigation
+    if (!sectionId) {
+      navigate(toPage);
+      if (onClick) onClick();
+      return;
+    }
+
+    if (location.pathname !== toPage) {
+      sessionStorage.setItem("scrollToSection", sectionId);
+      navigate(toPage);
+    } else {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+
+    if (onClick) onClick();
+  };
+
+  return (
+    <a href={sectionId ? `${toPage}#${sectionId}` : toPage} className={className} onClick={handleClick}>
+      {children}
+    </a>
+  );
+};
+
 export default MobileMenu;
+

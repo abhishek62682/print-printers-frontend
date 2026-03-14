@@ -27,7 +27,7 @@ const FooterS2 = () => {
     <>
       <footer
         className="footer-section style-2 bg-cover"
-        style={{ backgroundImage: `url(${Bgimg})` }}
+        style={{ backgroundColor: `var(--color-dark)` }}
       >
         <div className="container">
           <div className="footer-widgets-wrapper style-2">

@@ -3,13 +3,11 @@ import AppLayout from "../App/AppLayout";
 import Homepage from "../HomePage/HomePage";
 import BlogDetails from "../BlogDetails/BlogDetails";
 import ContactPage from "../ContactPage/ContactPage";
-import ErrorPage from "../ErrorPage/ErrorPage";
-
+import NotFoundPage from "../../components/NotFound"
 const router = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
-    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -23,8 +21,14 @@ const router = createBrowserRouter([
         path: "contact",
         element: <ContactPage />,
       },
+      {
+    path:"*",
+    element:<NotFoundPage />
+  }
     ],
+    
   },
+  
 ]);
 
 export default router;
