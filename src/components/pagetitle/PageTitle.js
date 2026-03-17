@@ -7,9 +7,9 @@ const PageTitle = (props) => {
            
                 <div className="breadcrumb-wrapper " style={{ backgroundColor:"var(--color-blue)"}}>
                    
-                    <div className="star-shape">
+                    {/* <div className="star-shape">
                         <img src={BShap2} alt="img" />
-                    </div>
+                    </div> */}
                     <div className="container">
                         <div className="page-heading center">
                             <span className='section-tags tags-light'>{props.pageTitle}</span>

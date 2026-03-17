@@ -62,7 +62,7 @@ const BlogSection = ({ hclass = "", SubClass = "" }) => {
           <h2>
             Get Update News & Blogs <br />
             <span>
-              <img src={Ws5} alt="" /> By Company
+                <div className='underline-theme underline-sm'></div> By Company
             </span>
           </h2>
         </div>

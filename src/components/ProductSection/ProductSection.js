@@ -19,9 +19,7 @@ const ServicesPrintSection = () => {
 
     return (
         <section id="service-container" className="product-section section-padding ">
-            <div className="shape-image">
-                <img src={ProdactShape} alt="img" />
-            </div>
+           
 
             <div className="container">
                 <div className="section-title text-center">

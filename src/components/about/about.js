@@ -12,33 +12,20 @@ import Abimg9 from '../../img/line.png'
 
 import Abimg11 from '../../img/about/author.png'
 import Abimg12 from '../../img/about/line.png'
-import { Link } from 'react-router-dom';
 
 const about = () => {
-    const ClickHandler = () => {
-        window.scrollTo(10, 0);
-    }
-
+    
     return (
         <section id="about-container" className="about-section  section-padding pb-0 ">
-            <div className="dot-shape">
-                <img src={Abimg1} alt="img" />
-            </div>
-            <div className="dot-shape-2">
-                <img src={Abimg2} alt="img" />
-            </div>
+           
             <div className="container">
                 <div className="about-wrapper">
                     <div className="row g-4 align-items-center">
                         <div className="col-lg-6">
                             <div className="about-image-items">
-                                <div className="circle-shape float-bob-y">
-                                    <img src={Abimg3} alt="img" />
-                                </div>
                                 
-                                <div className="shape-img">
-                                    <img src={Abimg5} alt="img" />
-                                </div>
+                                
+                                
                                 <div className="about-image-1 wow fadeInUp">
                                     <img src={Abimg6} alt="img" />
                                 </div>
@@ -57,7 +44,11 @@ const about = () => {
                                     <h2 className="wow fadeInUp" data-wow-delay=".3s">
                                         Three Decades of Print. 
 
-                                        <span> One Unwavering Promise. <img src={Abimg9} alt="img" /></span>
+                                        <span> One Unwavering Promise.
+
+                                            <div className='underline-theme'></div>
+
+                                        </span>
                                     </h2>
                                 </div>
                                 

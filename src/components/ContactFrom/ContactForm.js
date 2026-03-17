@@ -243,18 +243,21 @@ const ContactForm = () => {
                         {simpleValidator.current.message('bindingType', formData.bindingType, 'required')}
                     </div>
                     <div className="f-group">
-                        <label>How Did You Hear About Us?</label>
-                        <select name="howDidYouHear" value={formData.howDidYouHear} onChange={handleChange}>
-                            <option value="">Select an option…</option>
-                            <option value="Google Search">Google Search</option>
-                            <option value="Social Media">Social Media</option>
-                            <option value="Referral / Word of Mouth">Referral / Word of Mouth</option>
-                            <option value="Trade Show / Event">Trade Show / Event</option>
-                            <option value="Industry Publication">Industry Publication</option>
-                            <option value="Returning Customer">Returning Customer</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
+  <label>How Did You Hear About Us?</label>
+  <select name="howDidYouHear" value={formData.howDidYouHear} onChange={handleChange}>
+    <option value="">Select an option…</option>
+    <option value="Google Search">Google Search</option>
+    <option value="Social Media">Social Media</option>
+    <option value="Instagram">Instagram</option>
+    <option value="Facebook">Facebook</option>
+    <option value="LinkedIn">LinkedIn</option>
+    <option value="Friend / Referral">Friend / Referral</option>
+    <option value="Existing Client">Existing Client</option>
+    <option value="WhatsApp">WhatsApp</option>
+    <option value="Advertisement">Advertisement</option>
+    <option value="Other">Other</option>
+  </select>
+</div>
                 </div>
 
                 {/* Row 4 */}

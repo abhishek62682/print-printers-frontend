@@ -16,18 +16,10 @@ const hero = () => {
 
     return (
         <section id="hero-section" className="hero-section hero-1 fix theme-bg"  >
-            <div className="circle-shape">
-                <img src={Shape1} alt="img" />
-            </div>
-            <div className="vector-shape float-bob-x">
-                <img src={Shape2} alt="img" />
-            </div>
-            <div className="circle-shape-2">
-                <img src={Shape3} alt="img" />
-            </div>
-            <div className="arrow-shape float-bob-y">
-                <img src={Shape4} alt="img" />
-            </div>
+           
+           
+           
+           
            
             <div className="container">
                 <div className="row g-4 align-items-center">

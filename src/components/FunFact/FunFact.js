@@ -20,7 +20,7 @@ const FunFact = (props) => {
                     <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".4s">
                         <div className="counter-items">
                             <div className="counter-title bg-2">
-                                <h2><span><CountUp end={500} enableScrollSpy /></span>+</h2>
+                                <h2><span><CountUp end={1000} enableScrollSpy /></span>+</h2>
                             </div>
                             <p className="text-center">Titles Printed</p>
                         </div>
@@ -28,7 +28,7 @@ const FunFact = (props) => {
                     <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".6s">
                         <div className="counter-items">
                             <div className="counter-title bg-3">
-                                <h2><span>Free</span>+</h2>
+                                <h2><span>Free</span></h2>
                             </div>
                             <p className="text-center">Physical Proof on Every Job</p>
                         </div>

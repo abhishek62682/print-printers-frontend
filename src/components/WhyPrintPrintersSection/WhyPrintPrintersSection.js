@@ -43,7 +43,7 @@ const WhyPrintPrintersSection = (props) => {
                         
                         Because Offshore Printing   <br />
 
-                                                                <span><img src={Ws5} alt="img" />Shouldn't Feel Risky </span>
+                                                                <span>  <div className='underline-theme'></div>Shouldn't Feel Risky </span>
                     </h2>
                     <p>
                         We built Print Printers to solve the real problems publishers face when sourcing from India.
