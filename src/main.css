@@ -335,10 +335,11 @@ span {
   }
 }
 .about-wrapper .about-content p {
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 160%;
-  margin-bottom: 50px;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.about-block-wrappper{
+  margin: 50px 0 50px;
 }
 .about-wrapper .about-content .icon-box-items {
   background-color: transparent;
@@ -383,7 +384,7 @@ span {
   display: flex;
   align-items: center;
   gap: 30px;
-  margin-top: 50px;
+  
 }
 @media (max-width: 1399px) {
   .about-wrapper .about-content .about-author {
@@ -1534,6 +1535,10 @@ line-height: 1;
   .feature-wrapper-2 {
     margin-top: -75px;
   }
+
+  .feature-wrapper .feature-box-items .content > h3{
+    font-size: 32px;
+  }
 }
 .feature-wrapper-2 .feature-box-items-2 .icon {
   width: 100px;
@@ -1837,6 +1842,10 @@ line-height: 1;
 @media (max-width: 575px) {
   .feature-wrapper-3 .feature-image .customer-shape {
     display: none;
+  }
+  .feature-section{
+    margin-top: -80px;
+    padding:0 !important;
   }
 }
 .feature-wrapper-3 .feature-image .line-shape {
