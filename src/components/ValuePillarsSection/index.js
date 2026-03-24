@@ -38,7 +38,7 @@ const features = [
 
 const ValuePillarsSection = () => {
   return (
-    <section className=" section-padding pt-0">
+    <section className="">
       <div className="container">
         <div className="feature-wrapper-2">
           <div className="row justify-content-center gap-5 gap-lg-0">

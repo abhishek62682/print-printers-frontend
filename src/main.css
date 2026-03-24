@@ -2206,6 +2206,8 @@ line-height: 1;
   display: flex;
   align-items: center;
   gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .footer-bottom.style-2 .footer-wrapper .footer-menu li a  , .footer-widgets-wrapper.style-2 .list-items li a{
 
