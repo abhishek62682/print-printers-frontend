@@ -10026,8 +10026,12 @@ align-items: stretch;
         .packaging-grid{
           flex-direction: column;
         }
-          .shipping-cards-grid { grid-template-columns: repeat(2, 1fr); }
+          .shipping-cards-grid { grid-template-columns: 1fr; width:100%; }
           .packaging-grid { grid-template-columns: 1fr; }
+
+          .ship-card{
+          max-width: 400px;
+          }
         }
         @media (max-width: 400px) {
           .shipping-cards-grid { grid-template-columns: 1fr; }
