@@ -495,6 +495,10 @@ span {
   .about-feature-wrapper .about-image-items .about-feature-image .about-feature-image {
     max-width: 200px;
   }
+
+  .about-image-2 , .about-image-1{
+  width:100%;
+}
 }
 .about-feature-wrapper .about-image-items .about-feature-image .stickers-shape {
   position: absolute;
