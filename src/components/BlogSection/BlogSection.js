@@ -4,8 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Autoplay } from "swiper";
 import "swiper/swiper-bundle.min.css";
 import { ArrowLeft, ArrowRight, UserRound } from "lucide-react";
-import Ws5 from "../../img/line.png";
-import BlogBg from "../../img/news/bg.png";
+
 import httpClient from "../../config/http-client";
 
 SwiperCore.use([Navigation, Autoplay]);
@@ -54,7 +53,7 @@ const BlogSection = ({ hclass = "", SubClass = "" }) => {
     <section
       id="blog-container"
       className={`${hclass} testimonial-section-2`}
-      style={{ backgroundImage: `url(${BlogBg})` }}
+      
     >
       <div className="container">
         <div className="section-title text-center">

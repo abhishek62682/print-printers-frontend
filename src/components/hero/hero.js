@@ -1,12 +1,8 @@
 import React from 'react';
+
+
+import HeroSection from "../../img/hero/hero-section.png";
 import { Link } from 'react-router-dom';
-import Shape1 from '../../img/hero/circle-2.png'
-import Shape2 from '../../img/hero/vector.png'
-import Shape3 from '../../img/hero/circle.png'
-import Shape4 from '../../img/hero/arrow-up.png'
-
-import hero2 from '../../img/hero/information.png'
-
 
 
 const hero = () => {
@@ -25,7 +21,7 @@ const hero = () => {
                 <div className="row g-4 align-items-center">
                     <div className="col-lg-7">
                         <div className="hero-content ">
-                            <span className="wow  section-tags tags-light fadeInUp">Print & Ship to USA · UK · Australia</span>
+                            <span className="wow  section-tags tags-light fadeInUp">Print & Ship to USA · Europe · Australia</span>
                             <h1 className="wow fadeInUp" data-wow-delay=".3s">
                                 India's Book Printing Partner for Publishers Worldwide
                               
@@ -48,7 +44,7 @@ const hero = () => {
                     </div>
                     <div className="col-lg-5 wow fadeInUp" data-wow-delay=".4s">
                         <div className="hero-thumb">
-                            <img src="https://prinoz-next.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhero-1.d25dc91a.png&w=1920&q=75" alt="hero-img" />
+                            <img src={HeroSection} alt="hero-img" />
                           
                         </div>
                     </div>

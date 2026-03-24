@@ -1,11 +1,7 @@
 import React from 'react';
 
 import Ps1 from '../../img/feature/line-shape.png'
-import Ps2 from '../../img/feature/natural.png'
-import Ps3 from '../../img/feature/Group.png'
-import Ps4 from '../../img/feature/printing1.png'
-import Ps5 from '../../img/feature/printing1.png'
-import Ps6 from '../../img/feature/growth1.png'
+
 
 const ProcessSection = () => {
     return (

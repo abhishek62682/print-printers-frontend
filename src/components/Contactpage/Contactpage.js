@@ -1,7 +1,5 @@
 
-import InfIcon1 from '../../img/icon/location.png'
-import InfIcon2 from '../../img/icon/12.svg'
-import InfIcon3 from '../../img/icon/13.svg'
+
 import ContactForm from '../ContactFrom/ContactForm';
 
 

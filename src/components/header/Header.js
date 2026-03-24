@@ -33,11 +33,7 @@ const Header = (props) => {
                 <div className="main-menu d-none d-xl-block">
                   <nav id="mobile-menu">
                     <ul>
-                      <li>
-                        <SmartScrollLink toPage="/" sectionId="hero-section">
-                          Home
-                        </SmartScrollLink>
-                      </li>
+                    
                       <li>
                         <SmartScrollLink toPage="/" sectionId="about-container">
                           About
@@ -75,8 +71,8 @@ const Header = (props) => {
                         </SmartScrollLink>
                       </li>
                       <li>
-                        <Link to="/contact">Contact</Link>
-                      </li>
+  <Link to="/request-a-quote">Request a Quote</Link>
+</li>
                     </ul>
                   </nav>
                 </div>
