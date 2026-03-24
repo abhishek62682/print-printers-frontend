@@ -79,9 +79,11 @@ const PageTitle = (props) => {
         }
 
         @media (max-width: 768px) {
-          .page-title-wrap { padding: 48px 0; }
+          .page-title-wrap { padding: 160px 0 64px; }
           .page-title-heading { font-size: 28px; }
         }
+
+        
       `}</style>
     </div>
   );

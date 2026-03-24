@@ -1656,7 +1656,7 @@ line-height: 1;
 }
 
 .feature-section{
-  margin-top: -100px;
+  margin-top: -200px;
     position: relative;
     z-index: 20;
 }
@@ -4176,7 +4176,7 @@ line-height: 1;
 .hero-1 .hero-thumb img {
   width: 100%;
   height: 100%;
-  scale:1.2;
+  /* scale:1.2; */
   
 }
 .hero-1 .hero-thumb .information-shape {
@@ -10564,11 +10564,18 @@ align-items: stretch;
         @media (max-width: 768px) {
           .pp-content {
             font-size: 16px;
-            padding-top: 40px;
-            padding-bottom: 60px;
+            padding:40px;
           }
           .pp-content h2 { font-size: 20px; margin-top: 40px; }
           .pp-content h3 { font-size: 16px; }
+        }
+
+
+          @media (max-width: 768px) {
+          .pp-content {
+            padding:24px;
+          }
+          
         }
 @media (max-width:800px) {
   .floating-wrapper{
