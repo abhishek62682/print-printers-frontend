@@ -38,10 +38,10 @@ const features = [
 
 const ValuePillarsSection = () => {
   return (
-    <section className="feature-section section-padding pb-0">
+    <section className=" section-padding pt-0">
       <div className="container">
         <div className="feature-wrapper-2">
-          <div className="row g-4">
+          <div className="row justify-content-center gap-5 gap-lg-0">
             {features.map((feature) => (
               <div
                 key={feature.id}

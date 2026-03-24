@@ -40,7 +40,7 @@ const LeaderSection = ({ hclass = "", SubClass = "" }) => {
         </div>
 
         <div className={SubClass}>
-          <div className="row">
+          <div className="row justify-content-center">
             {leaders?.map((leader, index) => (
               <div
                 className="col-xl-4 col-lg-6 col-md-6 wow img-custom-anim-top"
