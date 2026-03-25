@@ -14,7 +14,7 @@ const RequestAQuote = () => {
 
     return (
         <Fragment>
-                        <PageTitle pageTitle={"Get a Quote"} pagesub={"Request a Quote"} />
+<PageTitle pageTitle="Quote" pagesub="Request a Quote" />
             <div>
 
 

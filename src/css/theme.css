@@ -13,7 +13,7 @@ body{
 
 :root {
 
-  --font-primary: "Josefin Sans", sans-serif;
+  --font-primary:"DM Sans", sans-serif;
   --font-secondary: "Inter", sans-serif;
 
   --color-text-primary: #1E1E1E;
@@ -37,6 +37,18 @@ body{
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 16px;
+
+  /* Stat 1 */
+--stat-gradient-1: linear-gradient(145deg, #D2D2D2 0%, rgba(255,255,255,0.05) 100%);
+
+/* Stat 2 */
+--stat-gradient-2: linear-gradient(145deg, #76B9F0 0%, rgba(255,255,255,0.05) 100%);
+
+/* Stat 3 */
+--stat-gradient-3: linear-gradient(145deg, #31A2FF 0%, rgba(255,255,255,0.05) 100%);
+
+/* Stat 4 */
+--stat-gradient-4: linear-gradient(145deg, #1E0D87 0%, rgba(255,255,255,0.05) 100%);
 
 }
 

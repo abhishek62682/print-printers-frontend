@@ -42,7 +42,7 @@ const hero = () => {
                            
                         </div>
                     </div>
-                    <div className="col-lg-5 p-0 wow fadeInUp" data-wow-delay=".4s">
+                    <div className="col-lg-5 wow fadeInUp" data-wow-delay=".4s">
                         <div className="hero-thumb">
                             <img src={HeroSection} alt="hero-img" />
                           

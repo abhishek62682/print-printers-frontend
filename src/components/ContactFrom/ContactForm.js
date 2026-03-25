@@ -4,10 +4,10 @@ import toast, { Toaster } from 'react-hot-toast';
 import { X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import httpClient from '../../config/http-client';
-
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 // ─── Replace with your Cloudflare Turnstile SITE KEY ─────────────────────────
-// Get yours free at: https://dash.cloudflare.com/ → Turnstile → Add Site
 const TURNSTILE_SITE_KEY = process.env.REACT_APP_TURNSTILE_SITE_KEY;
 
 // ─── Shared toast styles ──────────────────────────────────────────────────────
@@ -83,11 +83,9 @@ const useTurnstile = (siteKey) => {
 
 // ─── INITIAL FORM STATE ───────────────────────────────────────────────────────
 const INITIAL = {
-    // Section 1 — Contact
+    // Section 1 — Contact Information
     fullName:       '',
     companyName:    '',
-    title:          '',
-    website:        '',
     email:          '',
     phone:          '',
     country:        '',
@@ -95,48 +93,47 @@ const INITIAL = {
     city:           '',
     zipCode:        '',
 
-    // Section 2 — Project
+    // Section 2 — The Basics (Book & Project Information)
     bookTitle:      '',
     bookCategory:   '',
-    width:          '',
-    height:         '',
+    trimSize:       '',
     orientation:    '',
-    totalPages:     '',
     proofType:      '',
+    // fileFormat removed — now static display only
 
-    // Section 3 — Text & Paper
-    textPaperStock:   '',
-    textInk:          '',
-    textDetails:      '',
-    endsheetStock:    '',
-    endsheetPrinting: '',
-
-    // Section 4 — Cover, Binding & Finishing
-    coverType:          '',
+    // Section 3 — Cover, Binding, Endsheets & Finishing
+    bindingType:        '',
     bindingNotes:       '',
     coverStock:         '',
     coverInk:           '',
-    coverNotes:         '',
-    specialtyFinishes:  '',
+    coverLamination:    '',
     boardCalliper:      '',
-    liner:              '',
+    specialtyFinishes:  '',
     dustJacket:         '',
     dustJacketStock:    '',
     dustJacketInk:      '',
-    dustJacketCoating:  '',
+    dustJacketLamination: '',
+    dustJacketFinishes: '',
+    endsheetStock:      '',
+    endsheetPrinting:   '',
 
-    // Section 5 — Quantities (comma-separated)
+    // Section 4 — Text & Text Paper Specifications
+    totalPages:       '',
+    textPaperStock:   '',
+    textInk:          '',
+
+    // Section 5 — Quantities
     quantities: '',
 
     // Section 6 — Packing & Shipping
-    packingMethod:   '',
-    shippingMethod:  '',
-    deliveryCity:    '',
-    deliveryCountry: '',
-    deliveryZip:     '',
-    distributor:     '',
+    packingMethod:    '',
+    shippingMethod:   '',
+    deliveryAddress:  '',
+    deliveryCity:     '',
+    deliveryCountry:  '',
+    deliveryZip:      '',
 
-    // Section 7 — Notes & Submission
+    // Section 7 — Final Notes
     specialInstructions: '',
     howDidYouHear:       '',
 };
@@ -181,11 +178,9 @@ const ContactForm = () => {
         }
 
         const payload = {
-            // Contact
+            // Contact Information
             fullName:       formData.fullName,
             companyName:    formData.companyName,
-            title:          formData.title,
-            website:        formData.website        || undefined,
             email:          formData.email,
             phone:          formData.phone,
             country:        formData.country,
@@ -193,34 +188,34 @@ const ContactForm = () => {
             city:           formData.city,
             zipCode:        formData.zipCode,
 
-            // Project
+            // The Basics
             bookTitle:      formData.bookTitle,
             bookCategory:   formData.bookCategory   || undefined,
-            trimSize:       `${formData.width} x ${formData.height}`,
+            trimSize:       formData.trimSize,
             orientation:    formData.orientation    || undefined,
-            totalPages:     formData.totalPages,
             proofType:      formData.proofType      || undefined,
+            fileFormat:     'Customer Supplied Files must be trouble-free PDF Files', // static value
 
-            // Text & Paper
-            textPaperStock:   formData.textPaperStock   || undefined,
-            textInk:          formData.textInk           || undefined,
-            textDetails:      formData.textDetails       || undefined,
-            endsheetStock:    formData.endsheetStock     || undefined,
-            endsheetPrinting: formData.endsheetPrinting  || undefined,
+            // Cover, Binding, Endsheets & Finishing
+            bindingType:        formData.bindingType         || undefined,
+            bindingNotes:       formData.bindingNotes        || undefined,
+            coverStock:         formData.coverStock          || undefined,
+            coverInk:           formData.coverInk            || undefined,
+            coverLamination:    formData.coverLamination     || undefined,
+            boardCalliper:      formData.boardCalliper       || undefined,
+            specialtyFinishes:  formData.specialtyFinishes   || undefined,
+            dustJacket:         formData.dustJacket          || undefined,
+            dustJacketStock:    formData.dustJacketStock     || undefined,
+            dustJacketInk:      formData.dustJacketInk       || undefined,
+            dustJacketLamination: formData.dustJacketLamination || undefined,
+            dustJacketFinishes: formData.dustJacketFinishes  || undefined,
+            endsheetStock:      formData.endsheetStock       || undefined,
+            endsheetPrinting:   formData.endsheetPrinting    || undefined,
 
-            // Cover & Binding
-            coverType:         formData.coverType         || undefined,
-            bindingNotes:      formData.bindingNotes      || undefined,
-            coverStock:        formData.coverStock        || undefined,
-            coverInk:          formData.coverInk          || undefined,
-            coverNotes:        formData.coverNotes        || undefined,
-            specialtyFinishes: formData.specialtyFinishes || undefined,
-            boardCalliper:     formData.boardCalliper     || undefined,
-            liner:             formData.liner             || undefined,
-            dustJacket:        formData.dustJacket        || undefined,
-            dustJacketStock:   formData.dustJacketStock   || undefined,
-            dustJacketInk:     formData.dustJacketInk     || undefined,
-            dustJacketCoating: formData.dustJacketCoating || undefined,
+            // Text & Text Paper Specifications
+            totalPages:       formData.totalPages     || undefined,
+            textPaperStock:   formData.textPaperStock || undefined,
+            textInk:          formData.textInk        || undefined,
 
             // Quantities — split comma-separated string into array
             quantities: formData.quantities
@@ -228,20 +223,19 @@ const ContactForm = () => {
                 .map(q => q.trim())
                 .filter(Boolean),
 
-            // Shipping
-            packingMethod:   formData.packingMethod   || undefined,
-            shippingMethod:  formData.shippingMethod  || undefined,
-            deliveryCity:    formData.deliveryCity,
-            deliveryCountry: formData.deliveryCountry,
-            deliveryZip:     formData.deliveryZip,
-            distributor:     formData.distributor,
+            // Packing & Shipping
+            packingMethod:    formData.packingMethod   || undefined,
+            shippingMethod:   formData.shippingMethod  || undefined,
+            deliveryAddress:  formData.deliveryAddress || undefined,
+            deliveryCity:     formData.deliveryCity    || undefined,
+            deliveryCountry:  formData.deliveryCountry || undefined,
+            deliveryZip:      formData.deliveryZip     || undefined,
 
-            // Notes
+            // Final Notes
             specialInstructions: formData.specialInstructions || undefined,
             howDidYouHear:       formData.howDidYouHear       || undefined,
 
-            // Turnstile token — verify server-side:
-            // POST https://challenges.cloudflare.com/turnstile/v0/siteverify
+            // Turnstile token
             turnstileToken: captchaToken,
         };
 
@@ -326,7 +320,7 @@ const ContactForm = () => {
                 ════════════════════════════════════════ */}
                 <div className="f-section-title">1. Contact Information</div>
 
-                <div className="f-row f-row-3">
+                <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>Full Name <Req /></label>
                         <input type="text" name="fullName" placeholder="Your full name"
@@ -340,15 +334,6 @@ const ContactForm = () => {
                         {simpleValidator.current.message('companyName', formData.companyName, 'required')}
                     </div>
                     <div className="f-group">
-                        <label>Title <Req /></label>
-                        <input type="text" name="title" placeholder="e.g. Production Manager"
-                            value={formData.title} onChange={handleChange} />
-                        {simpleValidator.current.message('title', formData.title, 'required')}
-                    </div>
-                </div>
-
-                <div className="f-row f-row-3">
-                    <div className="f-group">
                         <label>Email Address <Req /></label>
                         <input type="email" name="email" placeholder="you@company.com"
                             value={formData.email} onChange={handleChange} />
@@ -356,18 +341,33 @@ const ContactForm = () => {
                     </div>
                     <div className="f-group">
                         <label>Phone Number <Req /></label>
-                        <input type="tel" name="phone" placeholder="+1 555 000 0000"
-                            value={formData.phone} onChange={handleChange} />
-                        {simpleValidator.current.message('phone', formData.phone, 'required|phone')}
-                    </div>
-                    <div className="f-group">
-                        <label>Website</label>
-                        <input type="text" name="website" placeholder="yourcompany.com"
-                            value={formData.website} onChange={handleChange} />
+                        <input
+                            type="tel"
+                            name="phone"
+                            placeholder="+1 555 000 0000"
+                            value={formData.phone}
+                            onChange={handleChange}
+                        />
+                        {/*
+                            Accepts all of the following formats:
+                              +1 555 000 0000        (E.164 with spaces)
+                              +1-555-000-0000        (E.164 with dashes)
+                              +44 20 7946 0958       (UK with spaces)
+                              +91 98765 43210        (India)
+                              (555) 000-0000         (US local without country code)
+                              5550000000             (digits only, 7–15 chars)
+                              +1 (555) 000-0000      (parenthesised area code)
+                        */}
+                        {simpleValidator.current.message('phone', formData.phone, [
+                            'required',
+                            {
+                                regex: /^\+?[\d\s\-().]{7,20}$/
+                            }
+                        ])}
                     </div>
                 </div>
 
-                <div className="f-row f-row-3">
+                <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>Country <Req /></label>
                         <input type="text" name="country" placeholder="e.g. United States"
@@ -386,24 +386,20 @@ const ContactForm = () => {
                             value={formData.city} onChange={handleChange} />
                         {simpleValidator.current.message('city', formData.city, 'required')}
                     </div>
-                </div>
-
-                <div className="f-row f-row-2">
                     <div className="f-group">
                         <label>Zip / Postal Code <Req /></label>
                         <input type="text" name="zipCode" placeholder="e.g. 90001"
                             value={formData.zipCode} onChange={handleChange} />
                         {simpleValidator.current.message('zipCode', formData.zipCode, 'required')}
                     </div>
-                    <div className="f-group" />
                 </div>
 
                 {/* ════════════════════════════════════════
-                    SECTION 2 — Project Details
+                    SECTION 2 — The Basics (Book & Project)
                 ════════════════════════════════════════ */}
-                <div className="f-section-title">2. Project Details</div>
+                <div className="f-section-title">2. The Basics</div>
 
-                <div className="f-row f-row-2">
+                <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>Project / Book Title <Req /></label>
                         <input type="text" name="bookTitle" placeholder="e.g. Post Oak"
@@ -411,7 +407,7 @@ const ContactForm = () => {
                         {simpleValidator.current.message('bookTitle', formData.bookTitle, 'required')}
                     </div>
                     <div className="f-group">
-                        <label>Book Category</label>
+                        <label>Book Category (Choose One)</label>
                         <select name="bookCategory" value={formData.bookCategory} onChange={handleChange}>
                             <option value="">Select category…</option>
                             <option value="Religious & Faith Based Books">Religious &amp; Faith Based Books</option>
@@ -426,121 +422,59 @@ const ContactForm = () => {
                             <option value="Other">Other</option>
                         </select>
                     </div>
-                </div>
-
-                <div className="f-row f-row-3">
                     <div className="f-group">
-                        <label>Width (inches) <Req /></label>
-                        <input type="text" name="width" placeholder="e.g. 6"
-                            value={formData.width} onChange={handleChange} />
-                        {simpleValidator.current.message('width', formData.width, 'required')}
+                        <label>Width x Height (inches) <Req /></label>
+                        <input type="text" name="trimSize" placeholder="e.g. 6 x 9"
+                            value={formData.trimSize} onChange={handleChange} />
+                        {simpleValidator.current.message('trimSize', formData.trimSize, 'required')}
                     </div>
                     <div className="f-group">
-                        <label>Height (inches) <Req /></label>
-                        <input type="text" name="height" placeholder="e.g. 9"
-                            value={formData.height} onChange={handleChange} />
-                        {simpleValidator.current.message('height', formData.height, 'required')}
-                    </div>
-                    <div className="f-group">
-                        <label>Orientation</label>
+                        <label>Orientation (Choose One) <Req /></label>
                         <select name="orientation" value={formData.orientation} onChange={handleChange}>
                             <option value="">Select…</option>
                             <option value="Portrait">Portrait</option>
                             <option value="Landscape">Landscape</option>
                             <option value="Square">Square</option>
                         </select>
+                        {simpleValidator.current.message('orientation', formData.orientation, 'required')}
                     </div>
                 </div>
 
-                <div className="f-row f-row-2">
+                <div className="f-row f-row-4">
                     <div className="f-group">
-                        <label>Total Pages <Req /></label>
-                        <input type="text" name="totalPages" placeholder="e.g. 544"
-                            value={formData.totalPages} onChange={handleChange} />
-                        {simpleValidator.current.message('totalPages', formData.totalPages, 'required')}
-                    </div>
-                    <div className="f-group">
-                        <label>Proof Type</label>
+                        <label>Proofs - Text + Cover <Req /></label>
                         <select name="proofType" value={formData.proofType} onChange={handleChange}>
                             <option value="">Select proof type…</option>
-                            <option value="CTP Lasers">CTP Lasers</option>
                             <option value="Epsons">Epsons</option>
                             <option value="PDFs">PDFs</option>
-                            <option value="Full Book Digitally Printed Copy">Full Book Digitally Printed Copy</option>
-                            <option value="None">None</option>
+                            <option value="Full Book Digitally Printed">Full Book Digitally Printed</option>
                         </select>
+                        {simpleValidator.current.message('proofType', formData.proofType, 'required')}
                     </div>
-                </div>
 
-                {/* File Format notice — from RFP "Copy Preparation" section */}
-                <div className="f-info-banner">
-                    <span className="f-info-icon">📄</span>
-                    <span>
-                        <strong>File Format:</strong> Customer supplied files must be trouble-free PDF files.
-                    </span>
-                </div>
+                    <div className="f-group">
+                        <label>File Format Details</label>
+                        <p className="f-file-format-pill">
+                           
+                            Customer Supplied Files must be trouble-free PDF Files.
+                        </p>
+                       
+                    </div>
 
-                {/* ════════════════════════════════════════
-                    SECTION 3 — Text & Paper Specifications
-                ════════════════════════════════════════ */}
-                <div className="f-section-title">3. Text &amp; Paper Specifications</div>
-
-                <div className="f-row f-row-2">
-                    <div className="f-group">
-                        <label>Text Paper Stock</label>
-                        <input type="text" name="textPaperStock" placeholder="e.g. 60# offset"
-                            value={formData.textPaperStock} onChange={handleChange} />
-                    </div>
-                    <div className="f-group">
-                        <label>Text Ink</label>
-                        <select name="textInk" value={formData.textInk} onChange={handleChange}>
-                            <option value="">Select ink…</option>
-                            <option value="1/1 Black">1/1 Black</option>
-                            <option value="4/4 Process Colour">4/4 Process Colour</option>
-                            <option value="4/4 Process Colour + Varnish">4/4 Process Colour + Varnish</option>
-                            <option value="2/2 Process Colour">2/2 Process Colour</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div className="f-row f-row-2">
-                    <div className="f-group">
-                        <label>Text Details</label>
-                        <input type="text" name="textDetails"
-                            placeholder="e.g. 516pp 60# offset 1/1 black + 28pp 70# matte 4/4 colour at back"
-                            value={formData.textDetails} onChange={handleChange} />
-                    </div>
-                    <div className="f-group">
-                        <label>Endsheet Stock</label>
-                        <input type="text" name="endsheetStock" placeholder="e.g. 80# text"
-                            value={formData.endsheetStock} onChange={handleChange} />
-                    </div>
-                </div>
-
-                <div className="f-row f-row-2">
-                    <div className="f-group">
-                        <label>Endsheet Printing</label>
-                        <select name="endsheetPrinting" value={formData.endsheetPrinting} onChange={handleChange}>
-                            <option value="">Select…</option>
-                            <option value="Not Required">Not Required</option>
-                            <option value="1/1 Black">1/1 Black</option>
-                            <option value="4/4 Colour">4/4 Colour</option>
-                            <option value="Custom">Custom (specify in notes)</option>
-                        </select>
-                    </div>
+                    <div className="f-group" />
                     <div className="f-group" />
                 </div>
 
                 {/* ════════════════════════════════════════
-                    SECTION 4 — Cover, Binding & Finishing
+                    SECTION 3 — Cover, Binding, Endsheets & Finishing
                 ════════════════════════════════════════ */}
-                <div className="f-section-title">4. Cover, Binding &amp; Finishing</div>
+                <div className="f-section-title">3. Cover, Binding, Endsheets &amp; Finishing</div>
 
-                <div className="f-row f-row-2">
+                <div className="f-row f-row-4">
                     <div className="f-group">
-                        <label>Cover Type <Req /></label>
-                        <select name="coverType" value={formData.coverType} onChange={handleChange}>
-                            <option value="">Select cover type…</option>
+                        <label>Binding Type <Req /></label>
+                        <select name="bindingType" value={formData.bindingType} onChange={handleChange}>
+                            <option value="">Select binding type…</option>
                             <option value="Softcover / Perfect Bound">Softcover / Perfect Bound</option>
                             <option value="Hardcover / Case Bound">Hardcover / Case Bound</option>
                             <option value="Saddle Stitch">Saddle Stitch</option>
@@ -548,101 +482,167 @@ const ContactForm = () => {
                             <option value="Lay Flat">Lay Flat</option>
                             <option value="Coil / Spiral Binding">Coil / Spiral Binding</option>
                             <option value="Comb Binding">Comb Binding</option>
+                            <option value="Board Book">Board Book</option>
                             <option value="Other">Other</option>
                         </select>
-                        {simpleValidator.current.message('coverType', formData.coverType, 'required')}
+                        {simpleValidator.current.message('bindingType', formData.bindingType, 'required')}
                     </div>
                     <div className="f-group">
-                        <label>Binding Notes</label>
+                        <label>Binding Special Notes</label>
                         <input type="text" name="bindingNotes"
-                            placeholder="e.g. Square loose back, gilded edges, ribbon marker"
+                            placeholder="e.g. Square loose back, gilded edges, ribbon marker etc."
                             value={formData.bindingNotes} onChange={handleChange} />
                     </div>
-                </div>
-
-                <div className="f-row f-row-2">
                     <div className="f-group">
-                        <label>Cover Stock</label>
-                        <input type="text" name="coverStock" placeholder="e.g. 100# C2S"
+                        <label>Cover Stock / Material <Req /></label>
+                        <input type="text" name="coverStock"
+                            placeholder="e.g. 100lb matte or 12pt C1S Gloss Artcard Paper or Faux-leather / Ecofiber Rainbow / Cloth etc."
                             value={formData.coverStock} onChange={handleChange} />
+                        {simpleValidator.current.message('coverStock', formData.coverStock, 'required')}
                     </div>
                     <div className="f-group">
-                        <label>Cover Ink</label>
+                        <label>Cover Ink <Req /></label>
                         <select name="coverInk" value={formData.coverInk} onChange={handleChange}>
                             <option value="">Select ink…</option>
-                            <option value="4/0 Process Colour">4/0 Process Colour</option>
+                            <option value="4/0 CMYK">4/0 CMYK</option>
                             <option value="1/0 Black">1/0 Black</option>
-                            <option value="4/0 Colour + Varnish">4/0 Colour + Varnish</option>
+                            <option value="4/0 CMYK + Varnish">4/0 CMYK + Varnish</option>
                             <option value="PMS">PMS</option>
                             <option value="Custom">Custom</option>
                         </select>
+                        {simpleValidator.current.message('coverInk', formData.coverInk, 'required')}
                     </div>
                 </div>
 
-                <div className="f-row f-row-2">
+                <div className="f-row f-row-4">
                     <div className="f-group">
-                        <label>Cover Notes</label>
-                        <input type="text" name="coverNotes"
-                            placeholder="e.g. One hit flat gold foil front lid & spine + embossing + Lamination"
-                            value={formData.coverNotes} onChange={handleChange} />
+                        <label>Cover Lamination <Req /></label>
+                        <select name="coverLamination" value={formData.coverLamination} onChange={handleChange}>
+                            <option value="">Select lamination…</option>
+                            <option value="None">None</option>
+                            <option value="Gloss Film Lamination">Gloss Film Lamination</option>
+                            <option value="Matte Film Lamination">Matte Film Lamination</option>
+                            <option value="Soft Touch Lamination">Soft Touch Lamination</option>
+                            <option value="Scuff-free Matte Lamination">Scuff-free Matte Lamination</option>
+                            <option value="Flood Aqeous Varnish">Flood Aqeous Varnish</option>
+                            <option value="Flood Matte Varnish">Flood Matte Varnish</option>
+                        </select>
+                        {simpleValidator.current.message('coverLamination', formData.coverLamination, 'required')}
                     </div>
                     <div className="f-group">
-                        <label>Specialty Finishes Required</label>
-                        <input type="text" name="specialtyFinishes"
-                            placeholder="e.g. Foil, Spot UV, Embossing, None"
-                            value={formData.specialtyFinishes} onChange={handleChange} />
-                    </div>
-                </div>
-
-                <div className="f-row f-row-3">
-                    <div className="f-group">
-                        <label>Board Calliper (mm)</label>
-                        <input type="text" name="boardCalliper" placeholder="e.g. 3mm"
+                        <label>Hard Cover Board Calliper (mm)</label>
+                        <input type="text" name="boardCalliper" placeholder="eg. 2.50 mm or 3.00 mm"
                             value={formData.boardCalliper} onChange={handleChange} />
                     </div>
                     <div className="f-group">
-                        <label>Liner</label>
-                        <select name="liner" value={formData.liner} onChange={handleChange}>
-                            <option value="">Select…</option>
-                            <option value="Paper">Paper</option>
-                            <option value="Stiff Board">Stiff Board</option>
-                        </select>
+                        <label>Specialty Finishes on Cover</label>
+                        <input type="text" name="specialtyFinishes"
+                            placeholder="Eg. One hit flat gold foil front lid & spine + embossing on front cover, printed, painted or gilded edges, Spot UV etc."
+                            value={formData.specialtyFinishes} onChange={handleChange} />
                     </div>
                     <div className="f-group">
-                        <label>Dust Jacket?</label>
+                        <label>Dust Jacket? <Req /></label>
                         <select name="dustJacket" value={formData.dustJacket} onChange={handleChange}>
                             <option value="">Select…</option>
                             <option value="No">No</option>
                             <option value="Yes">Yes</option>
                         </select>
+                        {simpleValidator.current.message('dustJacket', formData.dustJacket, 'required')}
                     </div>
                 </div>
 
-                {/* Dust Jacket details — shown only when dustJacket === "Yes" */}
+                {/* Dust Jacket Conditional Fields */}
                 {formData.dustJacket === 'Yes' && (
-                    <div className="f-row f-row-3">
-                        <div className="f-group">
-                            <label>Dust Jacket Paper Stock</label>
-                            <input type="text" name="dustJacketStock" placeholder="e.g. 100# gloss text"
-                                value={formData.dustJacketStock} onChange={handleChange} />
+                    <>
+                        <div className="f-row f-row-4">
+                            <div className="f-group">
+                                <label>Dust Jacket Paper Stock</label>
+                                <input type="text" name="dustJacketStock" placeholder="e.g. 100lb matte or 120lb gloss"
+                                    value={formData.dustJacketStock} onChange={handleChange} />
+                            </div>
+                            <div className="f-group">
+                                <label>Dust Jacket Ink</label>
+                                <select name="dustJacketInk" value={formData.dustJacketInk} onChange={handleChange}>
+                                    <option value="">Select…</option>
+                                    <option value="4/0 Process CMYK">4/0 Process CMYK</option>
+                                </select>
+                            </div>
+                            <div className="f-group">
+                                <label>Dust Jacket Lamination</label>
+                                <select name="dustJacketLamination" value={formData.dustJacketLamination} onChange={handleChange}>
+                                    <option value="">Select…</option>
+                                    <option value="None">None</option>
+                                    <option value="Gloss Film Lamination">Gloss Film Lamination</option>
+                                    <option value="Matte Film Lamination">Matte Film Lamination</option>
+                                    <option value="Soft Touch Lamination">Soft Touch Lamination</option>
+                                    <option value="Scuff-free Matte Lamination">Scuff-free Matte Lamination</option>
+                                    <option value="Flood Aqeous Varnish">Flood Aqeous Varnish</option>
+                                    <option value="Flood Matte Varnish">Flood Matte Varnish</option>
+                                </select>
+                            </div>
+                            <div className="f-group">
+                                <label>Specialty Finishes on Dust Jacket</label>
+                                <input type="text" name="dustJacketFinishes"
+                                    placeholder="e.g. Scuff-Resistant Matte Lam + Spot Gloss UV, or N/A"
+                                    value={formData.dustJacketFinishes} onChange={handleChange} />
+                            </div>
                         </div>
-                        <div className="f-group">
-                            <label>Dust Jacket Ink</label>
-                            <select name="dustJacketInk" value={formData.dustJacketInk} onChange={handleChange}>
-                                <option value="">Select…</option>
-                                <option value="4/0 Process Colour">4/0 Process Colour</option>
-                                <option value="Custom">Custom</option>
-                                <option value="N/A">N/A</option>
-                            </select>
-                        </div>
-                        <div className="f-group">
-                            <label>Dust Jacket Coating</label>
-                            <input type="text" name="dustJacketCoating"
-                                placeholder="e.g. Scuff-Resistant Matte Lam + Spot Gloss UV"
-                                value={formData.dustJacketCoating} onChange={handleChange} />
-                        </div>
-                    </div>
+                    </>
                 )}
+
+                <div className="f-row f-row-4">
+                    <div className="f-group">
+                        <label>Endsheet Stock</label>
+                        <input type="text" name="endsheetStock"
+                            placeholder="e.g. 80lb woodfree or 100lb woodfree or specialty paper."
+                            value={formData.endsheetStock} onChange={handleChange} />
+                    </div>
+                    <div className="f-group">
+                        <label>Endsheet Printing</label>
+                        <select name="endsheetPrinting" value={formData.endsheetPrinting} onChange={handleChange}>
+                            <option value="">Select…</option>
+                            <option value="Not Required">Not Required</option>
+                            <option value="1/1 Black">1/1 Black</option>
+                            <option value="4/4 Colour">4/4 Colour</option>
+                            <option value="Custom">Custom (Specify in Notes)</option>
+                        </select>
+                    </div>
+                    <div className="f-group" />
+                    <div className="f-group" />
+                </div>
+
+                {/* ════════════════════════════════════════
+                    SECTION 4 — Text & Text Paper Specifications
+                ════════════════════════════════════════ */}
+                <div className="f-section-title">4. Text &amp; Text Paper Specifications</div>
+
+                <div className="f-row f-row-4">
+                    <div className="f-group">
+                        <label>Text Page Count (even number) <Req /></label>
+                        <input type="text" name="totalPages" placeholder="e.g. 544 text pages"
+                            value={formData.totalPages} onChange={handleChange} />
+                        {simpleValidator.current.message('totalPages', formData.totalPages, 'required')}
+                    </div>
+                    <div className="f-group">
+                        <label>Text Paper Stock <Req /></label>
+                        <input type="text" name="textPaperStock"
+                            placeholder="e.g. 80lb matte art or 50lb woodfree or 100lb gloss or specialty paper."
+                            value={formData.textPaperStock} onChange={handleChange} />
+                        {simpleValidator.current.message('textPaperStock', formData.textPaperStock, 'required')}
+                    </div>
+                    <div className="f-group">
+                        <label>Text Ink <Req /></label>
+                        <select name="textInk" value={formData.textInk} onChange={handleChange}>
+                            <option value="">Select ink…</option>
+                            <option value="1/1 Black">1/1 Black</option>
+                            <option value="4/4 Process CMYK">4/4 Process CMYK</option>
+                            <option value="4/4 Process CMYK + Flood Varnish">4/4 Process CMYK + Flood Varnish</option>
+                            <option value="2/2 Process Colour">2/2 Process Colour</option>
+                        </select>
+                        {simpleValidator.current.message('textInk', formData.textInk, 'required')}
+                    </div>
+                    <div className="f-group" />
+                </div>
 
                 {/* ════════════════════════════════════════
                     SECTION 5 — Quantities
@@ -654,13 +654,13 @@ const ContactForm = () => {
                     <input
                         type="text"
                         name="quantities"
-                        placeholder="e.g. 1000, 2000, 3000, 5000, 10000"
+                        placeholder="e.g. 1000, 2000, 5000 or more"
                         value={formData.quantities}
                         onChange={handleChange}
                     />
                     <p className="f-field-hint">
-                        Add up to 5 quantities for comparative pricing (comma separated).
-                        Quantities should be multiples of your signature count where possible.
+                        Add up to 5 quantities for comparative pricing. Quantities should be multiples of your signature count where possible.<br />
+                        We recommend an MOQ of 1000 hardbound or softbound copies per title. For comparative quotes, please submit multiple quantities (comma separated).
                     </p>
                     {simpleValidator.current.message('quantities', formData.quantities, 'required')}
                 </div>
@@ -670,11 +670,15 @@ const ContactForm = () => {
                 ════════════════════════════════════════ */}
                 <div className="f-section-title">6. Packing &amp; Shipping</div>
 
-                <div className="f-row f-row-3">
+                <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>Packing Method</label>
-                        <input type="text" name="packingMethod" placeholder="e.g. Carton pack"
-                            value={formData.packingMethod} onChange={handleChange} />
+                        <select name="packingMethod" value={formData.packingMethod} onChange={handleChange}>
+                            <option value="">Select…</option>
+                            <option value="Individually Shrink-wrapped">Individually Shrink-wrapped</option>
+                            <option value="Multi Shrink-wrapped">Multi Shrink-wrapped</option>
+                            <option value="No Shrink-wrap">No Shrink-wrap</option>
+                        </select>
                     </div>
                     <div className="f-group">
                         <label>Shipping Method <Req /></label>
@@ -687,45 +691,60 @@ const ContactForm = () => {
                         {simpleValidator.current.message('shippingMethod', formData.shippingMethod, 'required')}
                     </div>
                     <div className="f-group">
-                        <label>Delivery City <Req /></label>
-                        <input type="text" name="deliveryCity" placeholder="e.g. New York"
-                            value={formData.deliveryCity} onChange={handleChange} />
-                        {simpleValidator.current.message('deliveryCity', formData.deliveryCity, 'required')}
+                        <label>Delivery Address <Req /></label>
+                        <input type="text" name="deliveryAddress" placeholder="e.g. 123, Books Lane, Receiving Warehouse"
+                            value={formData.deliveryAddress} onChange={handleChange} />
+                        {simpleValidator.current.message('deliveryAddress', formData.deliveryAddress, 'required')}
                     </div>
-                </div>
-
-                <div className="f-row f-row-3">
                     <div className="f-group">
                         <label>Delivery Country <Req /></label>
                         <input type="text" name="deliveryCountry" placeholder="e.g. United States"
                             value={formData.deliveryCountry} onChange={handleChange} />
                         {simpleValidator.current.message('deliveryCountry', formData.deliveryCountry, 'required')}
                     </div>
+                </div>
+
+                <div className="f-row f-row-3">
+                    <div className="f-group">
+                        <label>Delivery City + State <Req /></label>
+                        <input
+                            type="text"
+                            name="deliveryCity"
+                            placeholder="e.g. New York, NY"
+                            value={formData.deliveryCity}
+                            onChange={handleChange}
+                        />
+                        <p className="f-field-hint">
+                            Need for calculating DDP (Delivered Duty Unpaid).
+                            Delivery is INCLUDED unless stated otherwise.*
+                        </p>
+                        {simpleValidator.current.message('deliveryCity', formData.deliveryCity, 'required')}
+                    </div>
+
                     <div className="f-group">
                         <label>Delivery Zip / Postal Code <Req /></label>
-                        <input type="text" name="deliveryZip" placeholder="e.g. 10001"
-                            value={formData.deliveryZip} onChange={handleChange} />
+                        <input
+                            type="text"
+                            name="deliveryZip"
+                            placeholder="e.g. 10001"
+                            value={formData.deliveryZip}
+                            onChange={handleChange}
+                        />
                         {simpleValidator.current.message('deliveryZip', formData.deliveryZip, 'required')}
-                    </div>
-                    <div className="f-group">
-                        <label>Warehouse / Distributor <Req /></label>
-                        <input type="text" name="distributor" placeholder="e.g. Ingram Content Group"
-                            value={formData.distributor} onChange={handleChange} />
-                        {simpleValidator.current.message('distributor', formData.distributor, 'required')}
                     </div>
                 </div>
 
                 {/* ════════════════════════════════════════
-                    SECTION 7 — Additional Notes & Files
+                    SECTION 7 — Final Notes
                 ════════════════════════════════════════ */}
-                <div className="f-section-title">7. Additional Notes &amp; Files</div>
+                <div className="f-section-title">7. Final Notes</div>
 
                 <div className="f-group">
-                    <label>Special Instructions</label>
+                    <label>Special Instructions or Finishes</label>
                     <textarea
                         name="specialInstructions"
                         rows={4}
-                        placeholder="Include any special requirements, brand standards, reference numbers, or details that will help us quote accurately."
+                        placeholder="Include any special requirements, brand standards, reference numbers, or details that will help us quote accurately"
                         value={formData.specialInstructions}
                         onChange={handleChange}
                     />
@@ -738,7 +757,7 @@ const ContactForm = () => {
                     </p>
                 </div>
 
-                <div className="f-row f-row-2">
+                <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>How Did You Hear About Us?</label>
                         <select name="howDidYouHear" value={formData.howDidYouHear} onChange={handleChange}>
@@ -747,15 +766,11 @@ const ContactForm = () => {
                             <option value="LinkedIn">LinkedIn</option>
                             <option value="Referral from publisher">Referral from publisher</option>
                             <option value="Email Outreach">Email Outreach</option>
-                            <option value="Social Media">Social Media</option>
-                            <option value="Instagram">Instagram</option>
-                            <option value="Facebook">Facebook</option>
-                            <option value="WhatsApp">WhatsApp</option>
-                            <option value="Advertisement">Advertisement</option>
-                            <option value="Existing Client">Existing Client</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
+                    <div className="f-group" />
+                    <div className="f-group" />
                     <div className="f-group" />
                 </div>
 
@@ -779,10 +794,8 @@ const ContactForm = () => {
                     {isSubmitting ? 'Sending…' : 'Send My Enquiry'}
                 </button>
 
-                
-
                 <p className="form-note">
-                    ✓ Response within 5 working days &nbsp;·&nbsp; ✓ Free physical proof on every order &nbsp;·&nbsp; ✓ Door-to-door or ex-works delivery available
+                    ✓ Response within 5 working days &nbsp;&nbsp; ✓ Free physical proof on every order &nbsp;&nbsp; ✓ Door-to-door or ex-works delivery available
                 </p>
 
             </form>
