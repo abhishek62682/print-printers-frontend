@@ -217,9 +217,7 @@ const FooterS2 = () => {
 <li>
   <Link to="/terms-of-use">Terms of Use</Link>
 </li>
-<li>
-  <Link to="/request-a-quote">Request a Quote</Link>
-</li>
+
               </ul>
             </div>
           </div>

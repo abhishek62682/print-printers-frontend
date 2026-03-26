@@ -71,7 +71,7 @@ const Header = (props) => {
                         </SmartScrollLink>
                       </li>
                       <li>
-  <Link to="/request-a-quote">Request a Quote</Link>
+  <Link to="/request-a-quote">Get a Quote</Link>
 </li>
                     </ul>
                   </nav>

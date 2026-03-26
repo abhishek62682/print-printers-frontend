@@ -6,7 +6,7 @@ const StatsShowcase = () => {
         <section className="feature-section fix">
             <div className="container">
                 <div className="feature-wrapper">
-                    <div className="row g-4">
+                    <div className="row justify-content-center g-4">
                         <div className="col-xl-4 col-lg-6 col-md-4 wow fadeInUp" data-wow-delay=".3s">
                             <div className="feature-box-items">
                                 <div className="content">
