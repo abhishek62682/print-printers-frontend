@@ -1665,7 +1665,7 @@ line-height: 1;
 }
 
 .feature-section{
-  margin-top: -200px;
+  margin-top: -150px;
     position: relative;
     z-index: 20;
 }
@@ -4096,7 +4096,7 @@ line-height: 1;
 }
 @media (max-width: 575px) {
   .hero-1 .hero-content h1 {
-    font-size: 32px;
+    font-size: 36px;
   }
   .hero-content {
     text-align: center;
@@ -4174,8 +4174,7 @@ line-height: 1;
  
   position: relative;
   z-index: 9;
-  padding-block: 50px;
-  
+ 
   
   
 }
@@ -4250,7 +4249,7 @@ line-height: 1;
  
 
   .header-logo > img{
-    width:120px;
+    width:130px;
   }
   .hero-1 .hero-content{
     padding-top: 0;

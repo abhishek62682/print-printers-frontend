@@ -30,8 +30,8 @@ const hero = () => {
                                Three decades of printing excellence. Proudly manufactured in India. <br className='md-hidden' />Delivered to your door in New York, London, Melbourne and beyond.
 
                             </p>
-                            <div className=' btn-wrapper d-flex gap-4 '>
- <Link to="/contact" onClick={ClickHandler} className="theme-btn wow fadeInUp" data-wow-delay=".9s">Get A Free Quote!</Link>
+                            <div className=' btn-wrapper d-flex gap-3 gap-md-4 '>
+ <Link to="/get-a-quote" onClick={ClickHandler} className="theme-btn wow fadeInUp" data-wow-delay=".9s">Get A Free Quote!</Link>
 
                                  <Link to="#!" onClick={ClickHandler} className="theme-btn wow fadeInUp" data-wow-delay=".9s">Download Our Profile
 </Link>

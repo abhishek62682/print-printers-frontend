@@ -10,10 +10,7 @@ import { ReactLenis, useLenis } from 'lenis/react'
 
 const AppLayout = () => {
 
-  const lenis = useLenis((lenis) => {
-    // called every scroll
-    console.log(lenis)
-  })
+  
 
 
   return (

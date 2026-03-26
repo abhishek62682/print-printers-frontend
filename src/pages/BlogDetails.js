@@ -26,7 +26,7 @@ const BlogDetails = () => {
         }
     }
 
-    console.log(blogItem , recentBlog)
+
 
     useEffect(() => {
         if (slug) fetchBlogBySlug();

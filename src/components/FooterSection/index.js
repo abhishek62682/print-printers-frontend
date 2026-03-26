@@ -2,10 +2,9 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import { Instagram } from "lucide-react";
+import { SmartScrollLink } from "../MobileMenu/MobileMenu";
 
-const ClickHandler = () => {
-  window.scrollTo(10, 0);
-};
+
 
 const FooterS2 = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -107,33 +106,33 @@ const FooterS2 = () => {
                   <div className="widget-head">
                     <h3>Useful Links</h3>
                   </div>
-                  <ul className="list-items">
-                    <li>
-                      <Link onClick={ClickHandler} to="">
-                        About Us
-                      </Link>
-                    </li>
-                    <li>
-                      <Link onClick={ClickHandler} to="">
-                        What We Print
-                      </Link>
-                    </li>
-                    <li>
-                      <Link onClick={ClickHandler} to="">
-                        Our Process
-                      </Link>
-                    </li>
-                    <li>
-                      <Link onClick={ClickHandler} to="">
-                        Shipping & Sailing
-                      </Link>
-                    </li>
-                    <li>
-                      <Link onClick={ClickHandler} to="">
-                        Get A Quote
-                      </Link>
-                    </li>
-                  </ul>
+                <ul className="list-items">
+  <li>
+    <SmartScrollLink toPage="/" sectionId="about-container" >
+      About Us
+    </SmartScrollLink>
+  </li>
+  <li>
+    <SmartScrollLink toPage="/" sectionId="service-container" >
+      What We Print
+    </SmartScrollLink>
+  </li>
+  <li>
+    <SmartScrollLink toPage="/" sectionId="process-container" >
+      Our Process
+    </SmartScrollLink>
+  </li>
+  <li>
+    <SmartScrollLink toPage="/" sectionId="shipping-sailing-container" >
+      Shipping & Sailing
+    </SmartScrollLink>
+  </li>
+  <li>
+    <SmartScrollLink toPage="/request-a-quote">
+      Get a Quote
+    </SmartScrollLink>
+  </li>
+</ul>
                 </div>
               </div>
               <div
@@ -144,37 +143,33 @@ const FooterS2 = () => {
                   <div className="widget-head">
                     <h3>Quick Links</h3>
                   </div>
-                  <ul className="list-items">
-                    <li>
-                      <Link onClick={ClickHandler} to="/why-us">
-                        Why Print Printers
-                      </Link>
-                    </li>
-                    <li>
-                      <Link onClick={ClickHandler} to="/relationships">
-                        Our Relationships
-                      </Link>
-                    </li>
-                    <li>
-                      <Link onClick={ClickHandler} to="/blog">
-                        Blog
-                      </Link>
-                    </li>
-                    <li>
-                      <Link onClick={ClickHandler} to="/faqs">
-                        FAQs
-                      </Link>
-                    </li>
-                    <li>
-                      <a
-                        href="/capability-profile.pdf"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Capability Profile
-                      </a>
-                    </li>
-                  </ul>
+                 <ul className="list-items">
+  <li>
+    <SmartScrollLink toPage="/" sectionId="why-print-printers-container">
+      Why Print Printers
+    </SmartScrollLink>
+  </li>
+  <li>
+    <SmartScrollLink toPage="/" sectionId="testimonial-container">
+      Our Relationships
+    </SmartScrollLink>
+  </li>
+  <li>
+    <SmartScrollLink toPage="/" sectionId="blog-container">
+      Blog
+    </SmartScrollLink>
+  </li>
+ 
+  <li>
+  <a
+  href="/Print Printers Profile - 2026.pdf"
+  download="PrintPrintersProfile2026.pdf"
+  rel="noopener noreferrer"
+>
+  Capability Profile
+</a>
+  </li>
+</ul>
                 </div>
               </div>
               <div
@@ -246,8 +241,8 @@ const FooterS2 = () => {
       {/* ── WhatsApp Floating Button ── */}
 {location.pathname !== "/request-a-quote" && (
 <Link
-  to="/contact"
-  title="Request a Quote"
+  to="/get-a-quote"
+  title="get-a-quote"
   className="quote-fixed-btn"
   onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
   onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}

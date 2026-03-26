@@ -461,8 +461,7 @@ const ContactForm = () => {
                        
                     </div>
 
-                    <div className="f-group" />
-                    <div className="f-group" />
+                    
                 </div>
 
                 {/* ════════════════════════════════════════
@@ -607,8 +606,7 @@ const ContactForm = () => {
                             <option value="Custom">Custom (Specify in Notes)</option>
                         </select>
                     </div>
-                    <div className="f-group" />
-                    <div className="f-group" />
+                    
                 </div>
 
                 {/* ════════════════════════════════════════

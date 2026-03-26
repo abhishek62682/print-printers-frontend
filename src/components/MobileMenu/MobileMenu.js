@@ -15,7 +15,7 @@ const menus = [
   { id: 8, title: "Blog", sectionId: "blog-container" },
 
   // ✅ contact page navigation
-  { id: 9, title: "Contact", path: "/contact" },
+  { id: 9, title: "Get a Quote", path: "/request-a-quote" },
 ];
 
 const MobileMenu = () => {
@@ -58,14 +58,13 @@ const MobileMenu = () => {
   );
 };
 
-const SmartScrollLink = ({ toPage = "/", sectionId, children, className, onClick }) => {
+export const SmartScrollLink = ({ toPage = "/", sectionId, children, className, onClick }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleClick = (e) => {
     e.preventDefault();
 
-    // 🔥 If no sectionId → normal navigation
     if (!sectionId) {
       navigate(toPage);
       if (onClick) onClick();

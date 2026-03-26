@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         element: <BlogDetails />,
       },
       {
-        path: "request-a-quote",
+        path: "get-a-quote",
         element: <RequestAQuote />,
       },
       {
