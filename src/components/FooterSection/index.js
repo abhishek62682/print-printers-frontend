@@ -105,7 +105,7 @@ const FooterS2 = () => {
               >
                 <div className="single-footer-widget">
                   <div className="widget-head">
-                    <h3>Usefull Links</h3>
+                    <h3>Useful Links</h3>
                   </div>
                   <ul className="list-items">
                     <li>

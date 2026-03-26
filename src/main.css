@@ -4053,7 +4053,7 @@ line-height: 1;
 }
 @media (max-width: 575px) {
   .hero-1 .hero-content h1 {
-    font-size: 42px;
+    font-size: 32px;
   }
   .hero-content {
     text-align: center;
