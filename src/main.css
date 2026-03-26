@@ -3962,12 +3962,7 @@ line-height: 1;
   .hero-1 {
     padding: 150px 0 100px;
   }
-  .btn-wrapper{
-    /* max-width: 400px; */
-    margin-top: 2rem;
-    margin-inline: auto;
-    justify-content: center;
-  }
+  
 }
 .hero-1 .circle-shape {
   position: absolute;
@@ -4100,6 +4095,11 @@ line-height: 1;
   }
   .hero-content {
     text-align: center;
+  }
+  .btn-wrapper{
+    max-width: 300px;
+    margin-inline: auto;
+    
   }
 
   .btn-wrapper > a{
