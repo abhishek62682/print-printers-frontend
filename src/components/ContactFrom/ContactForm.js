@@ -308,7 +308,7 @@ const ContactForm = () => {
         const loadingId = toast.loading('Sending your enquiry…', toastLoading);
 
         try {
-            await httpClient.post('/enquiries', payload);
+            await httpClient.post('/request-quotes', payload);
             toast.success("Enquiry sent! We'll be in touch within 5 working days.", { ...toastSuccess, id: loadingId });
             setShowModal(true);
             setFormData(INITIAL);
@@ -365,7 +365,8 @@ const ContactForm = () => {
                             In the meantime, feel free to explore our blog for printing guides and insights.
                         </p>
                         <div className="cf-modal-actions">
-                            <a href="#" className="btn-modal-primary">
+                            <a  href="/Print Printers Profile - 2026.pdf"
+  download="PrintPrintersProfile2026.pdf" className="btn-modal-primary">
                                 <i className="fal fa-download" style={{ marginRight: 6 }} />
                                 Download Capability Profile
                             </a>

@@ -32,7 +32,7 @@ const CtaSection = () => {
                                 Something Great?
                         </h2>
                     </div>
-                    <Link onClick={ClickHandler} to="/about" className="theme-btn mt-3 mt-md-0 wow fadeInUp" data-wow-delay=".5s">Get A Free Quote</Link>
+                    <Link onClick={ClickHandler} to="/get-a-quote" className="theme-btn mt-3 mt-md-0 wow fadeInUp" data-wow-delay=".5s">Get A Free Quote</Link>
                 </div>
             </div>
         </section>
