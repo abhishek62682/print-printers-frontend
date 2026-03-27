@@ -15,7 +15,7 @@ const menus = [
   { id: 8, title: "Blog", sectionId: "blog-container" },
 
   // ✅ contact page navigation
-  { id: 9, title: "Get a Quote", path: "/request-a-quote" },
+  { id: 9, title: "Get a Quote", path: "/g-a-quote" },
 ];
 
 const MobileMenu = () => {

@@ -33,9 +33,14 @@ const hero = () => {
                             <div className=' btn-wrapper d-flex gap-3 gap-md-4 '>
  <Link to="/get-a-quote" onClick={ClickHandler} className="theme-btn wow fadeInUp" data-wow-delay=".9s">Get A Free Quote!</Link>
 
-                                 <Link to="#!" onClick={ClickHandler} className="theme-btn wow fadeInUp" data-wow-delay=".9s">Download Our Profile
-</Link>
-
+<a
+  href="/Print Printers Profile - 2026.pdf"
+  download="PrintPrintersProfile2026.pdf"
+  className="theme-btn wow fadeInUp"
+  data-wow-delay=".9s"
+>
+  Download Our Profile
+</a>
                                  
                             </div>
                             

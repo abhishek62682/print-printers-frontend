@@ -29,6 +29,8 @@
     padding-left: 0;
     padding-top: 10px;
 }
+.f-input-error { border-color: #e05c4b !important; }
+.f-field-error  { color: #e05c4b; font-size: 12px; margin-top: 4px; }
 .responsivemenu li a,
 .responsivemenu li p,
 .responsivemenu ul{
@@ -36,7 +38,7 @@
     padding: 13px 35px;
     font-size: 16px;
     letter-spacing: 0;
-    text-transform: capitalize;
+    
     font-weight: 500;
     color: #fff;
     cursor: pointer;

@@ -128,7 +128,7 @@ const FooterS2 = () => {
     </SmartScrollLink>
   </li>
   <li>
-    <SmartScrollLink toPage="/request-a-quote">
+    <SmartScrollLink toPage="/get-a-quote">
       Get a Quote
     </SmartScrollLink>
   </li>
@@ -239,7 +239,7 @@ const FooterS2 = () => {
       )}
 
       {/* ── WhatsApp Floating Button ── */}
-{location.pathname !== "/request-a-quote" && (
+{location.pathname !== "/get-a-quote" && (
 <Link
   to="/get-a-quote"
   title="get-a-quote"

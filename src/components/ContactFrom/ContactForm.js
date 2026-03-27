@@ -1,16 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import SimpleReactValidator from 'simple-react-validator';
+import { z } from 'zod';
 import toast, { Toaster } from 'react-hot-toast';
 import { X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import httpClient from '../../config/http-client';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
 
-// ─── Replace with your Cloudflare Turnstile SITE KEY ─────────────────────────
 const TURNSTILE_SITE_KEY = process.env.REACT_APP_TURNSTILE_SITE_KEY;
 
-// ─── Shared toast styles ──────────────────────────────────────────────────────
 const toastBase = {
     background: '#1a1a1a',
     color: '#fff',
@@ -20,15 +16,177 @@ const toastBase = {
     padding: '14px 18px',
     maxWidth: '460px',
 };
-const toastError   = { style: { ...toastBase, border: '1px solid rgba(224,92,75,0.45)'  }, iconTheme: { primary: '#e05c4b', secondary: '#fff' }, duration: 6000 };
-const toastSuccess = { style: { ...toastBase, border: '1px solid rgba(49,162,255,0.35)' }, iconTheme: { primary: '#31a2ff', secondary: '#fff' }, duration: 5000 };
-const toastLoading = { style: toastBase };
 
-// ─── Required asterisk ────────────────────────────────────────────────────────
-const Req = () => <span className="req" aria-hidden="true">*</span>;
+export const toastError   = { style: { ...toastBase, border: '1px solid rgba(224,92,75,0.45)'  }, iconTheme: { primary: '#e05c4b', secondary: '#fff' }, duration: 6000 };
+export const toastSuccess = { style: { ...toastBase, border: '1px solid rgba(49,162,255,0.35)' }, iconTheme: { primary: '#31a2ff', secondary: '#fff' }, duration: 5000 };
+export const toastLoading = { style: toastBase };
 
-// ─── Cloudflare Turnstile hook ────────────────────────────────────────────────
-const useTurnstile = (siteKey) => {
+const BOOK_CATEGORIES = [
+    'Religious & Faith Based Books',
+    'Novels & Trade Books',
+    "Children's Books & Board Books",
+    'K-12 & Educational Books',
+    'Coffee Table Books & Art Books',
+    'Comic Books & Graphic Novels',
+    'Cookbooks & Self-Learning Books',
+    'Training & Guide Books',
+    'Journals & Diaries',
+    'Other',
+];
+
+const BINDING_TYPES = [
+    'Softcover / Perfect Bound',
+    'Hardcover / Case Bound',
+    'Saddle Stitch',
+    'Wire-O',
+    'Lay Flat',
+    'Coil / Spiral Binding',
+    'Comb Binding',
+    'Board Book',
+    'Other',
+];
+
+const LAMINATION_OPTIONS = [
+    'None',
+    'Gloss Film Lamination',
+    'Matte Film Lamination',
+    'Soft Touch Lamination',
+    'Scuff-free Matte Lamination',
+    'Flood Aqeous Varnish',
+    'Flood Matte Varnish',
+];
+
+const optionalEnum = (values) =>
+    z.enum(values).optional().or(z.literal('')).transform(v => v || undefined);
+
+const optionalStr = (max = 500) =>
+    z.string().trim().max(max).optional().or(z.literal('')).transform(v => v || undefined);
+
+export const rfpSchema = z.object({
+    fullName:      z.string().trim().min(2, 'Full name must be at least 2 characters').max(100),
+    companyName:   z.string().trim().min(2, 'Company name must be at least 2 characters').max(150),
+    email:         z.string().trim().toLowerCase().email('Enter a valid email address').max(254),
+    phone:         z.string().trim().regex(/^\+?[\d\s\-().]{7,20}$/, 'Invalid phone number'),
+    country:       z.string().trim().min(2, 'Country is required').max(100),
+    stateProvince: z.string().trim().min(1, 'State / Province is required').max(100),
+    city:          z.string().trim().min(1, 'City is required').max(100),
+    zipCode:       z.string().trim().min(1, 'Zip / Postal code is required').max(20),
+
+    bookTitle:    z.string().trim().min(1, 'Book title is required').max(300),
+    bookCategory: optionalEnum(BOOK_CATEGORIES),
+   trimSize: z
+  .string()
+  .trim()
+  .min(1, 'Trim size is required')
+  .max(50, 'Trim size is too long')
+  .regex(
+    /^\d+(\.\d+)?\s*[xX*×]\s*\d+(\.\d+)?(\s*(in|inch|inches))?$/,
+    'Enter a valid trim size like "6 x 9" or "8.5 x 11"'
+  ),
+    orientation: z.enum(['Portrait', 'Landscape', 'Square'], {
+        errorMap: () => ({ message: 'Orientation is required' }),
+    }),
+    proofType: z.enum(['Epsons', 'PDFs', 'Full Book Digitally Printed'], {
+        errorMap: () => ({ message: 'Proof type is required' }),
+    }),
+
+    bindingType:       z.enum(BINDING_TYPES, { errorMap: () => ({ message: 'Binding type is required' }) }),
+    bindingNotes:      optionalStr(500),
+    coverStock:        z.string().trim().min(1, 'Cover stock is required').max(300),
+    coverInk:          z.enum(['4/0 CMYK', '1/0 Black', '4/0 CMYK + Varnish', 'PMS', 'Custom'], {
+        errorMap: () => ({ message: 'Cover ink is required' }),
+    }),
+    coverLamination:   z.enum(LAMINATION_OPTIONS, { errorMap: () => ({ message: 'Cover lamination is required' }) }),
+    boardCalliper:     optionalStr(50),
+    specialtyFinishes: optionalStr(1000),
+    dustJacket:        z.enum(['No', 'Yes'], { errorMap: () => ({ message: 'Dust jacket selection is required' }) }),
+
+    dustJacketStock:      optionalStr(200),
+    dustJacketInk:        optionalEnum(['4/0 Process CMYK']),
+    dustJacketLamination: optionalEnum(LAMINATION_OPTIONS),
+    dustJacketFinishes:   optionalStr(500),
+    endsheetStock:        optionalStr(200),
+    endsheetPrinting:     optionalEnum(['Not Required', '1/1 Black', '4/4 Colour', 'Custom']),
+
+    totalPages: z.string().trim()
+        .min(1, 'Page count is required')
+        .regex(/^\d+$/, 'Must be a number')
+        .refine(v => Number(v) > 0, 'Must be greater than 0')
+        .refine(v => Number(v) % 2 === 0, 'Page count must be an even number'),
+    textPaperStock: z.string().trim().min(1, 'Text paper stock is required').max(300),
+    textInk: z.enum(
+        ['1/1 Black', '4/4 Process CMYK', '4/4 Process CMYK + Flood Varnish', '2/2 Process Colour'],
+        { errorMap: () => ({ message: 'Text ink is required' }) }
+    ),
+
+    quantities: z.string().trim()
+        .min(1, 'At least one quantity is required')
+        .refine(val => {
+            const items = val.split(',').map(q => q.trim());
+            return items.length >= 1 && items.length <= 5 && items.every(q => /^\d+$/.test(q) && Number(q) > 0);
+        }, 'Enter 1–5 valid quantities separated by commas (e.g. 1000, 2000, 5000)')
+        .transform(val => val.split(',').map(q => Number(q.trim()))),
+
+    packingMethod:   optionalEnum(['Individually Shrink-wrapped', 'Multi Shrink-wrapped', 'No Shrink-wrap']),
+    shippingMethod:  z.enum(
+        ['Door to Door (DDU)', 'Ex-Works (India Factory/Warehouse)', 'Customer Carrier'],
+        { errorMap: () => ({ message: 'Shipping method is required' }) }
+    ),
+    deliveryAddress: z.string().trim().min(1, 'Delivery address is required').max(300),
+    deliveryCity:    z.string().trim().min(1, 'Delivery city is required').max(150),
+    deliveryCountry: z.string().trim().min(1, 'Delivery country is required').max(100),
+    deliveryZip:     z.string().trim().min(1, 'Delivery zip code is required').max(20),
+
+    specialInstructions: optionalStr(3000),
+    howDidYouHear: optionalEnum(['Google Search', 'LinkedIn', 'Referral from publisher', 'Email Outreach', 'Other']),
+}).superRefine((data, ctx) => {
+    if (data.dustJacket === 'Yes') {
+        if (!data.dustJacketStock)      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Dust jacket stock is required',      path: ['dustJacketStock']      });
+        if (!data.dustJacketInk)        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Dust jacket ink is required',        path: ['dustJacketInk']        });
+        if (!data.dustJacketLamination) ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Dust jacket lamination is required', path: ['dustJacketLamination'] });
+    }
+
+    if (
+        data.country.trim().toLowerCase() === 'india' &&
+        data.zipCode &&
+        !/^\d{6}$/.test(data.zipCode.trim())
+    ) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Indian PIN code must be exactly 6 digits',
+            path: ['zipCode'],
+        });
+    }
+});
+
+export const flattenZodErrors = (error) => {
+    const map = {};
+    for (const issue of error.issues) {
+        const key = issue.path.join('.');
+        if (!map[key]) map[key] = issue.message;
+    }
+    return map;
+};
+
+export const scrollToField = (name) => {
+    const el = document.querySelector(`[name="${name}"]`) || document.getElementById(name);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => el.focus({ preventScroll: true }), 400);
+};
+
+const scrollToFirstDomError = (errorMap) => {
+    const all = document.querySelectorAll('input[name], select[name], textarea[name]');
+    for (const el of all) {
+        if (errorMap[el.getAttribute('name')]) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(() => el.focus({ preventScroll: true }), 400);
+            return;
+        }
+    }
+};
+
+export const useTurnstile = (siteKey) => {
     const containerRef = useRef(null);
     const widgetIdRef  = useRef(null);
     const [token, setToken] = useState(null);
@@ -48,9 +206,9 @@ const useTurnstile = (siteKey) => {
                     callback:           (t) => setToken(t),
                     'expired-callback': () => setToken(null),
                     'error-callback':   () => setToken(null),
-                    theme:              'light',
-                    size:               'normal',
-                    language:           'auto',
+                    theme:    'light',
+                    size:     'normal',
+                    language: 'auto',
                 });
             }
         };
@@ -81,71 +239,30 @@ const useTurnstile = (siteKey) => {
     return { containerRef, token, resetTurnstile };
 };
 
-// ─── INITIAL FORM STATE ───────────────────────────────────────────────────────
+export const Req = () => <span className="req" aria-hidden="true">*</span>;
+
+export const FieldError = ({ message }) =>
+    message ? <p className="f-field-error" role="alert">{message}</p> : null;
+
 const INITIAL = {
-    // Section 1 — Contact Information
-    fullName:       '',
-    companyName:    '',
-    email:          '',
-    phone:          '',
-    country:        '',
-    stateProvince:  '',
-    city:           '',
-    zipCode:        '',
-
-    // Section 2 — The Basics (Book & Project Information)
-    bookTitle:      '',
-    bookCategory:   '',
-    trimSize:       '',
-    orientation:    '',
-    proofType:      '',
-    // fileFormat removed — now static display only
-
-    // Section 3 — Cover, Binding, Endsheets & Finishing
-    bindingType:        '',
-    bindingNotes:       '',
-    coverStock:         '',
-    coverInk:           '',
-    coverLamination:    '',
-    boardCalliper:      '',
-    specialtyFinishes:  '',
-    dustJacket:         '',
-    dustJacketStock:    '',
-    dustJacketInk:      '',
-    dustJacketLamination: '',
-    dustJacketFinishes: '',
-    endsheetStock:      '',
-    endsheetPrinting:   '',
-
-    // Section 4 — Text & Text Paper Specifications
-    totalPages:       '',
-    textPaperStock:   '',
-    textInk:          '',
-
-    // Section 5 — Quantities
+    fullName: '', companyName: '', email: '', phone: '',
+    country: '', stateProvince: '', city: '', zipCode: '',
+    bookTitle: '', bookCategory: '', trimSize: '', orientation: '', proofType: '',
+    bindingType: '', bindingNotes: '', coverStock: '', coverInk: '', coverLamination: '',
+    boardCalliper: '', specialtyFinishes: '', dustJacket: '',
+    dustJacketStock: '', dustJacketInk: '', dustJacketLamination: '', dustJacketFinishes: '',
+    endsheetStock: '', endsheetPrinting: '',
+    totalPages: '', textPaperStock: '', textInk: '',
     quantities: '',
-
-    // Section 6 — Packing & Shipping
-    packingMethod:    '',
-    shippingMethod:   '',
-    deliveryAddress:  '',
-    deliveryCity:     '',
-    deliveryCountry:  '',
-    deliveryZip:      '',
-
-    // Section 7 — Final Notes
-    specialInstructions: '',
-    howDidYouHear:       '',
+    packingMethod: '', shippingMethod: '', deliveryAddress: '', deliveryCity: '', deliveryCountry: '', deliveryZip: '',
+    specialInstructions: '', howDidYouHear: '',
 };
 
-
-// ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
 const ContactForm = () => {
     const [formData, setFormData]         = useState(INITIAL);
+    const [errors, setErrors]             = useState({});
     const [showModal, setShowModal]       = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [, forceUpdate]                 = useState(0);
-    const simpleValidator                 = useRef(new SimpleReactValidator());
     const navigate                        = useNavigate();
 
     const { containerRef, token: captchaToken, resetTurnstile } = useTurnstile(TURNSTILE_SITE_KEY);
@@ -153,22 +270,26 @@ const ContactForm = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+        if (errors[name]) {
+            setErrors(prev => { const next = { ...prev }; delete next[name]; return next; });
+        }
     };
 
     const scrollToBlog = () => {
         navigate('/');
-        setTimeout(() => {
-            document.getElementById('blog-container')?.scrollIntoView({ behavior: 'smooth' });
-        }, 200);
+        setTimeout(() => document.getElementById('blog-container')?.scrollIntoView({ behavior: 'smooth' }), 200);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!simpleValidator.current.allValid()) {
-            simpleValidator.current.showMessages();
-            forceUpdate(n => n + 1);
-            toast.error('Please fill in all required fields before submitting.', toastError);
+        const result = rfpSchema.safeParse(formData);
+
+        if (!result.success) {
+            const flat = flattenZodErrors(result.error);
+            setErrors(flat);
+            scrollToFirstDomError(flat);
+            toast.error('Please fix the highlighted fields before submitting.', toastError);
             return;
         }
 
@@ -178,64 +299,8 @@ const ContactForm = () => {
         }
 
         const payload = {
-            // Contact Information
-            fullName:       formData.fullName,
-            companyName:    formData.companyName,
-            email:          formData.email,
-            phone:          formData.phone,
-            country:        formData.country,
-            stateProvince:  formData.stateProvince,
-            city:           formData.city,
-            zipCode:        formData.zipCode,
-
-            // The Basics
-            bookTitle:      formData.bookTitle,
-            bookCategory:   formData.bookCategory   || undefined,
-            trimSize:       formData.trimSize,
-            orientation:    formData.orientation    || undefined,
-            proofType:      formData.proofType      || undefined,
-            fileFormat:     'Customer Supplied Files must be trouble-free PDF Files', // static value
-
-            // Cover, Binding, Endsheets & Finishing
-            bindingType:        formData.bindingType         || undefined,
-            bindingNotes:       formData.bindingNotes        || undefined,
-            coverStock:         formData.coverStock          || undefined,
-            coverInk:           formData.coverInk            || undefined,
-            coverLamination:    formData.coverLamination     || undefined,
-            boardCalliper:      formData.boardCalliper       || undefined,
-            specialtyFinishes:  formData.specialtyFinishes   || undefined,
-            dustJacket:         formData.dustJacket          || undefined,
-            dustJacketStock:    formData.dustJacketStock     || undefined,
-            dustJacketInk:      formData.dustJacketInk       || undefined,
-            dustJacketLamination: formData.dustJacketLamination || undefined,
-            dustJacketFinishes: formData.dustJacketFinishes  || undefined,
-            endsheetStock:      formData.endsheetStock       || undefined,
-            endsheetPrinting:   formData.endsheetPrinting    || undefined,
-
-            // Text & Text Paper Specifications
-            totalPages:       formData.totalPages     || undefined,
-            textPaperStock:   formData.textPaperStock || undefined,
-            textInk:          formData.textInk        || undefined,
-
-            // Quantities — split comma-separated string into array
-            quantities: formData.quantities
-                .split(',')
-                .map(q => q.trim())
-                .filter(Boolean),
-
-            // Packing & Shipping
-            packingMethod:    formData.packingMethod   || undefined,
-            shippingMethod:   formData.shippingMethod  || undefined,
-            deliveryAddress:  formData.deliveryAddress || undefined,
-            deliveryCity:     formData.deliveryCity    || undefined,
-            deliveryCountry:  formData.deliveryCountry || undefined,
-            deliveryZip:      formData.deliveryZip     || undefined,
-
-            // Final Notes
-            specialInstructions: formData.specialInstructions || undefined,
-            howDidYouHear:       formData.howDidYouHear       || undefined,
-
-            // Turnstile token
+            ...result.data,
+            fileFormat: 'Customer Supplied Files must be trouble-free PDF Files',
             turnstileToken: captchaToken,
         };
 
@@ -247,26 +312,42 @@ const ContactForm = () => {
             toast.success("Enquiry sent! We'll be in touch within 5 working days.", { ...toastSuccess, id: loadingId });
             setShowModal(true);
             setFormData(INITIAL);
-            simpleValidator.current.hideMessages();
+            setErrors({});
             resetTurnstile();
         } catch (error) {
-            const msg =
-                error?.response?.data?.message ||
-                error?.message ||
-                'Something went wrong. Please try again.';
-            toast.error(msg, { ...toastError, id: loadingId });
+            toast.dismiss(loadingId);
+
+            const fieldErrors = error?.response?.data?.fieldErrors;
+            if (fieldErrors) {
+                const serverErrors = Object.fromEntries(
+                    Object.entries(fieldErrors).map(([field, msgs]) => [field, msgs?.[0]?.message || 'Invalid value'])
+                );
+                setErrors(serverErrors);
+                scrollToFirstDomError(serverErrors);
+                toast.error(Object.values(serverErrors)[0], toastError);
+            } else {
+                toast.error(
+                    error?.response?.data?.message || error?.message || 'Something went wrong. Please try again.',
+                    toastError
+                );
+            }
             resetTurnstile();
         } finally {
             setIsSubmitting(false);
         }
     };
 
-    // ── Render ────────────────────────────────────────────────────────────────
+    const f = (name) => ({
+        name,
+        value: formData[name],
+        onChange: handleChange,
+        className: errors[name] ? 'f-input-error' : '',
+    });
+
     return (
         <>
             <Toaster position="top-right" containerStyle={{ zIndex: 99999, top: 24, right: 24 }} />
 
-            {/* ── Success Modal ── */}
             {showModal && (
                 <div className="cf-modal-overlay" onClick={() => setShowModal(false)}>
                     <div className="cf-modal" onClick={e => e.stopPropagation()}>
@@ -299,7 +380,6 @@ const ContactForm = () => {
 
             <form id="contact-form" className="form-wrap" onSubmit={handleSubmit} noValidate>
 
-                {/* ── Intro ── */}
                 <div className="f-form-intro">
                     <p>
                         Thank you for considering <strong>Print Printers</strong>. Please complete this
@@ -315,193 +395,126 @@ const ContactForm = () => {
                     </p>
                 </div>
 
-                {/* ════════════════════════════════════════
-                    SECTION 1 — Contact Information
-                ════════════════════════════════════════ */}
                 <div className="f-section-title">1. Contact Information</div>
 
                 <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>Full Name <Req /></label>
-                        <input type="text" name="fullName" placeholder="Your full name"
-                            value={formData.fullName} onChange={handleChange} />
-                        {simpleValidator.current.message('fullName', formData.fullName, 'required|alpha_space')}
+                        <input type="text" {...f('fullName')} placeholder="Your full name" />
+                        <FieldError message={errors.fullName} />
                     </div>
                     <div className="f-group">
                         <label>Company / Publisher <Req /></label>
-                        <input type="text" name="companyName" placeholder="Publishing house or company name"
-                            value={formData.companyName} onChange={handleChange} />
-                        {simpleValidator.current.message('companyName', formData.companyName, 'required')}
+                        <input type="text" {...f('companyName')} placeholder="Publishing house or company name" />
+                        <FieldError message={errors.companyName} />
                     </div>
                     <div className="f-group">
                         <label>Email Address <Req /></label>
-                        <input type="email" name="email" placeholder="you@company.com"
-                            value={formData.email} onChange={handleChange} />
-                        {simpleValidator.current.message('email', formData.email, 'required|email')}
+                        <input type="email" {...f('email')} placeholder="you@company.com" />
+                        <FieldError message={errors.email} />
                     </div>
                     <div className="f-group">
                         <label>Phone Number <Req /></label>
-                        <input
-                            type="tel"
-                            name="phone"
-                            placeholder="+1 555 000 0000"
-                            value={formData.phone}
-                            onChange={handleChange}
-                        />
-                        {/*
-                            Accepts all of the following formats:
-                              +1 555 000 0000        (E.164 with spaces)
-                              +1-555-000-0000        (E.164 with dashes)
-                              +44 20 7946 0958       (UK with spaces)
-                              +91 98765 43210        (India)
-                              (555) 000-0000         (US local without country code)
-                              5550000000             (digits only, 7–15 chars)
-                              +1 (555) 000-0000      (parenthesised area code)
-                        */}
-                        {simpleValidator.current.message('phone', formData.phone, [
-                            'required',
-                            {
-                                regex: /^\+?[\d\s\-().]{7,20}$/
-                            }
-                        ])}
+                        <input type="tel" {...f('phone')} placeholder="+1 555 000 0000" />
+                        <FieldError message={errors.phone} />
                     </div>
                 </div>
 
                 <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>Country <Req /></label>
-                        <input type="text" name="country" placeholder="e.g. United States"
-                            value={formData.country} onChange={handleChange} />
-                        {simpleValidator.current.message('country', formData.country, 'required')}
+                        <input type="text" {...f('country')} placeholder="e.g. United States" />
+                        <FieldError message={errors.country} />
                     </div>
                     <div className="f-group">
                         <label>State / Province <Req /></label>
-                        <input type="text" name="stateProvince" placeholder="e.g. New York"
-                            value={formData.stateProvince} onChange={handleChange} />
-                        {simpleValidator.current.message('stateProvince', formData.stateProvince, 'required')}
+                        <input type="text" {...f('stateProvince')} placeholder="e.g. New York" />
+                        <FieldError message={errors.stateProvince} />
                     </div>
                     <div className="f-group">
                         <label>City <Req /></label>
-                        <input type="text" name="city" placeholder="e.g. Los Angeles"
-                            value={formData.city} onChange={handleChange} />
-                        {simpleValidator.current.message('city', formData.city, 'required')}
+                        <input type="text" {...f('city')} placeholder="e.g. Los Angeles" />
+                        <FieldError message={errors.city} />
                     </div>
                     <div className="f-group">
                         <label>Zip / Postal Code <Req /></label>
-                        <input type="text" name="zipCode" placeholder="e.g. 90001"
-                            value={formData.zipCode} onChange={handleChange} />
-                        {simpleValidator.current.message('zipCode', formData.zipCode, 'required')}
+                        <input type="text" {...f('zipCode')} placeholder="e.g. 90001" />
+                        <FieldError message={errors.zipCode} />
                     </div>
                 </div>
 
-                {/* ════════════════════════════════════════
-                    SECTION 2 — The Basics (Book & Project)
-                ════════════════════════════════════════ */}
                 <div className="f-section-title">2. The Basics</div>
 
                 <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>Project / Book Title <Req /></label>
-                        <input type="text" name="bookTitle" placeholder="e.g. Post Oak"
-                            value={formData.bookTitle} onChange={handleChange} />
-                        {simpleValidator.current.message('bookTitle', formData.bookTitle, 'required')}
+                        <input type="text" {...f('bookTitle')} placeholder="e.g. Post Oak" />
+                        <FieldError message={errors.bookTitle} />
                     </div>
                     <div className="f-group">
-                        <label>Book Category (Choose One)</label>
-                        <select name="bookCategory" value={formData.bookCategory} onChange={handleChange}>
+                        <label>Book Category</label>
+                        <select {...f('bookCategory')}>
                             <option value="">Select category…</option>
-                            <option value="Religious & Faith Based Books">Religious &amp; Faith Based Books</option>
-                            <option value="Novels & Trade Books">Novels &amp; Trade Books</option>
-                            <option value="Children's Books & Board Books">Children's Books &amp; Board Books</option>
-                            <option value="K-12 & Educational Books">K-12 &amp; Educational Books</option>
-                            <option value="Coffee Table Books & Art Books">Coffee Table Books &amp; Art Books</option>
-                            <option value="Comic Books & Graphic Novels">Comic Books &amp; Graphic Novels</option>
-                            <option value="Cookbooks & Self-Learning Books">Cookbooks &amp; Self-Learning Books</option>
-                            <option value="Training & Guide Books">Training &amp; Guide Books</option>
-                            <option value="Journals & Diaries">Journals &amp; Diaries</option>
-                            <option value="Other">Other</option>
+                            {BOOK_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                         </select>
                     </div>
                     <div className="f-group">
                         <label>Width x Height (inches) <Req /></label>
-                        <input type="text" name="trimSize" placeholder="e.g. 6 x 9"
-                            value={formData.trimSize} onChange={handleChange} />
-                        {simpleValidator.current.message('trimSize', formData.trimSize, 'required')}
+                        <input type="text" {...f('trimSize')} placeholder="e.g. 6 x 9" />
+                        <FieldError message={errors.trimSize} />
                     </div>
                     <div className="f-group">
-                        <label>Orientation (Choose One) <Req /></label>
-                        <select name="orientation" value={formData.orientation} onChange={handleChange}>
+                        <label>Orientation <Req /></label>
+                        <select {...f('orientation')}>
                             <option value="">Select…</option>
                             <option value="Portrait">Portrait</option>
                             <option value="Landscape">Landscape</option>
                             <option value="Square">Square</option>
                         </select>
-                        {simpleValidator.current.message('orientation', formData.orientation, 'required')}
+                        <FieldError message={errors.orientation} />
                     </div>
                 </div>
 
                 <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>Proofs - Text + Cover <Req /></label>
-                        <select name="proofType" value={formData.proofType} onChange={handleChange}>
+                        <select {...f('proofType')}>
                             <option value="">Select proof type…</option>
                             <option value="Epsons">Epsons</option>
                             <option value="PDFs">PDFs</option>
                             <option value="Full Book Digitally Printed">Full Book Digitally Printed</option>
                         </select>
-                        {simpleValidator.current.message('proofType', formData.proofType, 'required')}
+                        <FieldError message={errors.proofType} />
                     </div>
-
                     <div className="f-group">
                         <label>File Format Details</label>
-                        <p className="f-file-format-pill">
-                           
-                            Customer Supplied Files must be trouble-free PDF Files.
-                        </p>
-                       
+                        <p className="f-file-format-pill">Customer Supplied Files must be trouble-free PDF Files.</p>
                     </div>
-
-                    
                 </div>
 
-                {/* ════════════════════════════════════════
-                    SECTION 3 — Cover, Binding, Endsheets & Finishing
-                ════════════════════════════════════════ */}
                 <div className="f-section-title">3. Cover, Binding, Endsheets &amp; Finishing</div>
 
                 <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>Binding Type <Req /></label>
-                        <select name="bindingType" value={formData.bindingType} onChange={handleChange}>
+                        <select {...f('bindingType')}>
                             <option value="">Select binding type…</option>
-                            <option value="Softcover / Perfect Bound">Softcover / Perfect Bound</option>
-                            <option value="Hardcover / Case Bound">Hardcover / Case Bound</option>
-                            <option value="Saddle Stitch">Saddle Stitch</option>
-                            <option value="Wire-O">Wire-O</option>
-                            <option value="Lay Flat">Lay Flat</option>
-                            <option value="Coil / Spiral Binding">Coil / Spiral Binding</option>
-                            <option value="Comb Binding">Comb Binding</option>
-                            <option value="Board Book">Board Book</option>
-                            <option value="Other">Other</option>
+                            {BINDING_TYPES.map(b => <option key={b} value={b}>{b}</option>)}
                         </select>
-                        {simpleValidator.current.message('bindingType', formData.bindingType, 'required')}
+                        <FieldError message={errors.bindingType} />
                     </div>
                     <div className="f-group">
                         <label>Binding Special Notes</label>
-                        <input type="text" name="bindingNotes"
-                            placeholder="e.g. Square loose back, gilded edges, ribbon marker etc."
-                            value={formData.bindingNotes} onChange={handleChange} />
+                        <input type="text" {...f('bindingNotes')} placeholder="e.g. Square loose back, gilded edges, ribbon marker etc." />
                     </div>
                     <div className="f-group">
                         <label>Cover Stock / Material <Req /></label>
-                        <input type="text" name="coverStock"
-                            placeholder="e.g. 100lb matte or 12pt C1S Gloss Artcard Paper or Faux-leather / Ecofiber Rainbow / Cloth etc."
-                            value={formData.coverStock} onChange={handleChange} />
-                        {simpleValidator.current.message('coverStock', formData.coverStock, 'required')}
+                        <input type="text" {...f('coverStock')} placeholder="e.g. 100lb matte or 12pt C1S Gloss Artcard" />
+                        <FieldError message={errors.coverStock} />
                     </div>
                     <div className="f-group">
                         <label>Cover Ink <Req /></label>
-                        <select name="coverInk" value={formData.coverInk} onChange={handleChange}>
+                        <select {...f('coverInk')}>
                             <option value="">Select ink…</option>
                             <option value="4/0 CMYK">4/0 CMYK</option>
                             <option value="1/0 Black">1/0 Black</option>
@@ -509,96 +522,76 @@ const ContactForm = () => {
                             <option value="PMS">PMS</option>
                             <option value="Custom">Custom</option>
                         </select>
-                        {simpleValidator.current.message('coverInk', formData.coverInk, 'required')}
+                        <FieldError message={errors.coverInk} />
                     </div>
                 </div>
 
                 <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>Cover Lamination <Req /></label>
-                        <select name="coverLamination" value={formData.coverLamination} onChange={handleChange}>
+                        <select {...f('coverLamination')}>
                             <option value="">Select lamination…</option>
-                            <option value="None">None</option>
-                            <option value="Gloss Film Lamination">Gloss Film Lamination</option>
-                            <option value="Matte Film Lamination">Matte Film Lamination</option>
-                            <option value="Soft Touch Lamination">Soft Touch Lamination</option>
-                            <option value="Scuff-free Matte Lamination">Scuff-free Matte Lamination</option>
-                            <option value="Flood Aqeous Varnish">Flood Aqeous Varnish</option>
-                            <option value="Flood Matte Varnish">Flood Matte Varnish</option>
+                            {LAMINATION_OPTIONS.map(l => <option key={l} value={l}>{l}</option>)}
                         </select>
-                        {simpleValidator.current.message('coverLamination', formData.coverLamination, 'required')}
+                        <FieldError message={errors.coverLamination} />
                     </div>
                     <div className="f-group">
                         <label>Hard Cover Board Calliper (mm)</label>
-                        <input type="text" name="boardCalliper" placeholder="eg. 2.50 mm or 3.00 mm"
-                            value={formData.boardCalliper} onChange={handleChange} />
+                        <input type="text" {...f('boardCalliper')} placeholder="e.g. 2.50 mm or 3.00 mm" />
                     </div>
                     <div className="f-group">
                         <label>Specialty Finishes on Cover</label>
-                        <input type="text" name="specialtyFinishes"
-                            placeholder="Eg. One hit flat gold foil front lid & spine + embossing on front cover, printed, painted or gilded edges, Spot UV etc."
-                            value={formData.specialtyFinishes} onChange={handleChange} />
+                        <input type="text" {...f('specialtyFinishes')} placeholder="e.g. Gold foil + embossing, Spot UV etc." />
                     </div>
                     <div className="f-group">
                         <label>Dust Jacket? <Req /></label>
-                        <select name="dustJacket" value={formData.dustJacket} onChange={handleChange}>
+                        <select {...f('dustJacket')}>
                             <option value="">Select…</option>
                             <option value="No">No</option>
                             <option value="Yes">Yes</option>
                         </select>
-                        {simpleValidator.current.message('dustJacket', formData.dustJacket, 'required')}
+                        <FieldError message={errors.dustJacket} />
                     </div>
                 </div>
 
-                {/* Dust Jacket Conditional Fields */}
                 {formData.dustJacket === 'Yes' && (
-                    <>
-                        <div className="f-row f-row-4">
-                            <div className="f-group">
-                                <label>Dust Jacket Paper Stock</label>
-                                <input type="text" name="dustJacketStock" placeholder="e.g. 100lb matte or 120lb gloss"
-                                    value={formData.dustJacketStock} onChange={handleChange} />
-                            </div>
-                            <div className="f-group">
-                                <label>Dust Jacket Ink</label>
-                                <select name="dustJacketInk" value={formData.dustJacketInk} onChange={handleChange}>
-                                    <option value="">Select…</option>
-                                    <option value="4/0 Process CMYK">4/0 Process CMYK</option>
-                                </select>
-                            </div>
-                            <div className="f-group">
-                                <label>Dust Jacket Lamination</label>
-                                <select name="dustJacketLamination" value={formData.dustJacketLamination} onChange={handleChange}>
-                                    <option value="">Select…</option>
-                                    <option value="None">None</option>
-                                    <option value="Gloss Film Lamination">Gloss Film Lamination</option>
-                                    <option value="Matte Film Lamination">Matte Film Lamination</option>
-                                    <option value="Soft Touch Lamination">Soft Touch Lamination</option>
-                                    <option value="Scuff-free Matte Lamination">Scuff-free Matte Lamination</option>
-                                    <option value="Flood Aqeous Varnish">Flood Aqeous Varnish</option>
-                                    <option value="Flood Matte Varnish">Flood Matte Varnish</option>
-                                </select>
-                            </div>
-                            <div className="f-group">
-                                <label>Specialty Finishes on Dust Jacket</label>
-                                <input type="text" name="dustJacketFinishes"
-                                    placeholder="e.g. Scuff-Resistant Matte Lam + Spot Gloss UV, or N/A"
-                                    value={formData.dustJacketFinishes} onChange={handleChange} />
-                            </div>
+                    <div className="f-row f-row-4">
+                        <div className="f-group">
+                            <label>Dust Jacket Paper Stock <Req /></label>
+                            <input type="text" {...f('dustJacketStock')} placeholder="e.g. 100lb matte or 120lb gloss" />
+                            <FieldError message={errors.dustJacketStock} />
                         </div>
-                    </>
+                        <div className="f-group">
+                            <label>Dust Jacket Ink <Req /></label>
+                            <select {...f('dustJacketInk')}>
+                                <option value="">Select…</option>
+                                <option value="4/0 Process CMYK">4/0 Process CMYK</option>
+                            </select>
+                            <FieldError message={errors.dustJacketInk} />
+                        </div>
+                        <div className="f-group">
+                            <label>Dust Jacket Lamination <Req /></label>
+                            <select {...f('dustJacketLamination')}>
+                                <option value="">Select…</option>
+                                {LAMINATION_OPTIONS.map(l => <option key={l} value={l}>{l}</option>)}
+                            </select>
+                            <FieldError message={errors.dustJacketLamination} />
+                        </div>
+                        <div className="f-group">
+                            <label>Specialty Finishes on Dust Jacket</label>
+                            <input type="text" {...f('dustJacketFinishes')} placeholder="e.g. Scuff-Resistant Matte Lam + Spot Gloss UV" />
+                        </div>
+                    </div>
                 )}
 
                 <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>Endsheet Stock</label>
-                        <input type="text" name="endsheetStock"
-                            placeholder="e.g. 80lb woodfree or 100lb woodfree or specialty paper."
-                            value={formData.endsheetStock} onChange={handleChange} />
+                        <input type="text" {...f('endsheetStock')} placeholder="e.g. 80lb woodfree or specialty paper" />
                     </div>
                     <div className="f-group">
                         <label>Endsheet Printing</label>
-                        <select name="endsheetPrinting" value={formData.endsheetPrinting} onChange={handleChange}>
+                        <select {...f('endsheetPrinting')}>
                             <option value="">Select…</option>
                             <option value="Not Required">Not Required</option>
                             <option value="1/1 Black">1/1 Black</option>
@@ -606,72 +599,54 @@ const ContactForm = () => {
                             <option value="Custom">Custom (Specify in Notes)</option>
                         </select>
                     </div>
-                    
+                    <div className="f-group" />
+                    <div className="f-group" />
                 </div>
 
-                {/* ════════════════════════════════════════
-                    SECTION 4 — Text & Text Paper Specifications
-                ════════════════════════════════════════ */}
                 <div className="f-section-title">4. Text &amp; Text Paper Specifications</div>
 
                 <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>Text Page Count (even number) <Req /></label>
-                        <input type="text" name="totalPages" placeholder="e.g. 544 text pages"
-                            value={formData.totalPages} onChange={handleChange} />
-                        {simpleValidator.current.message('totalPages', formData.totalPages, 'required')}
+                        <input type="text" {...f('totalPages')} placeholder="e.g. 544" />
+                        <FieldError message={errors.totalPages} />
                     </div>
                     <div className="f-group">
                         <label>Text Paper Stock <Req /></label>
-                        <input type="text" name="textPaperStock"
-                            placeholder="e.g. 80lb matte art or 50lb woodfree or 100lb gloss or specialty paper."
-                            value={formData.textPaperStock} onChange={handleChange} />
-                        {simpleValidator.current.message('textPaperStock', formData.textPaperStock, 'required')}
+                        <input type="text" {...f('textPaperStock')} placeholder="e.g. 80lb matte art or 50lb woodfree" />
+                        <FieldError message={errors.textPaperStock} />
                     </div>
                     <div className="f-group">
                         <label>Text Ink <Req /></label>
-                        <select name="textInk" value={formData.textInk} onChange={handleChange}>
+                        <select {...f('textInk')}>
                             <option value="">Select ink…</option>
                             <option value="1/1 Black">1/1 Black</option>
                             <option value="4/4 Process CMYK">4/4 Process CMYK</option>
                             <option value="4/4 Process CMYK + Flood Varnish">4/4 Process CMYK + Flood Varnish</option>
                             <option value="2/2 Process Colour">2/2 Process Colour</option>
                         </select>
-                        {simpleValidator.current.message('textInk', formData.textInk, 'required')}
+                        <FieldError message={errors.textInk} />
                     </div>
                     <div className="f-group" />
                 </div>
 
-                {/* ════════════════════════════════════════
-                    SECTION 5 — Quantities
-                ════════════════════════════════════════ */}
                 <div className="f-section-title">5. Quantities</div>
 
                 <div className="f-group">
                     <label>Quantities <Req /></label>
-                    <input
-                        type="text"
-                        name="quantities"
-                        placeholder="e.g. 1000, 2000, 5000 or more"
-                        value={formData.quantities}
-                        onChange={handleChange}
-                    />
+                    <input type="text" {...f('quantities')} placeholder="e.g. 1000, 2000, 5000" />
                     <p className="f-field-hint">
-                        Add up to 5 quantities for comparative pricing. Quantities should be multiples of your signature count where possible.<br />
-                        We recommend an MOQ of 1000 hardbound or softbound copies per title. For comparative quotes, please submit multiple quantities (comma separated).
+                        Add up to 5 quantities for comparative pricing. We recommend an MOQ of 1000 copies per title.
                     </p>
-                    {simpleValidator.current.message('quantities', formData.quantities, 'required')}
+                    <FieldError message={errors.quantities} />
                 </div>
 
-                {/* ════════════════════════════════════════
-                    SECTION 6 — Packing & Shipping
-                ════════════════════════════════════════ */}
                 <div className="f-section-title">6. Packing &amp; Shipping</div>
 
                 <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>Packing Method</label>
-                        <select name="packingMethod" value={formData.packingMethod} onChange={handleChange}>
+                        <select {...f('packingMethod')}>
                             <option value="">Select…</option>
                             <option value="Individually Shrink-wrapped">Individually Shrink-wrapped</option>
                             <option value="Multi Shrink-wrapped">Multi Shrink-wrapped</option>
@@ -680,85 +655,60 @@ const ContactForm = () => {
                     </div>
                     <div className="f-group">
                         <label>Shipping Method <Req /></label>
-                        <select name="shippingMethod" value={formData.shippingMethod} onChange={handleChange}>
+                        <select {...f('shippingMethod')}>
                             <option value="">Select…</option>
                             <option value="Door to Door (DDU)">Door to Door (DDU)</option>
                             <option value="Ex-Works (India Factory/Warehouse)">Ex-Works (India Factory/Warehouse)</option>
                             <option value="Customer Carrier">Customer Carrier</option>
                         </select>
-                        {simpleValidator.current.message('shippingMethod', formData.shippingMethod, 'required')}
+                        <FieldError message={errors.shippingMethod} />
                     </div>
                     <div className="f-group">
                         <label>Delivery Address <Req /></label>
-                        <input type="text" name="deliveryAddress" placeholder="e.g. 123, Books Lane, Receiving Warehouse"
-                            value={formData.deliveryAddress} onChange={handleChange} />
-                        {simpleValidator.current.message('deliveryAddress', formData.deliveryAddress, 'required')}
+                        <input type="text" {...f('deliveryAddress')} placeholder="e.g. 123 Books Lane, Receiving Warehouse" />
+                        <FieldError message={errors.deliveryAddress} />
                     </div>
                     <div className="f-group">
                         <label>Delivery Country <Req /></label>
-                        <input type="text" name="deliveryCountry" placeholder="e.g. United States"
-                            value={formData.deliveryCountry} onChange={handleChange} />
-                        {simpleValidator.current.message('deliveryCountry', formData.deliveryCountry, 'required')}
+                        <input type="text" {...f('deliveryCountry')} placeholder="e.g. United States" />
+                        <FieldError message={errors.deliveryCountry} />
                     </div>
                 </div>
 
                 <div className="f-row f-row-3">
                     <div className="f-group">
                         <label>Delivery City + State <Req /></label>
-                        <input
-                            type="text"
-                            name="deliveryCity"
-                            placeholder="e.g. New York, NY"
-                            value={formData.deliveryCity}
-                            onChange={handleChange}
-                        />
-                        <p className="f-field-hint">
-                            Need for calculating DDP (Delivered Duty Unpaid).
-                            Delivery is INCLUDED unless stated otherwise.*
-                        </p>
-                        {simpleValidator.current.message('deliveryCity', formData.deliveryCity, 'required')}
+                        <input type="text" {...f('deliveryCity')} placeholder="e.g. New York, NY" />
+                        <p className="f-field-hint">Needed for calculating DDU. Delivery is INCLUDED unless stated otherwise.</p>
+                        <FieldError message={errors.deliveryCity} />
                     </div>
-
                     <div className="f-group">
                         <label>Delivery Zip / Postal Code <Req /></label>
-                        <input
-                            type="text"
-                            name="deliveryZip"
-                            placeholder="e.g. 10001"
-                            value={formData.deliveryZip}
-                            onChange={handleChange}
-                        />
-                        {simpleValidator.current.message('deliveryZip', formData.deliveryZip, 'required')}
+                        <input type="text" {...f('deliveryZip')} placeholder="e.g. 10001" />
+                        <FieldError message={errors.deliveryZip} />
                     </div>
                 </div>
 
-                {/* ════════════════════════════════════════
-                    SECTION 7 — Final Notes
-                ════════════════════════════════════════ */}
                 <div className="f-section-title">7. Final Notes</div>
 
                 <div className="f-group">
                     <label>Special Instructions or Finishes</label>
-                    <textarea
-                        name="specialInstructions"
-                        rows={4}
-                        placeholder="Include any special requirements, brand standards, reference numbers, or details that will help us quote accurately"
-                        value={formData.specialInstructions}
-                        onChange={handleChange}
-                    />
+                    <textarea name="specialInstructions" rows={4}
+                        value={formData.specialInstructions} onChange={handleChange}
+                        placeholder="Include any special requirements, brand standards, reference numbers, or details that will help us quote accurately" />
                     <p className="f-field-hint">
-                        For large files, please use{' '}
+                        For large files use{' '}
                         <a href="https://wetransfer.com" target="_blank" rel="noopener noreferrer">WeTransfer</a>
                         {' '}or{' '}
                         <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer">Google Drive</a>
-                        {' '}and share the link in the notes field above.
+                        {' '}and paste the link above.
                     </p>
                 </div>
 
                 <div className="f-row f-row-4">
                     <div className="f-group">
                         <label>How Did You Hear About Us?</label>
-                        <select name="howDidYouHear" value={formData.howDidYouHear} onChange={handleChange}>
+                        <select {...f('howDidYouHear')}>
                             <option value="">Select an option…</option>
                             <option value="Google Search">Google Search</option>
                             <option value="LinkedIn">LinkedIn</option>
@@ -767,22 +717,15 @@ const ContactForm = () => {
                             <option value="Other">Other</option>
                         </select>
                     </div>
-                    <div className="f-group" />
-                    <div className="f-group" />
-                    <div className="f-group" />
                 </div>
 
-                {/* ── Cloudflare Turnstile ── */}
                 <div className="f-captcha-wrap">
                     <div ref={containerRef} />
                     {!captchaToken && (
-                        <p className="f-captcha-hint">
-                            Please complete the security check above before submitting.
-                        </p>
+                        <p className="f-captcha-hint">Please complete the security check above before submitting.</p>
                     )}
                 </div>
 
-                {/* ── Submit ── */}
                 <button
                     className="btn-enquiry"
                     type="submit"
