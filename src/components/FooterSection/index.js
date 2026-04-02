@@ -39,7 +39,7 @@ const FooterS2 = () => {
                   <div className="widget-head">
                     <Link to="/">
                       <img
-                        src="/logo.png"
+                        src="/logo.webp"
                         style={{ width: "200px" }}
                         alt="logo-img"
                       />
@@ -187,7 +187,7 @@ const FooterS2 = () => {
                       </a>
                     </li>
                     <li>
-                      <a href="tel:+919910087788">+91 99100 87788</a>
+                      <a href="tel:+17867859547"> +1 786 785 9547</a>
                     </li>
                     <li>
                       <a href="tel:+12024700880">+1 202 470 0880</a>

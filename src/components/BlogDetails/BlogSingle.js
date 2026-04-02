@@ -1,10 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import BlogSidebar from '../BlogSidebar/BlogSidebar';
-
-
-
-const ClickHandler = () => window.scrollTo(10, 0);
 
 const formatDate = (dateStr) => {
   if (!dateStr) return "";
@@ -35,7 +30,7 @@ const BlogSingle = ({ blogItem, recentBlogs = [] }) => {
                   <div className="details-image">
                     <img
                       src={`${process.env.REACT_APP_API_URL}/${blogItem.bannerImage}`}
-                      alt={blogItem?.title ?? "blog banner"}
+                      alt={blogItem?.bannerImageAlt || blogItem?.title || "blog banner"}
                     />
                   </div>
                 )}
@@ -46,7 +41,7 @@ const BlogSingle = ({ blogItem, recentBlogs = [] }) => {
                   <div className="post-meta">
                     <span>
                       <i className="fa-regular fa-user"></i>
-                      {blogItem?.createdBy?.username ?? "Admin"}
+                      {blogItem?.authorName || blogItem?.createdBy?.username || "Admin"}
                     </span>
                     <span>
                       <i className="fal fa-calendar-alt"></i>
@@ -61,9 +56,9 @@ const BlogSingle = ({ blogItem, recentBlogs = [] }) => {
 
                   {/* Content */}
                   <div
-  className="blog-body mt-3"
-  dangerouslySetInnerHTML={{ __html: blogItem?.content || "" }}
-></div>
+                    className="blog-body mt-3"
+                    dangerouslySetInnerHTML={{ __html: blogItem?.content || "" }}
+                  />
 
                 </div>
               </div>
@@ -75,19 +70,17 @@ const BlogSingle = ({ blogItem, recentBlogs = [] }) => {
                     <div className="tagcloud">
                       <span>Tags:</span>
                       {blogItem.tags.map((tag, index) => (
-                        <small  key={index}>{tag}</small>
+                        <small key={index}>{tag}</small>
                       ))}
                     </div>
                   </div>
                 </div>
               )}
 
-             
-
             </div>
 
             {/* ── Sidebar ── */}
-            <div className="col-12 blog-sidebar col-lg-4 ">
+            <div className="col-12 blog-sidebar col-lg-4">
               <BlogSidebar recentBlogs={recentBlogs} />
             </div>
 

@@ -1,10 +1,11 @@
-import React from 'react';
-import PageTitle from '../components/pagetitle/PageTitle'; // adjust path as needed
+
+import PageTitle from '../components/pagetitle/PageTitle'; 
 
 const TermsOfUse = () => {
   return (
     <div>
       <PageTitle pageTitle="Legal" pagesub="Terms of Use" />
+       
 
       <div className="container">
         
@@ -353,8 +354,8 @@ const TermsOfUse = () => {
             <p>
               <strong>Email:</strong>{' '}
               <a href="mailto:print@printprinters.com">print@printprinters.com</a><br />
-              <strong>Phone — India:</strong> +91 11 4304 3388<br />
-              <strong>Phone — USA:</strong> +1 202 470 0880<br />
+              <strong>Phone India:</strong> +91 11 4304 3388<br />
+              <strong>Phone USA:</strong> +1 202 470 0880<br />
               <strong>Address:</strong> Citicap Channels Pvt. Ltd., New Delhi, India<br />
               <strong>Website:</strong> printprinters.com
             </p>

@@ -1,11 +1,12 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import { z } from 'zod';
 import toast, { Toaster } from 'react-hot-toast';
 import { X } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import httpClient from '../../config/http-client';
+import ReCAPTCHA from 'react-google-recaptcha';
 
-const TURNSTILE_SITE_KEY = process.env.REACT_APP_TURNSTILE_SITE_KEY;
+const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 
 const toastBase = {
     background: '#1a1a1a',
@@ -74,15 +75,15 @@ export const rfpSchema = z.object({
 
     bookTitle:    z.string().trim().min(1, 'Book title is required').max(300),
     bookCategory: optionalEnum(BOOK_CATEGORIES),
-   trimSize: z
-  .string()
-  .trim()
-  .min(1, 'Trim size is required')
-  .max(50, 'Trim size is too long')
-  .regex(
-    /^\d+(\.\d+)?\s*[xX*×]\s*\d+(\.\d+)?(\s*(in|inch|inches))?$/,
-    'Enter a valid trim size like "6 x 9" or "8.5 x 11"'
-  ),
+    trimSize: z
+        .string()
+        .trim()
+        .min(1, 'Trim size is required')
+        .max(50, 'Trim size is too long')
+        .regex(
+            /^\d+(\.\d+)?\s*[xX*×]\s*\d+(\.\d+)?(\s*(in|inch|inches))?$/,
+            'Enter a valid trim size like "6 x 9" or "8.5 x 11"'
+        ),
     orientation: z.enum(['Portrait', 'Landscape', 'Square'], {
         errorMap: () => ({ message: 'Orientation is required' }),
     }),
@@ -186,59 +187,6 @@ const scrollToFirstDomError = (errorMap) => {
     }
 };
 
-export const useTurnstile = (siteKey) => {
-    const containerRef = useRef(null);
-    const widgetIdRef  = useRef(null);
-    const [token, setToken] = useState(null);
-
-    const resetTurnstile = useCallback(() => {
-        if (window.turnstile && widgetIdRef.current !== null) {
-            window.turnstile.reset(widgetIdRef.current);
-        }
-        setToken(null);
-    }, []);
-
-    useEffect(() => {
-        const renderWidget = () => {
-            if (containerRef.current && widgetIdRef.current === null) {
-                widgetIdRef.current = window.turnstile.render(containerRef.current, {
-                    sitekey:            siteKey,
-                    callback:           (t) => setToken(t),
-                    'expired-callback': () => setToken(null),
-                    'error-callback':   () => setToken(null),
-                    theme:    'light',
-                    size:     'normal',
-                    language: 'auto',
-                });
-            }
-        };
-
-        if (window.turnstile) {
-            renderWidget();
-        } else {
-            window.__onTurnstileLoad__ = renderWidget;
-            if (!document.querySelector('#turnstile-script')) {
-                const script  = document.createElement('script');
-                script.id     = 'turnstile-script';
-                script.src    = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=__onTurnstileLoad__&render=explicit';
-                script.async  = true;
-                script.defer  = true;
-                document.head.appendChild(script);
-            }
-        }
-
-        return () => {
-            if (window.turnstile && widgetIdRef.current !== null) {
-                window.turnstile.remove(widgetIdRef.current);
-                widgetIdRef.current = null;
-            }
-            delete window.__onTurnstileLoad__;
-        };
-    }, [siteKey]);
-
-    return { containerRef, token, resetTurnstile };
-};
-
 export const Req = () => <span className="req" aria-hidden="true">*</span>;
 
 export const FieldError = ({ message }) =>
@@ -263,10 +211,9 @@ const ContactForm = () => {
     const [errors, setErrors]             = useState({});
     const [showModal, setShowModal]       = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const navigate                        = useNavigate();
-
-    const { containerRef, token: captchaToken, resetTurnstile } = useTurnstile(TURNSTILE_SITE_KEY);
-
+    const [captchaToken, setCaptchaToken] = useState(null); 
+    const recaptchaRef                    = useRef(null);   
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -275,9 +222,19 @@ const ContactForm = () => {
         }
     };
 
-    const scrollToBlog = () => {
-        navigate('/');
-        setTimeout(() => document.getElementById('blog-container')?.scrollIntoView({ behavior: 'smooth' }), 200);
+    
+    // ✅ reCAPTCHA handlers
+    const handleCaptchaChange = (token) => {
+        setCaptchaToken(token); 
+    };
+
+    const handleCaptchaExpired = () => {
+        setCaptchaToken(null); // token expired, user needs to verify again
+    };
+
+    const resetCaptcha = () => {
+        recaptchaRef.current?.reset(); // reset the widget
+        setCaptchaToken(null);
     };
 
     const handleSubmit = async (e) => {
@@ -301,7 +258,7 @@ const ContactForm = () => {
         const payload = {
             ...result.data,
             fileFormat: 'Customer Supplied Files must be trouble-free PDF Files',
-            turnstileToken: captchaToken,
+            recaptchaToken: captchaToken, // ✅ sending to backend for verification
         };
 
         setIsSubmitting(true);
@@ -313,7 +270,7 @@ const ContactForm = () => {
             setShowModal(true);
             setFormData(INITIAL);
             setErrors({});
-            resetTurnstile();
+            resetCaptcha(); // ✅ reset after success
         } catch (error) {
             toast.dismiss(loadingId);
 
@@ -331,7 +288,7 @@ const ContactForm = () => {
                     toastError
                 );
             }
-            resetTurnstile();
+            resetCaptcha(); // ✅ reset after error too
         } finally {
             setIsSubmitting(false);
         }
@@ -348,36 +305,52 @@ const ContactForm = () => {
         <>
             <Toaster position="top-right" containerStyle={{ zIndex: 99999, top: 24, right: 24 }} />
 
-            {showModal && (
-                <div className="cf-modal-overlay" onClick={() => setShowModal(false)}>
-                    <div className="cf-modal" onClick={e => e.stopPropagation()}>
-                        <button className="cf-modal-close" onClick={() => setShowModal(false)} aria-label="Close">
-                            <X />
-                        </button>
-                        <div className="cf-modal-icon">
-                            <img src="./namaste.png" alt="Thank you" />
-                        </div>
-                        <h4>Thank You!</h4>
-                        <div className="cf-modal-divider" />
-                        <p>
-                            We've received your enquiry and will respond within <strong>5 working days</strong>.
-                            A free physical proof will be shipped to your door before production begins.
-                            In the meantime, feel free to explore our blog for printing guides and insights.
-                        </p>
-                        <div className="cf-modal-actions">
-                            <a  href="/Print Printers Profile - 2026.pdf"
-  download="PrintPrintersProfile2026.pdf" className="btn-modal-primary">
-                                <i className="fal fa-download" style={{ marginRight: 6 }} />
-                                Download Capability Profile
-                            </a>
-                            <a onClick={scrollToBlog} href="#" className="btn-modal-secondary">
-                                <i className="fal fa-book-open" style={{ marginRight: 6 }} />
-                                Explore Our Blog
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            )}
+           {showModal && (
+    <div className="cf-modal-overlay" onClick={() => setShowModal(false)}>
+        <div className="cf-modal" onClick={e => e.stopPropagation()}>
+            <button
+                className="cf-modal-close"
+                onClick={() => setShowModal(false)}
+                aria-label="Close"
+            >
+                <X />
+            </button>
+
+            <div className="cf-modal-icon">
+                <img src="./namaste.png" alt="Thank you" />
+            </div>
+
+            <h4>Thank You!</h4>
+            <div className="cf-modal-divider" />
+
+            <p>
+                We've received your enquiry and will respond within <strong>5 working days</strong>.
+                A free physical proof will be shipped to your door before production begins.
+                In the meantime, feel free to explore our blog for printing guides and insights.
+            </p>
+
+            <div className="cf-modal-actions">
+                <a
+                    href="/Print Printers Profile - 2026.pdf"
+                    download="PrintPrintersProfile2026.pdf"
+                    className="btn-modal-primary"
+                >
+                    <i className="fal fa-download" style={{ marginRight: 6 }} />
+                    Download Capability Profile
+                </a>
+
+                <Link
+                    
+                    to="/#blog-container"
+                    className="btn-modal-secondary"
+                >
+                    <i className="fal fa-book-open" style={{ marginRight: 6 }} />
+                    Explore Our Blog
+                </Link>
+            </div>
+        </div>
+    </div>
+)}
 
             <form id="contact-form" className="form-wrap" onSubmit={handleSubmit} noValidate>
 
@@ -694,9 +667,13 @@ const ContactForm = () => {
 
                 <div className="f-group">
                     <label>Special Instructions or Finishes</label>
-                    <textarea name="specialInstructions" rows={4}
-                        value={formData.specialInstructions} onChange={handleChange}
-                        placeholder="Include any special requirements, brand standards, reference numbers, or details that will help us quote accurately" />
+                    <textarea
+                        name="specialInstructions"
+                        rows={4}
+                        value={formData.specialInstructions}
+                        onChange={handleChange}
+                        placeholder="Include any special requirements, brand standards, reference numbers, or details that will help us quote accurately"
+                    />
                     <p className="f-field-hint">
                         For large files use{' '}
                         <a href="https://wetransfer.com" target="_blank" rel="noopener noreferrer">WeTransfer</a>
@@ -720,8 +697,14 @@ const ContactForm = () => {
                     </div>
                 </div>
 
+                {/* ✅ Google reCAPTCHA v2 widget */}
                 <div className="f-captcha-wrap">
-                    <div ref={containerRef} />
+                    <ReCAPTCHA
+                        ref={recaptchaRef}
+                        sitekey={RECAPTCHA_SITE_KEY}
+                        onChange={handleCaptchaChange}
+                        onExpired={handleCaptchaExpired}
+                    />
                     {!captchaToken && (
                         <p className="f-captcha-hint">Please complete the security check above before submitting.</p>
                     )}

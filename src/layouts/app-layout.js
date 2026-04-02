@@ -6,7 +6,9 @@ import FooterSection from "../components/FooterSection"
 import CursorMaus from "../components/CursorMaus/CursorMaus"
 import Navbar from "../components/Navbar/Navbar"
 import ScrollToTop from '../components/ScrollToTop';
-import { ReactLenis, useLenis } from 'lenis/react'
+import { ReactLenis } from 'lenis/react'
+import { HelmetProvider } from 'react-helmet-async';
+import PageLoader from '../components/PageLoader';
 
 const AppLayout = () => {
 
@@ -15,9 +17,13 @@ const AppLayout = () => {
 
   return (
     <div className="App" >
+      <HelmetProvider>
       <ReactLenis root />
 
-      <ScrollToTop />
+      <ScrollToTop/>
+       <PageLoader />
+
+      
 
       <Navbar hclass={'header-section'} />
        <CursorMaus />
@@ -27,6 +33,7 @@ const AppLayout = () => {
 
 
       <FooterSection />
+      </HelmetProvider>
      
     </div>
   );

@@ -5134,7 +5134,7 @@ margin: 0;
   width: 2px;
   height: 21px;
   position: absolute;
-  background-color: var(--theme);
+  background-color: #1e0d86;
 }
 .main-sidebar .single-sidebar-widget .wid-title h4 {
   font-size: 22px;
@@ -5363,21 +5363,22 @@ margin: 0;
 }
 .news-details-wrapper .tag-share-wrap .tagcloud span {
   display: inline-block;
-  font-weight: 700;
-
+  font-weight: 600;
   margin-right: 15px;
-  font-size: 20px;
+  font-size: 16px;
 }
 .news-details-wrapper .tag-share-wrap .tagcloud  small{
   display: inline-block;
-  padding: 12px 26px;
+  padding: 8px 8px;
   line-height: 1;
   background-color: #fff;
   margin-right: 8px;
+  margin-bottom: 8px;
   text-transform: capitalize;
   font-weight: 500;
   transition: all 0.4s ease-in-out;
   border-radius: 0;
+  font-size: 12px;
   border-radius: var(--radius-md);
 }
 @media (max-width: 575px) {

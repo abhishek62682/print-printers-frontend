@@ -43,7 +43,7 @@ const BlogSidebar = ({ recentBlogs = [] }) => {
                     </li>
                   </ul>
                   <h6>
-                    <Link onClick={ClickHandler} to={`/blog-single/${blog?.slug ?? ""}`}>
+                    <Link onClick={ClickHandler} to={`/blogs/${blog?.slug ?? ""}`}>
                       {blog?.title ?? "Untitled"}
                     </Link>
                   </h6>

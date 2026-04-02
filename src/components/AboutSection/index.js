@@ -56,9 +56,7 @@ const about = () => {
 
                                We believe that offshore and overseas printing should never mean uncertainty. Many publishers have experienced the frustration of receiving books that don't match the approved proof, shipments that arrive late, or vendors who disappear when things go wrong. We built Print Printers to be the antidote of all of that.
 
-                               <p>
-
-                               </p>
+                               
 
 
 As a specialist print export company, we sit at the intersection of two worlds: the manufacturing depth of the finest printing equipment and the communication standards of international clients. We speak both languages — and that translation is where the value lies.
@@ -71,7 +69,7 @@ As a specialist print export company, we sit at the intersection of two worlds: 
                                 </div>
                                
                                 <div className="about-author">
-                                   <a href="#leader-section" class="theme-btn wow fadeInUp" data-wow-delay=".3s">
+                                   <a href="#leader-section" className="theme-btn wow fadeInUp" data-wow-delay=".3s">
       More About Us
     </a>
                                    

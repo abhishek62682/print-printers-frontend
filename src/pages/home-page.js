@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect } from "react";
 import Hero from "../components/hero/hero";
 import StatsShowcase from "../components/StatsShowcase";
 import MarqueeSection from "../components/MarqueeSection";
@@ -17,27 +17,23 @@ import BlogSection from "../components/BlogSection/BlogSection";
 import ShippingSailingSection from "../components/ShipingSailingSection";
 import WhyPrintPrintersSection from "../components/WhyPrintPrintersSection";
 import LeaderSection from "../components/LeaderSection/LeaderSection";
-
-import httpClient from "../config/http-client";
+import { useLocation } from "react-router-dom";
 const HomePage = () => {
-  const [blogList, setBlogList] = useState([]);
 
-  async function FectchBlogList() {
-    const { data } = await httpClient("/blogs/public");
-
-    setBlogList(data?.data);
-  }
-
+  const location = useLocation();
   useEffect(() => {
-    const sectionId = sessionStorage.getItem("scrollToSection");
-    if (sectionId) {
-      const el = document.getElementById(sectionId);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-      sessionStorage.removeItem("scrollToSection");
-    }
+    if (location.hash) {
+      const id = location.hash.slice(1);
 
-    FectchBlogList();
-  }, []);
+      
+      const timer = setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+
+      return () => clearTimeout(timer);
+    }
+  }, [location.hash]);
 
   return (
     <Fragment>

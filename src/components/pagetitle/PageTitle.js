@@ -11,7 +11,9 @@ const PageTitle = (props) => {
           <nav className="page-title-breadcrumb">
             <Link to="/">Home</Link>
             <span className="page-title-sep">/</span>
-            <span>{props.pagesub}</span>
+          <span>
+    {props.pagesub?.length > 100 ? props.pagesub.slice(0, 100) + '...' : props.pagesub}
+</span>
           </nav>
         </div>
       </div>
@@ -44,15 +46,20 @@ const PageTitle = (props) => {
           border-radius: 40px;
         }
 
-        .page-title-heading {
-          font-family: var(--font-primary);
-          font-size: clamp(32px, 5vw, 48px);
-          font-weight: 700;
-          color: var(--color-white);
-          margin: 0;
-          line-height: 1.2;
-          letter-spacing: -0.5px;
-        }
+       .page-title-heading {
+  font-family: var(--font-primary);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  color: var(--color-white);
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
         .page-title-breadcrumb {
           display: flex;

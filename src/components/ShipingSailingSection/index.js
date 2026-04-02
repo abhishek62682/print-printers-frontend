@@ -49,9 +49,7 @@ const ShippingSailingSection = () => {
               lineHeight: 1.8,
             }}
           >
-            All sailing times are port to port, from New Delhi once loaded on vessel.
-            Door-to-door delivery is included on every order. We can also work on
-            ex-works terms if preferred — just let us know at the time of quoting.
+           All sailing times are port to port, from India once loaded on vessel. Door-to-door delivery is included on every order. We can also work on ex-works terms if preferred just let us know at the time of quoting.
           </p>
         </div>
 

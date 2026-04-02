@@ -170,3 +170,58 @@
 .responsivemenu a:not([href]):not([class]):hover{
  color: #ddd;
 }
+
+
+
+
+.pp-loader {
+  position: fixed;
+  inset: 0;
+  background: #f5f4f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  gap: 24px;
+  transition: opacity 0.5s ease;
+}
+
+.pp-loader--out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pp-loader__logo {
+  width:80px;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  animation: pp-fadeUp 0.5s ease forwards 0.2s;
+}
+
+.pp-loader__bar-wrap {
+  width: 200px;
+  height: 2px;
+  background: #ddd;
+  overflow: hidden;
+  opacity: 0;
+  animation: pp-fadeUp 0.5s ease forwards 0.3s;
+}
+
+.pp-loader__bar {
+  height: 2px;
+  width: 0%;
+  background: #1a1a1a;
+  animation: pp-fill 2s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.4s;
+}
+
+@keyframes pp-fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pp-fill {
+  0%   { width: 0%; }
+  50%  { width: 60%; }
+  100% { width: 100%; }
+}

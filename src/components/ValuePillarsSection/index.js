@@ -1,9 +1,9 @@
 import React from 'react';
 
-import SS1 from '../../img/usp/technology-innovation.webp';
-import SS2 from '../../img/usp/real-time-updates.webp';
-import SS3 from '../../img/usp/360-degree-collaboration.webp';
-import SS4 from '../../img/usp/sustainable-approach.webp';
+import SS1 from '../../img/svg/technology-innovation.svg';
+import SS2 from '../../img/svg/real-time-updates.svg';
+import SS3 from '../../img/svg/360-degree-collaboration.svg';
+import SS4 from '../../img/svg/sustainable-approach.svg';
 
 const features = [
   {
@@ -41,7 +41,7 @@ const ValuePillarsSection = () => {
     <section className="">
       <div className="container">
         <div className="feature-wrapper-2">
-          <div className="row justify-content-center gap-5 gap-lg-0">
+          <div className="row justify-content-center gap-lg-4 gap-xl-0 ">
             {features.map((feature) => (
               <div
                 key={feature.id}

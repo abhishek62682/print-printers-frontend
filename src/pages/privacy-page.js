@@ -1,10 +1,13 @@
-import React from 'react';
+
 import PageTitle from '../components/pagetitle/PageTitle'; // adjust path as needed
+
 
 const PrivacyPolicy = () => {
   return (
     <div>
      <PageTitle pageTitle="Legal" pagesub="Privacy Policy" />
+
+   
 
       <div className="container">
        
@@ -259,8 +262,8 @@ const PrivacyPolicy = () => {
             <p>
               <strong>Email:</strong>{' '}
               <a href="mailto:print@printprinters.com">print@printprinters.com</a><br />
-              <strong>Phone — India:</strong> +91 99100 87788<br />
-              <strong>Phone — USA:</strong> +1 202 470 0880<br />
+              <strong>Phone India:</strong> +91 99100 87788<br />
+              <strong>Phone USA:</strong> +1 202 470 0880<br />
               <strong>Address:</strong> Citicap Channels Pvt. Ltd., New Delhi, India<br />
               <strong>Website:</strong> printprinters.com
             </p>

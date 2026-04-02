@@ -85,60 +85,63 @@ const BlogSection = ({ hclass = "", SubClass = "" }) => {
               }}
             >
               {blogList.map((blog) => (
-                <SwiperSlide key={blog?._id}>
-                  <div className="blog-box-items">
-                    <div className="blog-image">
-                      <img
-                        src={
-                          blog?.coverImage
-                            ? `${process.env.REACT_APP_API_URL}/${blog.coverImage}`
-                            : "/placeholder-blog.png"
-                        }
-                        alt={blog?.title ?? "blog image"}
-                      />
-                      <img
-                        src={
-                          blog?.coverImage
-                            ? `${process.env.REACT_APP_API_URL}/${blog.coverImage}`
-                            : "/placeholder-blog.png"
-                        }
-                        alt={blog?.title ?? "blog image"}
-                      />
-                    </div>
+           
 
-                    <div className="blog-content">
-                      {Array.isArray(blog?.tags) && blog.tags.length > 0 && (
-                        <div className="d-flex gap-2">
-                          {blog.tags.map((tag, index) => (
-                            <span className="rounded-pill" key={index}>
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
+<SwiperSlide key={blog?._id}>
+  <Link to={`/blogs/${blog?.slug}`} className="blog-box-items" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+    <div className="blog-image">
+      <img
+        src={
+          blog?.coverImage
+            ? `${process.env.REACT_APP_API_URL}/${blog.coverImage}`
+            : "/placeholder-blog.png"
+        }
+        alt={blog?.title ?? "blog image"}
+      />
+      <img
+        src={
+          blog?.coverImage
+            ? `${process.env.REACT_APP_API_URL}/${blog.coverImage}`
+            : "/placeholder-blog.png"
+        }
+        alt={blog?.title ?? "blog image"}
+      />
+    </div>
 
-                      <h3>
-                        <Link
-                          onClick={ClickHandler}
-                          to={`/blog-single/${blog?.slug ?? ""}`}
-                        >
-                          {blog?.title ?? "Untitled"}
-                        </Link>
-                      </h3>
+    <div className="blog-content">
+      {Array.isArray(blog?.tags) && blog.tags.length > 0 && (
+        <div className="d-flex gap-2">
+          {blog.tags.map((tag, index) => (
+            <span className="rounded-pill" key={index}>
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
 
-                      <ul className="blog-meta">
-                        <li className="d-flex gap-2 align-items-center">
-                          <UserRound strokeWidth="1.5" />
-                          {blog?.createdBy?.username ?? "Admin"}
-                        </li>
-                        <li>
-                          <i className="fa-regular fa-calendar"></i>
-                          {formatDate(blog?.createdAt)}
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </SwiperSlide>
+      <h3 style={{
+        display: '-webkit-box',
+        WebkitLineClamp: 3,
+        WebkitBoxOrient: 'vertical',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+      }}>
+        {blog?.title ?? "Untitled"}
+      </h3>
+
+      <ul className="blog-meta">
+        <li className="d-flex gap-2 align-items-center">
+          <UserRound strokeWidth="1.5" />
+          {blog?.authorName || blog?.createdBy?.username || 'Admin'}
+        </li>
+        <li>
+          <i className="fa-regular fa-calendar"></i>
+          {formatDate(blog?.createdAt)}
+        </li>
+      </ul>
+    </div>
+  </Link>
+</SwiperSlide>
               ))}
             </Swiper>
 

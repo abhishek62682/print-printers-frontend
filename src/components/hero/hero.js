@@ -1,14 +1,12 @@
 import React from 'react';
 
 
-import HeroSection from "../../img/hero/hero-section.png";
+import HeroSection from "../../img/hero/hero-section.webp";
 import { Link } from 'react-router-dom';
 
 
 const hero = () => {
-    const ClickHandler = () => {
-        window.scrollTo(10, 0);
-    }
+    
 
     return (
         <section id="hero-section" className="hero-section hero-1 fix theme-bg"  >
@@ -27,11 +25,11 @@ const hero = () => {
                               
                             </h1>
                             <p className="wow fadeInUp" data-wow-delay=".5s">
-                               Three decades of printing excellence. Proudly manufactured in India. <br className='md-hidden' />Delivered to your door in New York, London, Melbourne and beyond.
+                               Three decades of printing excellence. Proudly manufactured in India. Delivered to your door in New York, London, Melbourne and beyond.
 
                             </p>
                             <div className=' btn-wrapper d-flex gap-3 gap-md-4 '>
- <Link to="/get-a-quote" onClick={ClickHandler} className="theme-btn wow fadeInUp" data-wow-delay=".9s">Get A Free Quote!</Link>
+ <Link to="/get-a-quote"  className="theme-btn wow fadeInUp" data-wow-delay=".9s">Get A Free Quote!</Link>
 
 <a
   href="/Print Printers Profile - 2026.pdf"
