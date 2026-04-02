@@ -1,6 +1,7 @@
 import React from 'react';
 import BlogSidebar from '../BlogSidebar/BlogSidebar';
-
+import "../../css/blog.css"
+import { CalendarDays, User } from 'lucide-react';
 const formatDate = (dateStr) => {
   if (!dateStr) return "";
   try {
@@ -16,7 +17,7 @@ const formatDate = (dateStr) => {
 
 const BlogSingle = ({ blogItem, recentBlogs = [] }) => {
   return (
-    <section className="news-section-3 section-padding section-bg-2">
+    <section className="news-section-3 section-bg-2">
       <div className="container">
         <div className="news-details-wrapper">
           <div className="row g-5 align-items-start">
@@ -40,11 +41,11 @@ const BlogSingle = ({ blogItem, recentBlogs = [] }) => {
                   {/* Meta */}
                   <div className="post-meta">
                     <span>
-                      <i className="fa-regular fa-user"></i>
+                      <User size={20} />
                       {blogItem?.authorName || blogItem?.createdBy?.username || "Admin"}
                     </span>
                     <span>
-                      <i className="fal fa-calendar-alt"></i>
+                      <CalendarDays size={20}  />
                       {formatDate(blogItem?.createdAt)}
                     </span>
                   </div>

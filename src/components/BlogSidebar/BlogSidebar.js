@@ -1,4 +1,5 @@
 
+import { ImageOff } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 
@@ -30,10 +31,18 @@ const BlogSidebar = ({ recentBlogs = [] }) => {
             recentBlogs.map((blog) => (
               <div className="recent-items" key={blog?._id}>
                 <div className="recent-thumb">
-                  <img
-                    src={blog?.coverImage ? `${process.env.REACT_APP_API_URL}/${blog.coverImage}` : "/placeholder-blog.png"}
-                    alt={blog?.title ?? "blog"}
-                  />
+                {blog?.coverImage ? (
+  <img
+    src={`${process.env.REACT_APP_API_URL}/${blog.coverImage}`}
+    alt={blog?.coverImageAlt || ""}
+    className="blog-cover-image"
+  />
+) : (
+  <div className="blog-cover-placeholder">
+    <ImageOff size={32} strokeWidth={1.8} />
+    <span>No Cover Image</span>
+  </div>
+)}
                 </div>
                 <div className="recent-content">
                   <ul>

@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Autoplay } from "swiper";
 import "swiper/swiper-bundle.min.css";
-import { ArrowLeft, ArrowRight, UserRound } from "lucide-react";
+import { ArrowLeft, ArrowRight, ImageOff, UserRound } from "lucide-react";
 
 import httpClient from "../../config/http-client";
 
 SwiperCore.use([Navigation, Autoplay]);
 
-const ClickHandler = () => window.scrollTo(10, 0);
+
 
 
 
@@ -90,22 +90,30 @@ const BlogSection = ({ hclass = "", SubClass = "" }) => {
 <SwiperSlide key={blog?._id}>
   <Link to={`/blogs/${blog?.slug}`} className="blog-box-items" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
     <div className="blog-image">
-      <img
-        src={
-          blog?.coverImage
-            ? `${process.env.REACT_APP_API_URL}/${blog.coverImage}`
-            : "/placeholder-blog.png"
-        }
-        alt={blog?.title ?? "blog image"}
-      />
-      <img
-        src={
-          blog?.coverImage
-            ? `${process.env.REACT_APP_API_URL}/${blog.coverImage}`
-            : "/placeholder-blog.png"
-        }
-        alt={blog?.title ?? "blog image"}
-      />
+     {blog?.coverImage ? (
+  <>
+    <img
+      src={`${process.env.REACT_APP_API_URL}/${blog.coverImage}`}
+      alt={blog?.coverImageAlt || ""}
+      className="blog-effect-image"
+    />
+    <img
+      src={`${process.env.REACT_APP_API_URL}/${blog.coverImage}`}
+      alt={blog?.coverImageAlt || ""}
+      className="blog-effect-image"
+    />
+  </>
+) : (
+  <>
+    <div className="blog-cover-placeholder blog-cover-height">
+      <ImageOff size={28} strokeWidth={1.8} />
+      <span>No Cover Image</span>
+    </div>
+
+    
+    
+  </>
+)}
     </div>
 
     <div className="blog-content">

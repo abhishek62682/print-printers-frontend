@@ -1,3 +1,6 @@
+/* =========================
+   MOBILE MENU DRAWER
+========================= */
 .mobileMenu {
     position: fixed;
     left: -300px;
@@ -6,116 +9,161 @@
     height: 100vh;
     width: 300px;
     background: var(--color-dark);
-    transition: all 0.3s ease 0s;
+    transition: all 0.3s ease;
     box-shadow: 0px 10px 40px 0px rgba(50, 50, 50, 0.1);
 }
-.responsivemenu .card-body{
-    background: #1A1729;
-}
-.mobileMenu h2{
-    padding-left: 20px;
-}
-.mobileMenu.show{
+
+.mobileMenu.show {
     left: 0;
 }
+
+.mobileMenu h2 {
+    padding-left: 20px;
+}
+
+/* =========================
+   MOBILE MENU WRAPPER (header hamburger container)
+========================= */
+.mobileMenuWrap {
+    display: none;
+}
+
+/* =========================
+   HAMBURGER BUTTON
+========================= */
 .showmenu {
     position: relative;
     top: 0;
     z-index: 999;
     cursor: pointer;
-}
-.responsivemenu {
-    list-style: none;
-    padding-left: 0;
-    padding-top: 10px;
-}
-.f-input-error { border-color: #e05c4b !important; }
-.f-field-error  { color: #e05c4b; font-size: 12px; margin-top: 4px; }
-.responsivemenu li a,
-.responsivemenu li p,
-.responsivemenu ul{
-    display: block;
-    padding: 13px 35px;
-    font-size: 16px;
-    letter-spacing: 0;
-    
-    font-weight: 500;
-    color: #fff;
-    cursor: pointer;
-}
-.responsivemenu li p{
-    position: relative;
-    margin-bottom: 0;
-}
-.responsivemenu ul.subMenu{
-    padding-top: 0;
-    padding-left: 15px;
-    padding-right: 0;
-}
-.responsivemenu ul.subMenu ul{
-    position: relative;
-    margin-bottom: 0;
-    padding-left: 0;
-}
-.responsivemenu ul{
-    list-style: none;
-}
-.responsivemenu ul p,
-.responsivemenu ul a{
-    color: #fff;
-    position: relative;
-    font-size: 16px;
+    display: none;
 }
 
-.responsivemenu ul p i{
-    position: absolute;
-    right: 0;
-    top: 5px;
-}
-
-.responsivemenu .card{
-  border:none
-}
-.responsivemenu .card-body{
-  padding-top: 0;
-}
-
-
-.responsivemenu li a{
-    position: relative;
-}
-.responsivemenu li i{
-    position: absolute;
-    right: 20px;
-    top: 17px;
-}
 .showmenu i {
     font-size: 30px;
     color: #fff;
 }
 
-.mobileMenu{
-    display: none;
+/* =========================
+   RESPONSIVE MENU
+========================= */
+.responsivemenu {
+    list-style: none;
+    padding-left: 0;
+    padding-top: 10px;
 }
-.showmenu{
-    /* display: none; */
+
+.responsivemenu .card {
+    border: none;
 }
-.underline-theme{
-    max-width:322px;
-    width:100%;
-    height:6px;
+
+.responsivemenu .card-body {
+    background: #1A1729;
+    padding-top: 0;
+}
+
+.responsivemenu li a,
+.responsivemenu li p,
+.responsivemenu ul {
+    display: block;
+    padding: 13px 35px;
+    font-size: 16px;
+    letter-spacing: 0;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+}
+
+.responsivemenu li p {
+    position: relative;
+    margin-bottom: 0;
+}
+
+.responsivemenu li a {
+    position: relative;
+}
+
+.responsivemenu li i {
+    position: absolute;
+    right: 20px;
+    top: 17px;
+}
+
+.responsivemenu ul {
+    list-style: none;
+}
+
+.responsivemenu ul p,
+.responsivemenu ul a {
+    color: #fff;
+    position: relative;
+    font-size: 16px;
+}
+
+.responsivemenu ul p i {
+    position: absolute;
+    right: 0;
+    top: 5px;
+}
+
+.responsivemenu ul.subMenu {
+    padding-top: 0;
+    padding-left: 15px;
+    padding-right: 0;
+}
+
+.responsivemenu ul.subMenu ul {
+    position: relative;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.responsivemenu a:not([href]):not([class]),
+.responsivemenu a:not([href]):not([class]):hover {
+    color: #ddd;
+}
+
+/* =========================
+   FORM ERROR
+========================= */
+.f-input-error {
+    border-color: #e05c4b !important;
+}
+
+.f-field-error {
+    color: #e05c4b;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* =========================
+   UNDERLINE
+========================= */
+.underline-theme {
+    max-width: 322px;
+    width: 100%;
+    height: 6px;
     background-color: var(--color-dark);
     position: absolute;
-    bottom:-2px;
+    bottom: -2px;
 }
-.underline-sm{
-    max-width: 200px;
-    width:100%;
 
+.underline-sm {
+    max-width: 200px;
+    width: 100%;
 }
-@media (max-width:992px){
-    .showmenu {
+
+/* =========================
+   RESPONSIVE BREAKPOINT
+   IMPORTANT: match d-xl-block
+========================= */
+@media (max-width: 1199px) {
+    .mobileMenuWrap {
         display: block;
+    }
+
+    .showmenu {
+        display: block !important;
         width: 40px;
         height: 36px;
         text-align: center;
@@ -123,105 +171,107 @@
         border-radius: 5px;
     }
 
-    .showmenu button:focus{
+    .showmenu button:focus {
         outline: none;
         box-shadow: none;
     }
-    .showmenu button span{
+
+    .showmenu button span {
         background-color: #fff;
         width: 20px;
         display: block;
         height: 2px;
-        margin: 0 auto;
-        margin-bottom: 5px;
-    }
-    .mobileMenu{
-        display: block;
+        margin: 0 auto 5px;
     }
 }
-
-
 
 .middle-header-3 .showmenu {
     top: 36px;
 }
+
 .middle-header2 .showmenu {
     top: 26px;
 }
 
-.middle-header-3 .showmenu i{
+.middle-header-3 .showmenu i {
     color: #fff;
 }
 
-
-@media(max-width:450px){
+@media (max-width: 450px) {
     .mobileMenu {
         left: -260px;
         width: 260px;
     }
-    .responsivemenu li a, .responsivemenu li p {
+
+    .responsivemenu li a,
+    .responsivemenu li p {
         font-size: 14px;
         padding: 13px 25px;
     }
 }
 
 
-.responsivemenu a:not([href]):not([class]), 
-.responsivemenu a:not([href]):not([class]):hover{
- color: #ddd;
-}
-
-
-
-
 .pp-loader {
-  position: fixed;
-  inset: 0;
-  background: #f5f4f0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 999999;
-  gap: 24px;
-  transition: opacity 0.5s ease;
+    position: fixed;
+    inset: 0;
+    background: #f5f4f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+    gap: 24px;
+    transition: opacity 0.5s ease;
 }
 
 .pp-loader--out {
-  opacity: 0;
-  pointer-events: none;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .pp-loader__logo {
-  width:80px;
-  mix-blend-mode: multiply;
-  opacity: 0;
-  animation: pp-fadeUp 0.5s ease forwards 0.2s;
+    width: 80px;
+    mix-blend-mode: multiply;
+    opacity: 0;
+    animation: pp-fadeUp 0.5s ease forwards 0.2s;
 }
 
 .pp-loader__bar-wrap {
-  width: 200px;
-  height: 2px;
-  background: #ddd;
-  overflow: hidden;
-  opacity: 0;
-  animation: pp-fadeUp 0.5s ease forwards 0.3s;
+    width: 200px;
+    height: 4px;
+    background: #ddd;
+    border-radius:24px;
+    overflow: hidden;
+    opacity: 0;
+    animation: pp-fadeUp 0.5s ease forwards 0.3s;
 }
 
 .pp-loader__bar {
-  height: 2px;
-  width: 0%;
-  background: #1a1a1a;
-  animation: pp-fill 2s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.4s;
+    height: 4px;
+    width: 0%;
+    background: var(--color-dark);
+    animation: pp-fill 2s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.4s;
 }
 
 @keyframes pp-fadeUp {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes pp-fill {
-  0%   { width: 0%; }
-  50%  { width: 60%; }
-  100% { width: 100%; }
+    0% {
+        width: 0%;
+    }
+    50% {
+        width: 60%;
+    }
+    100% {
+        width: 100%;
+    }
 }

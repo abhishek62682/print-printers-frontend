@@ -46,11 +46,11 @@ const Header = (props) => {
                 </div>
               </div>
 
-              <div className="header-right mobile-menu">
-                <div className="header__hamburger">
-                  <MobileMenu />
-                </div>
-              </div>
+<div className="header-right mobileMenuWrap">
+  <div className="header__hamburger">
+    <MobileMenu />
+  </div>
+</div>
             </div>
           </div>
         </div>

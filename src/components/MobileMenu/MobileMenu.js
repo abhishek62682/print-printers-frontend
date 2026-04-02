@@ -14,7 +14,7 @@ const menus = [
   { id: 7, title: "Our Relationships", sectionId: "testimonial-container" },
   { id: 8, title: "Blog", sectionId: "blog-container" },
 
-  // ✅ contact page navigation
+
   { id: 9, title: "Get a Quote", path: "/get-a-quote" },
 ];
 
