@@ -42,10 +42,10 @@ const FunFactsSection = ({ hclass }) => {
       <div className="container">
         {/* Section Heading */}
         <div className="counter-text text-center">
-          <h6 className="wow fadeInUp">
-            Publishing houses trust us for a reason. <br /> Here are four of them.
-          </h6>
-        </div>
+  <h2 className="wow fadeInUp small-heading">
+    Publishing houses trust us for a reason. <br /> Here are four of them.
+  </h2>
+</div>
 
         {/* Counters */}
         <div className="row">

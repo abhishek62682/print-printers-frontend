@@ -33,7 +33,7 @@ const ShippingSailingSection = () => {
 
         {/* Section Title */}
         <div className="section-title text-center">
-          <h6 className="wow section-tags fadeInUp">Getting Your Books to You</h6>
+          <span className="wow section-tags fadeInUp">Getting Your Books to You</span>
           <h2 className="wow fadeInUp" data-wow-delay=".3s">
             Ocean Freight, Fully Managed.
           </h2>

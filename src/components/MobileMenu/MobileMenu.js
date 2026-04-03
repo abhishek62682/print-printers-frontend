@@ -3,7 +3,7 @@ import "./style.css";
 import { X } from "lucide-react";
 
 const menus = [
-  { id: 1, title: "Home", sectionId: "hero-section" },
+  { id: 1, title: "Home", sectionId: "hero-container" },
   { id: 2, title: "About", sectionId: "about-container" },
   { id: 3, title: "Services", sectionId: "service-container" },
   { id: 4, title: "Process", sectionId: "process-container" },

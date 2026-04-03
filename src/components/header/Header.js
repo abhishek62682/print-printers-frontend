@@ -33,6 +33,7 @@ const Header = (props) => {
                 <div className="main-menu d-none d-xl-block">
                   <nav id="mobile-menu">
                     <ul>
+                      <li><Link to="/#hero-container">Home</Link></li>
                       <li><Link to="/#about-container">About</Link></li>
                       <li><Link to="/#service-container">Services</Link></li>
                       <li><Link to="/#process-container">Our Process</Link></li>

@@ -27,11 +27,11 @@ From file approval to printing, packing, and delivery.
                         </div>
                         <div className="feature-content">
                             <span>Step 1</span>
-                            <h5>
-                                Files Approved
-<br/>
-                                    & Proof Sent
-                            </h5>
+                            <h3>
+  Files Approved
+  <br />
+  & Proof Sent
+</h3>
                         </div>
                     </div>
                     <div className="feature-item wow fadeInUp" data-wow-delay=".4s">
@@ -42,12 +42,12 @@ From file approval to printing, packing, and delivery.
                         </div>
                         <div className="feature-content">
                             <span>Step 2</span>
-                            <h5>
+                            <h3>
                                 
                                 Physical Proof
 <br/>
                                     Approved
-                            </h5>
+                            </h3>
                         </div>
                     </div>
                     <div className="feature-item wow fadeInUp" data-wow-delay=".6s">
@@ -58,12 +58,12 @@ From file approval to printing, packing, and delivery.
                         </div>
                         <div className="feature-content">
                             <span>Step 3</span>
-                            <h5>
+                            <h3>
                                 
                                 Printing &
 <br/>
                                    Binding
-                            </h5>
+                            </h3>
                         </div>
                     </div>
                     <div className="feature-item wow fadeInUp" data-wow-delay=".7s">
@@ -73,12 +73,12 @@ From file approval to printing, packing, and delivery.
                         </div>
                         <div className="feature-content">
                             <span>Step 4</span>
-                            <h5>
+                            <h3>
                                 
                                Quality Check
 <br/>
                                     & Packing
-                            </h5>
+                            </h3>
                         </div>
                     </div>
                     <div className="feature-item wow fadeInUp" data-wow-delay=".8s">
@@ -88,12 +88,12 @@ From file approval to printing, packing, and delivery.
                         </div>
                         <div className="feature-content">
                             <span>Step 5</span>
-                            <h5>
+                            <h3>
                                 
                                 Shipped to
 <br/>
                                     Your Door
-                            </h5>
+                            </h3>
                         </div>
                     </div>
                 </div>

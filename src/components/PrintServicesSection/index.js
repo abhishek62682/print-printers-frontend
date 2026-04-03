@@ -23,12 +23,16 @@ const printServices = [
 
 const PrintServicesSection = () => {
   return (
-    <section id="service-container" className="product-section section-padding">
+    <section
+      id="service-container"
+      className="product-section section-padding"
+      aria-labelledby="print-services-title"
+    >
       <div className="container">
         {/* Section Title */}
         <div className="section-title text-center">
           <span className="section-tags">Our Services</span>
-          <h2>What We Print</h2>
+          <h2 id="print-services-title">What We Print</h2>
           <p>Every book format. Every binding style. Every destination.</p>
         </div>
 
@@ -43,7 +47,7 @@ const PrintServicesSection = () => {
                       <img src={service.image} alt={service.title} />
                     </div>
                     <div className="product-content">
-                      <h6>{service.title}</h6>
+                      <h3>{service.title}</h3>
                     </div>
                   </div>
                 </div>

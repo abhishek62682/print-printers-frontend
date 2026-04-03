@@ -9,7 +9,7 @@ const hero = () => {
     
 
     return (
-        <section id="hero-section" className="hero-section hero-1 fix theme-bg"  >
+        <section id="hero-container" className="hero-section hero-1 fix theme-bg"  >
            
            
            
@@ -31,14 +31,7 @@ const hero = () => {
                             <div className=' btn-wrapper d-flex gap-3 gap-md-4 '>
  <Link to="/get-a-quote"  className="theme-btn wow fadeInUp" data-wow-delay=".9s">Get A Free Quote!</Link>
 
-<a
-  href="/Print Printers Profile - 2026.pdf"
-  download="PrintPrintersProfile2026.pdf"
-  className="theme-btn wow fadeInUp"
-  data-wow-delay=".9s"
->
-  Download Our Profile
-</a>
+
                                  
                             </div>
                             

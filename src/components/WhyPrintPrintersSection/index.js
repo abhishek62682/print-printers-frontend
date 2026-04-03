@@ -3,6 +3,7 @@ import React from "react";
 import ProofFirst from "../../img/why-print-printers/wpp-proof-first.webp";
 import CommunicationUpdates from "../../img/why-print-printers/wpp-communication-updates.webp";
 import Certifications from "../../img/why-print-printers/wpp-certifications.webp";
+import { Link } from "react-router-dom";
 
 // Section 13: Why Print Printers
 const WhyPrintPrintersSection = (props) => {
@@ -47,7 +48,7 @@ const WhyPrintPrintersSection = (props) => {
       <div className="container">
         {/* Section Title */}
         <div className="section-title text-center">
-          <h6 className="section-tags">Why Print Printers</h6>
+          <span className="section-tags">Why Print Printers</span>
           <h2>
             Because Offshore Printing
             <br />
@@ -70,8 +71,8 @@ const WhyPrintPrintersSection = (props) => {
               >
                 <div className="blog-box-items">
                   <div className="blog-image">
-                    <img src={reason?.screens} alt={reason?.title} />
-                    <img src={reason?.screens} alt={reason?.title} />
+                    <img loading="lazy" src={reason?.screens} alt={reason?.title} />
+                    <img loading="lazy" src={reason?.screens} alt={reason?.title} />
                   </div>
                   <div className="blog-content">
                     <span>{reason?.tags}</span>
@@ -89,17 +90,13 @@ const WhyPrintPrintersSection = (props) => {
               className="news-button text-center mt-5 wow fadeInUp"
               data-wow-delay=".3s"
             >
-              <a
-                className="theme-btn wow fadeInUp"
-                data-wow-delay=".3s"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const el = document.getElementById("about-container");
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                See All Reasons
-              </a>
+              <Link
+  to="/#about-container"
+  className="theme-btn wow fadeInUp"
+  data-wow-delay=".3s"
+>
+  See All Reasons
+</Link>
             </div>
           )}
         </div>

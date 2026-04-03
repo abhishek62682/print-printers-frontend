@@ -51,7 +51,7 @@ const ValuePillarsSection = () => {
               >
                 <div className="feature-box-items-2 text-center">
                   <div className="value-pillar-icon">
-                    <img src={feature.img} alt={feature.id} />
+                    <img loading="lazy" src={feature.img} alt={feature.id} />
                   </div>
                   <div className="content">
                     <h3>{feature.title}</h3>

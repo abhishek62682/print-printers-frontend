@@ -26,7 +26,7 @@ const CtaSection = () => {
                     </div>
                     
                     <div className="section-title">
-                        <h6 className="wow section-tags fadeInUp">Printing Service</h6>
+                        <span className="wow section-tags fadeInUp">Printing Service</span >
                         <h2 className="wow fadeInUp" data-wow-delay=".3s">
                             Ready to Print <br />
                                 Something Great?

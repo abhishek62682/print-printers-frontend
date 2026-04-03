@@ -62,7 +62,7 @@ const PrintManagementSection = ({ hclass, eclass }) => {
                       className="box-item active wow fadeInUp"
                       data-wow-delay=".3s"
                     >
-                      <h5>{item.title}</h5>
+                      <h4 className="feature-title">{item.title}</h4>
                       <p>{item.description}</p>
                     </div>
                   ))}

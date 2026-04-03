@@ -50,7 +50,7 @@ const TestimonialsSection = () => {
       <div className="container">
         {/* Section Title */}
         <div className="section-title text-center">
-          <h6 className="wow section-tags fadeInUp">Our Relationships</h6>
+          <span className="wow section-tags fadeInUp">Our Relationships</span>
           <h2 className="wow fadeInUp" data-wow-delay=".3s">What Our Clients Say</h2>
           <p>About Print Printers</p>
         </div>
@@ -59,13 +59,14 @@ const TestimonialsSection = () => {
         <div className="row justify-content-center">
           <div className="col-lg-9">
             <div className="swiper testimonial-slider-2">
-              <Swiper
-                spaceBetween={30}
-                speed={2000}
-                loop={testimonialList.length > 1}
-                autoplay={{ delay: 4000, disableOnInteraction: false }}
-                navigation={{ nextEl: ".array-next", prevEl: ".array-prev" }}
-              >
+             <Swiper
+  spaceBetween={30}
+  speed={800}
+  loop={testimonialList.length > 1}
+  autoplay={{ delay: 4000, disableOnInteraction: false }}
+  navigation={{ nextEl: ".array-next", prevEl: ".array-prev" }}
+  cssMode={false}
+>
                 {testimonialList.map((item) => (
                   <SwiperSlide key={item?._id}>
                     <div className="testimonial-box-items">
@@ -99,10 +100,14 @@ const TestimonialsSection = () => {
 
               {/* Navigation Buttons */}
               {testimonialList.length > 1 && (
-                <div className="array-button justify-content-center">
-                  <button className="array-prev"><ArrowLeft /></button>
-                  <button className="array-next"><ArrowRight /></button>
-                </div>
+               <div className="array-button justify-content-center">
+  <button className="array-prev" aria-label="Previous slide">
+    <ArrowLeft />
+  </button>
+  <button className="array-next" aria-label="Next slide">
+    <ArrowRight />
+  </button>
+</div>
               )}
             </div>
           </div>
