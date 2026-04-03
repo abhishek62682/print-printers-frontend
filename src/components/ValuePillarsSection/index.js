@@ -41,7 +41,7 @@ const ValuePillarsSection = () => {
     <section className="">
       <div className="container">
         <div className="feature-wrapper-2">
-          <div className="row justify-content-center gap-lg-4 gap-xl-0 ">
+          <div className="row justify-content-center gap-5 gap-xl-0 ">
             {features.map((feature) => (
               <div
                 key={feature.id}
